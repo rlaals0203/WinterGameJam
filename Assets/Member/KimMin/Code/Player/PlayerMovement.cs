@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Code.Player
+namespace Code.Entities
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour, IEntityComponent
     {
         [SerializeField] private PlayerInputSO playerInput;
         
         public Vector2 Direction { get; private set; }
         public Vector2 Position { get; private set; }
-        
-        private Queue<Vector2> _movementQueue = new();
 
-        private void Awake()
+        private Player _player;
+        private Queue<Vector2> _movementQueue = new();
+        
+        public void Initialize(Entity entity)
         {
+            _player = entity as Player;
             playerInput.OnMovePressed += HandleMove;
         }
 
@@ -34,12 +36,15 @@ namespace Code.Player
 
         private void Move()
         {
-            
+            Vector2 dir = _movementQueue.Dequeue();
+            Position += dir;
+            float duration = 0.1f - (_movementQueue.Count * 0.02f);
+            _player.transform.DOMove(Position, duration);
         }
 
-        private void HandleMove(Vector2 dir)
+        private void HandleMove()
         {
-            Debug.Log(dir);
+            Vector2 dir = playerInput.MovementKey;
             if (!CheckCanMove(dir)) return;
             _movementQueue.Enqueue(dir);
         }

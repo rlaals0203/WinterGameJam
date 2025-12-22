@@ -2,13 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Code.Player
+namespace Code.Entities
 {
     [CreateAssetMenu(fileName = "PlayerInput", menuName = "SO/PlayerInput", order = 0)]
     public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
-        public event Action<Vector2> OnMovePressed;
-        public Vector2 MovementKey { get; private set; }
+        public event Action OnMovePressed;
+        public Vector2 MovementKey;
         
         private Controls _controls;
         
@@ -30,7 +30,9 @@ namespace Code.Player
         public void OnMove(InputAction.CallbackContext context)
         {
             if (context.performed)
-                OnMovePressed?.Invoke(context.ReadValue<Vector2>());
+                OnMovePressed?.Invoke();
+            
+            MovementKey = context.ReadValue<Vector2>();
         }
     }
 }
