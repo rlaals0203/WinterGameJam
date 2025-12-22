@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 namespace KimMin.UI.Misc
 {
-    public class VolumeSetting
+    public class VolumeSetting : MonoBehaviour
     {
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private Slider masterSlider;
         [SerializeField] private Slider musicSlider;
         [SerializeField] private Slider sfxSlider;
 
-        private void Start()
+        private void OnEnable()
         {
             if (PlayerPrefs.HasKey("musicVolume") && PlayerPrefs.HasKey("sfxVolume") && PlayerPrefs.HasKey("masterVolume"))
                 LoadVolume();
