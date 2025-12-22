@@ -1,4 +1,4 @@
-using Code.Entities;
+/*using Code.Entities;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
@@ -59,4 +59,4 @@ public class HittingMeleeAttackState : EnemyState
         yield return new WaitForSeconds(0.1f);
         Object.Destroy(weaponPivot);
     }
-}
+}*/

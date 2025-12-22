@@ -14,6 +14,7 @@ namespace Code.Core
         Green,
         Blue,
         Black,
+        White,
         None
     }
     
@@ -43,9 +44,22 @@ namespace Code.Core
                     Vector3 worldPos = grid.CellToWorld(cell) + grid.cellSize / 2f + (Vector3)gridOffset;
 
                     gridObj.transform.position = worldPos;
+                    gridObj.Area = GetAreaIndex(cell);;
+
                     _gridData[x, y] = gridObj;
                 }
             }
+        }
+        
+        private int GetAreaIndex(Vector3Int cell)
+        {
+            int areaWidth = row / 3;
+            int areaHeight = col / 3;
+            int areaX = Mathf.Clamp(cell.x / areaWidth, 0, 2);
+            int areaY = Mathf.Clamp(cell.y / areaHeight, 0, 2);
+            int invertedY = 2 - areaY;
+            
+            return invertedY * 3 + areaX + 1;
         }
         
         public bool IsValidCell(Vector3Int cell)
