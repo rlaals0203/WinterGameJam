@@ -18,14 +18,17 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        buy_confirm_btn.interactable = false;
+
         buy_confirm_btn.onClick.RemoveAllListeners();
         buy_confirm_btn.onClick.AddListener(OnBuyConfirmClick);
-
     }
 
     public void UpdateInfoPanel(SupplySO item)
     {
         currentSelectedSupply = item;
+
+        buy_confirm_btn.interactable = true;
 
         info_icon_img.sprite = item.icon;
         info_name_txt.text = item.SupplyName;
