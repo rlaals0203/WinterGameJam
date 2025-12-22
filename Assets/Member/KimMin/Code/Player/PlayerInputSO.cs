@@ -9,7 +9,6 @@ namespace Code.Entities
     {
         public event Action OnMovePressed;
         public Vector2 MovementKey;
-        public Vector2 MousePosition;
         
         private Controls _controls;
         
@@ -34,11 +33,6 @@ namespace Code.Entities
                 OnMovePressed?.Invoke();
             
             MovementKey = context.ReadValue<Vector2>();
-        }
-
-        public void OnPoint(InputAction.CallbackContext context)
-        {
-            MousePosition = context.ReadValue<Vector2>();
         }
     }
 }
