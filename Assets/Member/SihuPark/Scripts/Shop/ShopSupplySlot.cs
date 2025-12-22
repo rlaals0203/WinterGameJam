@@ -4,51 +4,28 @@ using TMPro;
 
 public class ShopSupplySlot : MonoBehaviour
 {
-    [Header("UI Components")]
-    [SerializeField] private Image icon_img;
-    [SerializeField] private TextMeshProUGUI name_txt;
-    [SerializeField] private TextMeshProUGUI price_txt;
-    [SerializeField] private TextMeshProUGUI desc_txt;
+    [Header("My Data")]
+    public SupplySO mySupplyData;
 
-    [SerializeField] private TextMeshProUGUI type_txt;
+    [Header("Settings")]
+    [SerializeField] private ShopManager shopManager; 
+    [SerializeField] private Button myButton;
 
-    [SerializeField] private Button purchase_btn;
+    [Header("My UI")]
+    [SerializeField] private Image myIcon;
+    [SerializeField] private TextMeshProUGUI myName;
 
-    private SupplySO currentSupply;
-    private ShopManager shopManager;
-
-    public void Setup(SupplySO supplyData, ShopManager manager)
+    private void Start()
     {
-        currentSupply = supplyData;
-        shopManager = manager;
-
-        if (icon_img != null) icon_img.sprite = supplyData.icon;
-        if (name_txt != null) name_txt.text = supplyData.SupplyName;
-        if (price_txt != null) price_txt.text = $"{supplyData.price} Gold";
-        if (desc_txt != null) desc_txt.text = supplyData.description;
-
-        if (type_txt != null)
+        if (mySupplyData != null)
         {
-            type_txt.text = GetKoreanType(supplyData.supplyType);
+            if (myIcon != null) myIcon.sprite = mySupplyData.icon;
+            if (myName != null) myName.text = mySupplyData.SupplyName;
         }
 
-        purchase_btn.onClick.RemoveAllListeners();
-        purchase_btn.onClick.AddListener(OnClickPurchase);
-    }
-
-    private void OnClickPurchase()
-    {
-        shopManager.OnItemSelected(currentSupply);
-    }
-
-    private string GetKoreanType(SupplyType type) // 타입 한국말로 바꿔주기
-    {
-        switch (type)
-        {
-            case SupplyType.Palette: return "팔레트";
-            case SupplyType.Brush: return "붓";
-            case SupplyType.Extractor: return "추출기";
-            default: return "";
-        }
+        myButton.onClick.RemoveAllListeners();
+        myButton.onClick.AddListener(() => {
+            shopManager.UpdateInfoPanel(mySupplyData);
+        });
     }
 }
