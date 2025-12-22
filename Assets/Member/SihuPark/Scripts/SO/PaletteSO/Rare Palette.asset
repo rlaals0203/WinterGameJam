@@ -17,4 +17,4 @@ MonoBehaviour:
   supplyType: 0
   icon: {fileID: 0}
   description: "\uC2DC\uC911\uC758 \uBB3C\uAC74\uBCF4\uB2E4 \uACE0\uAE09\uC9C4 \uD314\uB808\uD2B8"
-  price: 0
+  price: 100
