@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8fdf898cfc2fe94b91bf2d7fcb39d59, type: 3}
-  m_Name: Supply
+  m_Name: Rare Palette
   m_EditorClassIdentifier: 
-  SupplyName: 
-  SupplyID: 0
+  SupplyName: "\uACE0\uAE09 \uD314\uB808\uD2B8"
+  SupplyID: 3
+  supplyType: 0
   icon: {fileID: 0}
-  description: 
+  description: "\uC2DC\uC911\uC758 \uBB3C\uAC74\uBCF4\uB2E4 \uACE0\uAE09\uC9C4 \uD314\uB808\uD2B8"
   price: 0
