@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SJ._01.Script.Entites
 {
-    public class EntityStat
+    public class EntityStat : MonoBehaviour, IEntityComponent
     {
         [SerializeField] private StatOverride[] statOverrides;
         private Dictionary<string, StatSO> _stats;
