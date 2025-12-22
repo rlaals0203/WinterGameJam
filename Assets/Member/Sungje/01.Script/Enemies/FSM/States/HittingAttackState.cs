@@ -3,13 +3,18 @@ using UnityEngine;
 public class HittingAttackState : EnemyState
 {
     private float _timer;
+    private EnemyAttackCompo _attackCompo;
 
-    public HittingAttackState(Enemy enemy) : base(enemy) { }
+    public HittingAttackState(Enemy enemy) : base(enemy)
+    {
+        _attackCompo = enemy.GetCompo<EnemyAttackCompo>();
+        Debug.Log(_attackCompo);
+    }
 
     public override void Enter()
     {
+        _attackCompo.DoAttack();
         _timer = 0f;
-        _enemy.AttackCompo.StartAttack();
     }
 
     public override void UpdateState()
@@ -30,12 +35,10 @@ public class HittingAttackState : EnemyState
         if (_timer >= data.attackCooldown)
         {
             _timer = 0f;
-            //_enemy.AttackCompo.DoAttack();
         }
     }
 
     public override void Exit()
     {
-        _enemy.AttackCompo.EndAttack();
     }
 }

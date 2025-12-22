@@ -11,13 +11,12 @@ public enum EnemyStateType
     Dead
 }
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : Entity
 {
     [SerializeField] private Player player;
     [SerializeField] private GridManager gridManager;
 
     public EnemyDataSO enemyDataSO;
-    public EnemyAttackCompo AttackCompo { get; private set; }
 
     [SerializedDictionary] private Dictionary<EnemyStateType, EnemyState> _stateDict;
     private EnemyState _currentState;
@@ -34,13 +33,15 @@ public abstract class Enemy : MonoBehaviour
 
     public GridManager GridManager => gridManager;
 
-    protected virtual void Awake()
-    {
-        AttackCompo = GetComponent<EnemyAttackCompo>();
-    }
-
     protected virtual void Start()
     {
+        _stateDict = new Dictionary<EnemyStateType, EnemyState>
+        {
+            { EnemyStateType.Move, new EnemyMoveState(this) },
+            { EnemyStateType.Attack, new HittingAttackState(this) },
+            { EnemyStateType.Dead, new EnemyDeadState(this) }
+        };
+        
         TransitionState(EnemyStateType.Move);
     }
 

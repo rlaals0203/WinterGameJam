@@ -2,28 +2,21 @@ using Code.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EnemyAttackCompo : MonoBehaviour
+public class EnemyAttackCompo : MonoBehaviour, IEntityComponent
 {
     [SerializeField] private LayerMask targetLayer;
 
-    private Enemy _enemy;
-    private bool _isAttacking;
+    protected Enemy _enemy;
 
     private EnemyDataSO Data => _enemy.enemyDataSO;
-
-    private void Awake()
+    
+    public virtual void Initialize(Entity entity)
     {
-        _enemy = GetComponent<Enemy>();
+        _enemy = entity as Enemy;
     }
 
-    public void StartAttack()
+    public virtual void DoAttack()
     {
-        _isAttacking = true;
-    }
-
-    public void DoAttack()
-    {
-        if (!_isAttacking) return;
         if (Data == null) return;
 
         Collider2D hit = Physics2D.OverlapCircle(
@@ -38,11 +31,6 @@ public class EnemyAttackCompo : MonoBehaviour
         if (target == null) return;
 
         target.TakeDamage(Data.damage);
-    }
-
-    public void EndAttack()
-    {
-        _isAttacking = false;
     }
 
 #if UNITY_EDITOR

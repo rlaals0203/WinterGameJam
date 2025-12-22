@@ -19,7 +19,7 @@ namespace Code.Core
     }
     
     [Provide]
-    public class GridManager : MonoBehaviour, IDependencyProvider
+    public class GridManager : MonoSingleton<GridManager>, IDependencyProvider
     {
         [SerializeField] private int row;
         [SerializeField] private int col;
