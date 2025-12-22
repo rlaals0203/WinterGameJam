@@ -21,7 +21,7 @@ public class HittingMoveState : EnemyState
 
         if (distance <= data.attackRange)
         {
-            _enemy.TransitionState(EnemyStateType.Attack);
+            _enemy.TransitionState(EnemyStateType.MeleeAttack);
         }
         else
         {

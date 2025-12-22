@@ -12,44 +12,24 @@ public class HittingAttackState : EnemyState
     protected override void EnterState()
     {
         base.EnterState();
-
-
-        Debug.Log("Attakkacasj");
-
-        //if (_enemy.AnimTrigger != null)
-        //{
-        //    _enemy.AnimTrigger.OnAnimationEndEvent += AnimationEnd;
-        //}
-        //else
-        //{
-        //    _lastAttackTime = Time.time;
-        //}
     }
 
     public override void UpdateState()
     {
-        //if (_enemy.AnimTrigger == null)
-        //{
-        //    if (Time.time - _lastAttackTime > 1.0f)
-        //    {
-        //        AnimationEnd();
-        //    }
-        //}
-    }
+        base.UpdateState();
 
-    private void AnimationEnd()
-    {
-        _enemy.TransitionState(EnemyStateType.Move);
+        if (_player == null) return;
+
+        float distance = Vector3.Distance(_enemy.transform.position, _player.transform.position);
+
+        if (distance > data.attackRange)
+        {
+            _enemy.TransitionState(EnemyStateType.Move);
+        }
     }
 
     protected override void ExitState()
     {
-        //if (_enemy.AnimTrigger != null)
-        //{
-        //    _enemy.AnimTrigger.OnAnimationEndEvent -= AnimationEnd;
-        //}
-
-        _enemy.TransitionState(EnemyStateType.Move);
         base.ExitState();
     }
 }

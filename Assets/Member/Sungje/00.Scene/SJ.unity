@@ -157,7 +157,7 @@ Transform:
   m_GameObject: {fileID: 78463101}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1800991, y: 2.7473435, z: 0.0054630255}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -307,9 +307,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270, type: 3}
-  m_Color: {r: 0.34591186, g: 0.34591186, b: 0.34591186, a: 1}
+  m_Color: {r: 0.35154858, g: 0.37386304, b: 0.9433962, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -583,7 +583,7 @@ Transform:
   m_GameObject: {fileID: 907831874}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1800991, y: 2.7473435, z: 0.0054630255}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -757,11 +757,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65352db4049452881e00a16360e7442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  row: 5
-  col: 5
+  row: 50
+  col: 50
   grid: {fileID: 1654775876}
   gridPrefab: {fileID: 8207641614524031968, guid: b49b823237c27c24ea176fbfc98dfd00, type: 3}
-  gridOffset: {x: 0.5, y: 0.5}
+  gridOffset: {x: 0, y: 0}
 --- !u!4 &1150371575
 Transform:
   m_ObjectHideFlags: 0

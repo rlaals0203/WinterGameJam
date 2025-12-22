@@ -22,7 +22,6 @@ public abstract class EnemyState
 
     protected virtual void EnterState()
     {
-        Debug.Log("Enter State: " + stateName);
     }
 
     public void Exit()
@@ -32,7 +31,6 @@ public abstract class EnemyState
 
     protected virtual void ExitState()
     {
-        Debug.Log("Exit State: " + stateName);
     }
 
     public virtual void UpdateState()

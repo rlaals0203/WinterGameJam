@@ -2,15 +2,17 @@ using Code.Core;
 using Code.Entities;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum EnemyStateType
 {
     Move,
     Attack,
+    MeleeAttack,
     Dead,
 }
 
-public abstract class Enemy : Entity
+public abstract class Enemy : Entity, IDamageable
 {
     [field: SerializeField] public EnemyDataSO enemyDataSO { get; private set; }
     [SerializeField] private int _currentHealth;
@@ -24,7 +26,6 @@ public abstract class Enemy : Entity
 
     public EnemyAttackCompo AttackCompo { get; set; }
     public EnemyMoveCompo MoveCompo { get; private set; }
-    //public EnemyAnimationTrigger AnimTrigger { get; private set; }
 
     protected override void Awake()
     {
@@ -34,8 +35,6 @@ public abstract class Enemy : Entity
 
         if (enemyDataSO != null)
             _currentHealth = enemyDataSO.maxHealth;
-        else
-            Debug.LogError($"EnemyDataSO is not assigned on '{name}'", this);
 
         AttackCompo = GetComponentInChildren<EnemyAttackCompo>();
         MoveCompo = GetComponentInChildren<EnemyMoveCompo>();
@@ -70,6 +69,8 @@ public abstract class Enemy : Entity
     {
         if (StateEnum.ContainsKey(currentState))
             StateEnum[currentState].UpdateState();
+        if(Keyboard.current.gKey.wasPressedThisFrame)
+            ApplyDamage(Vector3.zero, Vector3.up);
     }
 
     protected virtual void FixedUpdate()
@@ -90,5 +91,14 @@ public abstract class Enemy : Entity
         if (enemyDataSO == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, enemyDataSO.attackRange);
+    }
+
+    public void ApplyDamage(Vector3 hitPoint, Vector3 hitNormal)
+    {
+        _currentHealth -= 1;
+        if (_currentHealth <= 0 && !IsDead)
+        {
+            HandleDead();
+        }
     }
 }
