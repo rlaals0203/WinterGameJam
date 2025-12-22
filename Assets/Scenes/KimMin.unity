@@ -774,6 +774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statOverrides: []
+  <Owner>k__BackingField: {fileID: 0}
 --- !u!4 &807781407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5760184556838687310, guid: b58ac35c290b51c41a0efc6b720e7699, type: 3}
