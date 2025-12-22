@@ -1,3 +1,4 @@
+using System.Data.Common;
 using Code.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,15 +17,18 @@ public class EnemyAttackCompo : MonoBehaviour, IEntityComponent
         _enemy = entity as Enemy;
     }
 
-    public virtual void TryDoAttack()
+    public void TryDoAttack()
     {
         if (Data == null) return;
 
-        if (Time.time - _lastAttackTime < Data.attackCooldown) return;
+        if (Time.time - _lastAttackTime < Data.attackCooldown
+            || _enemy.DistanceToPlayer < Data.attackRange) return;
+        
         _lastAttackTime = Time.time;
+        ProcessAttack();
     }
 
-    protected void ProcessAttack()
+    protected virtual void ProcessAttack()
     {
         Collider2D hit = Physics2D.OverlapCircle(
             transform.position,

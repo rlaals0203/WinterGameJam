@@ -2,25 +2,40 @@ using Code.Core;
 using KimMin.Dependencies;
 using UnityEngine;
 
-public class EnemyMoveCompo : MonoBehaviour
+public class EnemyMoveCompo : MonoBehaviour, IEntityComponent
 {
-    [SerializeField] private float duration = 2f;
+    private float duration = 2f;
     private float _prevTime = 0f;
+    private Enemy _enemy;
 
     [Inject] private GridManager _gridManager;
+    
+    public void Initialize(Entity entity)
+    {
+        _enemy = entity as Enemy;
+        duration = _enemy.EnemyDataSO.moveSpeed;
+    }
 
+    private void Update()
+    {
+        ProcessMove();
+    }
 
     public void ProcessMove()
     {
         if (Time.time - _prevTime > duration)
         {
+            _gridManager.MoveToPlayer(_enemy.transform, HandleCompleteMove);
             _prevTime = Time.time;
-            _gridManager.MoveToPlayer(transform);
         }
     }
 
-    public void ResetTimer()
+    private void HandleCompleteMove()
     {
-        _prevTime = Time.time;
+        var grid = _gridManager.GetGrid(_gridManager.WorldToGrid(_enemy.transform.position));
+        if (grid.Type != InkType.None || grid.Type != InkType.Black)
+        {
+            grid.ClearModify();
+        }
     }
 }

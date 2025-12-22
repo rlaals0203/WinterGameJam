@@ -14,8 +14,9 @@ namespace Code.Combat
             base.Initialize(entity);
         }
 
-        public async override void TryDoAttack()
+        protected async override void ProcessAttack()
         {
+            base.ProcessAttack();
             for (int i = 0; i < 3; i++)
             {
                 Vector2 dir = _enemy.Player.Position - _enemy.transform.position;

@@ -17,7 +17,7 @@ MonoBehaviour:
   maxHealth: 50
   damage: 10
   moveSpeed: 0.5
-  attackCooldown: 2
+  attackCooldown: 5
   attackRange: 2
   attackAngle: 0
   occupySpaceX: 0

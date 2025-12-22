@@ -433,6 +433,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &510160719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 510160720}
+  - component: {fileID: 510160721}
+  m_Layer: 0
+  m_Name: EnemyMoveCompo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &510160720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510160719}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8619350600638694927}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &510160721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510160719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7342fe013785ae40bbe5abdb9fb214e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1058,7 @@ MonoBehaviour:
   OnDeadEvent:
     m_PersistentCalls:
       m_Calls: []
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 485350368}
   hitFlashTime: 0.1
   currentHealth: 0
   <PlayerInput>k__BackingField: {fileID: 11400000, guid: e404979626a37854eb83e482b0ca7efe, type: 2}
@@ -1834,7 +1878,7 @@ MonoBehaviour:
       m_Calls: []
   player: {fileID: 1021397916}
   gridManager: {fileID: 1150371574}
-  enemyDataSO: {fileID: 11400000, guid: e94b98b83ebfd5a43a81a1a81ba08073, type: 2}
+  <EnemyDataSO>k__BackingField: {fileID: 11400000, guid: e94b98b83ebfd5a43a81a1a81ba08073, type: 2}
 --- !u!1 &5008736782277626423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,7 +1889,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8619350600638694927}
   - component: {fileID: 3565371716964472476}
-  - component: {fileID: 7474776610719382374}
   - component: {fileID: 5535915965878051668}
   m_Layer: 0
   m_Name: BulletEnemy
@@ -2003,21 +2046,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7474776610719382374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5008736782277626423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab40c80e1052e349993a52a77e35e35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &8040168961301233620
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,6 +2097,7 @@ Transform:
   m_Children:
   - {fileID: 5846449192682494138}
   - {fileID: 1665314151}
+  - {fileID: 510160720}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807

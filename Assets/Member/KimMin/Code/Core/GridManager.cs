@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Entities;
 using Code.Misc;
@@ -138,7 +139,7 @@ namespace Code.Core
             return result;
         }
 
-        public void MoveToPlayer(Transform target)
+        public void MoveToPlayer(Transform target, Action callback = null)
         {
             Vector3Int targetCell = grid.WorldToCell(target.position);
             Vector3Int playerCell = grid.WorldToCell(_player.transform.position);
@@ -147,7 +148,10 @@ namespace Code.Core
             Vector3Int nextCell = targetCell + step;
             Vector3 worldPos = grid.CellToWorld(nextCell) + grid.cellSize / 2f + (Vector3)gridOffset;
 
-            target.DOMove(worldPos, 0.1f);
+            target.DOMove(worldPos, 0.1f).OnComplete(() =>
+            {
+                if (callback != null) callback();
+            });
         }
         
     }
