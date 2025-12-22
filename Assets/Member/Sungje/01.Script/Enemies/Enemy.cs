@@ -42,9 +42,9 @@ public abstract class Enemy : MonoBehaviour
     {
         _stateDict = new Dictionary<EnemyStateType, EnemyState>
         {
-            { EnemyStateType.Move, new HittingMoveState(this) },
+            { EnemyStateType.Move, new EnemyMoveState(this) },
             { EnemyStateType.Attack, new HittingAttackState(this) },
-            { EnemyStateType.Dead, new HittingDeadState(this) }
+            { EnemyStateType.Dead, new EnemyDeadState(this) }
         };
 
         TransitionState(EnemyStateType.Move);

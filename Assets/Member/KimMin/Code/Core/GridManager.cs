@@ -39,7 +39,7 @@ namespace Code.Core
             {
                 for (int x = 0; x < row; x++)
                 {
-                    GridObject gridObj = Instantiate(gridPrefab);
+                    GridObject gridObj = Instantiate(gridPrefab, transform);
                     Vector3Int cell = new Vector3Int(x, y, 0);
                     Vector3 worldPos = grid.CellToWorld(cell) + grid.cellSize / 2f + (Vector3)gridOffset;
 
@@ -142,8 +142,11 @@ namespace Code.Core
         {
             Vector3Int targetCell = grid.WorldToCell(target.position);
             Vector3Int playerCell = grid.WorldToCell(_player.transform.position);
+    
             Vector3Int step = MoveByGrid(targetCell, playerCell);
-            Vector3 worldPos = grid.CellToWorld(targetCell + step) + grid.cellSize / 2f;
+            Vector3Int nextCell = targetCell + step;
+            Vector3 worldPos = grid.CellToWorld(nextCell) + grid.cellSize / 2f + (Vector3)gridOffset;
+
             target.DOMove(worldPos, 0.1f);
         }
         

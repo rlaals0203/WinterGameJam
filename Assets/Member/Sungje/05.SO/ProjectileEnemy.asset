@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5af38b02d8d696f468e573677893290b, type: 3}
-  m_Name: Enemy2
+  m_Name: ProjectileEnemy
   m_EditorClassIdentifier: 
-  enemyName: 
+  enemyName: ProjectileEnemy
   description: 
   maxHealth: 0
   damage: 0

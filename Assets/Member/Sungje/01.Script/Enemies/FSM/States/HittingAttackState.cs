@@ -30,7 +30,7 @@ public class HittingAttackState : EnemyState
         if (_timer >= data.attackCooldown)
         {
             _timer = 0f;
-            _enemy.AttackCompo.DoAttack();
+            //_enemy.AttackCompo.DoAttack();
         }
     }
 

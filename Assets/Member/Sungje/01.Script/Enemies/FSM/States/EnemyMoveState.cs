@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class HittingMoveState : EnemyState
+public class EnemyMoveState : EnemyState
 {
     private float _interval = 2f;
     private float _prevTime;
 
-    public HittingMoveState(Enemy enemy) : base(enemy) { }
+    public EnemyMoveState(Enemy enemy) : base(enemy)
+    {
+        _interval = enemy.enemyDataSO.moveSpeed;
+    }
 
     public override void Enter()
     {
