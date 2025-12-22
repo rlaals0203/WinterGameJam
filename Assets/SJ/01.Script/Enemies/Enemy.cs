@@ -33,7 +33,6 @@ public abstract class Enemy : Entity
 
     public void Initialize()
     {
-        //Player = player;
     }
 
     private void OnEnable()
