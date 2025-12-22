@@ -12,6 +12,8 @@ namespace Code.Entities
         public Vector2 Direction { get; private set; }
         public Vector2 Position { get; private set; }
 
+        public event Action OnPositionChanged;
+
         private Player _player;
         private Queue<Vector2> _movementQueue = new();
         
@@ -40,6 +42,7 @@ namespace Code.Entities
             Position += dir;
             float duration = 0.1f - (_movementQueue.Count * 0.02f);
             _player.transform.DOMove(Position, duration);
+            OnPositionChanged?.Invoke();
         }
 
         private void HandleMove()
