@@ -6,6 +6,21 @@ using UnityEngine;
 
 namespace Code.Core
 {
+    public enum GridType
+    {
+        Red,
+        Orange,
+        Yellow,
+        Green,
+        Sky,
+        Blue,
+        Purple,
+        Pink,
+        Black,
+        None
+    }
+    
+    
     [Provide]
     public class GridManager : MonoBehaviour, IDependencyProvider
     {
@@ -52,8 +67,8 @@ namespace Code.Core
 
             if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
                 return new Vector3Int((int)Mathf.Sign(delta.x), 0, 0);
-            else
-                return new Vector3Int(0, (int)Mathf.Sign(delta.y), 0);
+            
+            return new Vector3Int(0, (int)Mathf.Sign(delta.y), 0);
         }
 
         public void MoveToPlayer(Transform target)
