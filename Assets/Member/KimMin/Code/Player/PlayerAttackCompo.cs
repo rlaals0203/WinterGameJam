@@ -42,7 +42,7 @@ namespace Code.Entities
             
             if(grid.Type == ink) return;
             _inkStorage.ModifyInk(ink, -_inkSkillAmount);
-            grid.SetModify(_gridManager.GetGridColor(ink), ink);
+            grid.SetModify(Utility.GetGridColor(ink), ink);
         }
 
         private void OnDestroy()

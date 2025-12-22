@@ -132,18 +132,6 @@ namespace Code.Core
             Vector3 worldPos = grid.CellToWorld(targetCell + step) + grid.cellSize / 2f;
             target.DOMove(worldPos, 0.1f);
         }
-
-        public Color GetGridColor(InkType inkType)
-        {
-            return inkType switch
-            {
-                InkType.Red => new Color32(255, 175, 175, 100),
-                InkType.Yellow => new Color32(255, 255, 175, 100),
-                InkType.Blue => new Color32(150, 175, 255, 100),
-                InkType.Green => new Color32(175, 255, 175, 100),
-                InkType.Black => new Color32(50, 50, 50, 100),
-                _ => Color.white
-            };
-        }
+        
     }
 }
