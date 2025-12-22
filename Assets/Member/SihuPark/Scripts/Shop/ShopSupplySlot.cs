@@ -9,6 +9,9 @@ public class ShopSupplySlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI name_txt;
     [SerializeField] private TextMeshProUGUI price_txt;
     [SerializeField] private TextMeshProUGUI desc_txt;
+
+    [SerializeField] private TextMeshProUGUI type_txt;
+
     [SerializeField] private Button purchase_btn;
 
     private SupplySO currentSupply;
@@ -24,6 +27,11 @@ public class ShopSupplySlot : MonoBehaviour
         if (price_txt != null) price_txt.text = $"{supplyData.price} Gold";
         if (desc_txt != null) desc_txt.text = supplyData.description;
 
+        if (type_txt != null)
+        {
+            type_txt.text = GetKoreanType(supplyData.supplyType);
+        }
+
         purchase_btn.onClick.RemoveAllListeners();
         purchase_btn.onClick.AddListener(OnClickPurchase);
     }
@@ -31,5 +39,16 @@ public class ShopSupplySlot : MonoBehaviour
     private void OnClickPurchase()
     {
         shopManager.OnItemSelected(currentSupply);
+    }
+
+    private string GetKoreanType(SupplyType type) // 타입 한국말로 바꿔주기
+    {
+        switch (type)
+        {
+            case SupplyType.Palette: return "팔레트";
+            case SupplyType.Brush: return "붓";
+            case SupplyType.Extractor: return "추출기";
+            default: return "";
+        }
     }
 }
