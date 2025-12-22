@@ -14,17 +14,35 @@ namespace Code.Entities
         private Player _player;
         private Vector3Int _direction;
         private PlayerMovement _movementCompo;
+        private PlayerInkCompo _inkCompo;
         
         private List<GridObject> _prevGrids;
         private Color _gizmoColor = new Color32(255, 200, 200, 100);
 
+        private readonly int _inkSkillAmount = 10;
+
         [Inject] private GridManager _gridManager;
-        
+        [Inject] private InkStorage _inkStorage;
+
         public void Initialize(Entity entity)
         {
             _player = entity as Player;
+
+            _inkCompo = entity.GetCompo<PlayerInkCompo>();
             _movementCompo = entity.GetCompo<PlayerMovement>();
             _movementCompo.OnPositionChanged += SetGridGizmo;
+            _player.PlayerInput.OnRightClickPressed += HandleRightClick;
+        }
+
+        private void HandleRightClick()
+        {
+            if (!_inkStorage.HasInk(_inkCompo.CurrentInk)) return;
+            var grid = _gridManager.GetGrid(_gridManager.WorldToGrid(_player.Position));
+            var ink = _inkCompo.CurrentInk;
+            
+            if(grid.Type == ink) return;
+            _inkStorage.ModifyInk(ink, -_inkSkillAmount);
+            grid.SetModify(_gridManager.GetGridColor(ink), ink);
         }
 
         private void OnDestroy()
@@ -86,10 +104,22 @@ namespace Code.Entities
             
             var grids = _prevGrids =_gridManager.GetForwardGrid
                 (_movementCompo.Position, _direction, 2, 0);
+            
+            List<GridObject> removeList = new();
 
             foreach (var grid in grids)
             {
-                grid.SetModify(_gizmoColor, GridType.None);
+                if (grid.Type != InkType.None) {
+                    removeList.Add(grid);
+                    continue;
+                }
+                
+                grid.SetModify(_gizmoColor, InkType.None);
+            }
+            
+            foreach (var item in removeList)
+            {
+                _prevGrids.Remove(item);
             }
         }
     }

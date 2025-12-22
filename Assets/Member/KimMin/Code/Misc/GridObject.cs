@@ -11,12 +11,17 @@ namespace Code.Misc
         [field: SerializeField] public SpriteRenderer Fill { get; private set; }
         
         public Vector2 Position => transform.position;
-        public GridType Type { get; private set; }
+        public InkType Type { get; private set; }
         
         private Color _originColor = new Color32(255, 255, 255, 100);
 
         private bool _isColored;
         private float _duration;
+
+        private void Awake()
+        {
+            Type = InkType.None;
+        }
 
         private void Update()
         {
@@ -30,12 +35,12 @@ namespace Code.Misc
         public void SetDestroyState(bool isDestroyed)
         {
             if(isDestroyed)
-                SetModify(Color.grey, GridType.Black);
+                SetModify(Color.grey, InkType.Black);
             else
                 ClearModify();
         }
 
-        public void SetModify(Color color, GridType type, float duration = int.MaxValue)
+        public void SetModify(Color color, InkType type, float duration = int.MaxValue)
         {
             Fill.DOColor(color, 0.1f);
             _duration = duration;

@@ -8,6 +8,8 @@ namespace Code.Entities
     public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
         public event Action OnMovePressed;
+        public event Action OnDashPressed;
+        public event Action OnRightClickPressed;
         public Vector2 MovementKey;
         public Vector2 MousePosition;
         
@@ -39,6 +41,18 @@ namespace Code.Entities
         public void OnPoint(InputAction.CallbackContext context)
         {
             MousePosition = context.ReadValue<Vector2>();
+        }
+
+        public void OnDash(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+                OnDashPressed?.Invoke();
+        }
+
+        public void OnRightClick(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+                OnRightClickPressed?.Invoke();
         }
     }
 }
