@@ -13,6 +13,13 @@ public enum EnemyStateType
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField] private GridManager gridManager;
+
+    public EnemyDataSO enemyDataSO;
+    public EnemyAttackCompo AttackCompo { get; private set; }
+
+    private Dictionary<EnemyStateType, EnemyState> _stateDict;
+    private EnemyState _currentState;
 
     public Player Player
     {
@@ -24,31 +31,14 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    [SerializeField] private GridManager gridManager;
     public GridManager GridManager => gridManager;
-
-    public EnemyDataSO enemyDataSO;
-
-    public EnemyAttackCompo AttackCompo { get; private set; }
-
-    private Dictionary<EnemyStateType, EnemyState> _stateDict;
-    private EnemyState _currentState;
 
     protected virtual void Awake()
     {
         AttackCompo = GetComponent<EnemyAttackCompo>();
-
-        if (AttackCompo == null)
-            Debug.LogError("EnemyAttackCompo ¾øÀ½", this);
     }
 
     protected virtual void Start()
-    {
-        InitFSM();
-        TransitionState(EnemyStateType.Move);
-    }
-
-    protected virtual void InitFSM()
     {
         _stateDict = new Dictionary<EnemyStateType, EnemyState>
         {
@@ -56,6 +46,8 @@ public abstract class Enemy : MonoBehaviour
             { EnemyStateType.Attack, new HittingAttackState(this) },
             { EnemyStateType.Dead, new HittingDeadState(this) }
         };
+
+        TransitionState(EnemyStateType.Move);
     }
 
     private void Update()
@@ -63,12 +55,12 @@ public abstract class Enemy : MonoBehaviour
         _currentState?.UpdateState();
     }
 
-    public void TransitionState(EnemyStateType nextState)
+    public void TransitionState(EnemyStateType next)
     {
-        if (_currentState == _stateDict[nextState]) return;
+        if (_currentState == _stateDict[next]) return;
 
         _currentState?.Exit();
-        _currentState = _stateDict[nextState];
+        _currentState = _stateDict[next];
         _currentState.Enter();
     }
 }

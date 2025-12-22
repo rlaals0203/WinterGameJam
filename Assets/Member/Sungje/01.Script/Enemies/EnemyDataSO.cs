@@ -12,6 +12,7 @@ public class EnemyDataSO : ScriptableObject
 
     public float attackCooldown;
     public float attackRange;
+    public float attackAngle;
     public int occupySpaceX;
     public int occupySpaceY;
 }
