@@ -1,4 +1,6 @@
 using System;
+using Code.Core;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Code.Misc
@@ -9,15 +11,43 @@ namespace Code.Misc
         [field: SerializeField] public SpriteRenderer Fill { get; private set; }
         
         public Vector2 Position => transform.position;
+        public GridType Type { get; private set; }
+        
+        private Color _originColor = new Color32(255, 255, 255, 100);
 
-        public void SetOutline(Color color)
+        private bool _isColored;
+        private float _duration;
+
+        private void Update()
         {
-            Outline.color = color;
+            if (!_isColored) return;
+            
+            _duration -= Time.deltaTime;
+            if (_duration <= 0)
+                ClearModify();
         }
 
-        public void SetFill(Color color)
+        public void SetDestroyState(bool isDestroyed)
         {
-            Fill.color = color;
+            if(isDestroyed)
+                SetModify(Color.grey, GridType.Black);
+            else
+                ClearModify();
+        }
+
+        public void SetModify(Color color, GridType type, float duration = int.MaxValue)
+        {
+            Fill.DOColor(color, 0.1f);
+            _duration = duration;
+            _isColored = true;
+
+            Type = type;
+        }
+
+        public void ClearModify()
+        {
+            Fill.DOColor(_originColor, 0.1f);
+            _isColored = false;
         }
     }
 }
