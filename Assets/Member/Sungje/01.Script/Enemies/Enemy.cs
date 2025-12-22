@@ -1,6 +1,7 @@
 using Code.Core;
 using Code.Entities;
 using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
 public enum EnemyStateType
@@ -18,7 +19,7 @@ public abstract class Enemy : MonoBehaviour
     public EnemyDataSO enemyDataSO;
     public EnemyAttackCompo AttackCompo { get; private set; }
 
-    private Dictionary<EnemyStateType, EnemyState> _stateDict;
+    [SerializedDictionary] private Dictionary<EnemyStateType, EnemyState> _stateDict;
     private EnemyState _currentState;
 
     public Player Player
@@ -40,13 +41,6 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        _stateDict = new Dictionary<EnemyStateType, EnemyState>
-        {
-            { EnemyStateType.Move, new EnemyMoveState(this) },
-            { EnemyStateType.Attack, new HittingAttackState(this) },
-            { EnemyStateType.Dead, new EnemyDeadState(this) }
-        };
-
         TransitionState(EnemyStateType.Move);
     }
 
