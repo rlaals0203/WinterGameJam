@@ -8,35 +8,9 @@ public class HittingAttackState : EnemyState
 
     public override void Enter()
     {
-        Debug.Log("AttackState Enter");
-
-        if (_enemy == null)
-        {
-            Debug.LogError("enemy null");
-            return;
-        }
-
-        if (_enemy.AttackCompo == null)
-        {
-            Debug.LogError("AttackCompo null", _enemy);
-            return;
-        }
-
-        if (_player == null)
-        {
-            Debug.LogError("Player null", _enemy);
-            return;
-        }
-
-        if (data == null)
-        {
-            Debug.LogError("EnemyDataSO null", _enemy);
-            return;
-        }
-
+        _timer = 0f;
         _enemy.AttackCompo.StartAttack();
     }
-
 
     public override void UpdateState()
     {
@@ -62,8 +36,6 @@ public class HittingAttackState : EnemyState
 
     public override void Exit()
     {
-        if (_enemy.AttackCompo != null)
-            _enemy.AttackCompo.EndAttack();
+        _enemy.AttackCompo.EndAttack();
     }
-
 }
