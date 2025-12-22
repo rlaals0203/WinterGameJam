@@ -13,10 +13,11 @@ namespace Code.Entities
         
         private Player _player;
         private Vector3Int _direction;
-        private Vector3Int _prevDir;
         private PlayerMovement _movementCompo;
         
         private List<GridObject> _prevGrids;
+        private Color _gizmoColor = new Color32(255, 200, 200, 100);
+
         [Inject] private GridManager _gridManager;
         
         public void Initialize(Entity entity)
@@ -54,7 +55,6 @@ namespace Code.Entities
             if (newDir == _direction)
                 return;
 
-            _prevDir = _direction;
             _direction = newDir;
 
             SetArrowTransform();
@@ -89,7 +89,7 @@ namespace Code.Entities
 
             foreach (var grid in grids)
             {
-                grid.SetModify(Color.red, GridType.None);
+                grid.SetModify(_gizmoColor, GridType.None);
             }
         }
     }
