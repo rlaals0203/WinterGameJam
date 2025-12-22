@@ -8,14 +8,14 @@ namespace Code.UI
 {
     public class ExtractorUI : MonoBehaviour, IUIElement<InkData[]>
     {
-        [SerializeField] private Transform root;
+        [field: SerializeField] public Transform Root { get; private set; }
         [SerializeField] private IconTextBar iconTextBar;
         
         public void EnableFor(InkData[] element)
         {
             for (int i = 0; i < element.Length; i++)
             {
-                var bar = Instantiate(iconTextBar, root);
+                var bar = Instantiate(iconTextBar, Root);
                 bar.SetText($"{element[i].InkType} {element[i].Chance}%");
                 bar.SetIconColor(Utility.GetGridColor(element[i].InkType));
             }

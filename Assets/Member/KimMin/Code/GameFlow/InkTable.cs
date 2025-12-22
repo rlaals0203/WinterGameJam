@@ -18,13 +18,6 @@ namespace Code.GameFlow
 
     public class InkTable
     {
-        public static List<InkData[]>[] StageDatas = new []
-        {
-            Stage1Data,
-            Stage2Data,
-            Stage3Data
-        };
-        
         public static InkType GetRandomInk(int stage, int area)
         {
             if (stage < 0 || stage >= StageDatas.Length)
@@ -288,5 +281,13 @@ namespace Code.GameFlow
                 new InkData(InkType.Yellow, 40),
             }
         };
+        
+        public static List<InkData[]>[] StageDatas = new []
+        {
+            Stage1Data,
+            Stage2Data,
+            Stage3Data
+        };
+
     }
 }
