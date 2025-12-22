@@ -5,7 +5,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
     public bool IsDead { get; set; }
     public UnityEvent OnHitEvent;
