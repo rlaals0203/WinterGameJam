@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class EnemyAttackCompo : MonoBehaviour
 {
-    [field: SerializeField] public EnemyDataSO enemyDataSO { get; private set; }
     [SerializeField] private LayerMask targetLayer;
 
     private Enemy _enemy;
     private bool _isAttacking;
+
+    private EnemyDataSO Data => _enemy.enemyDataSO;
 
     private void Awake()
     {
@@ -22,10 +23,11 @@ public class EnemyAttackCompo : MonoBehaviour
     public void DoAttack()
     {
         if (!_isAttacking) return;
+        if (Data == null) return;
 
         Collider2D hit = Physics2D.OverlapCircle(
             transform.position,
-            enemyDataSO.attackRange,
+            Data.attackRange,
             targetLayer
         );
 
@@ -34,7 +36,7 @@ public class EnemyAttackCompo : MonoBehaviour
         Player target = hit.GetComponent<Player>();
         if (target == null) return;
 
-        //target.TakeDamage(damage);
+        // target.TakeDamage(Data.attackDamage);
     }
 
     public void EndAttack()
@@ -45,8 +47,10 @@ public class EnemyAttackCompo : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
+        if (_enemy == null || _enemy.enemyDataSO == null) return;
+
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enemyDataSO.attackRange);
+        Gizmos.DrawWireSphere(transform.position, _enemy.enemyDataSO.attackRange);
     }
 #endif
 }

@@ -173,6 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 213536711}
   - component: {fileID: 213536712}
+  - component: {fileID: 213536713}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -194,7 +195,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1013389050}
-  - {fileID: 995115059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &213536712
@@ -210,7 +210,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1021397916}
+  gridManager: {fileID: 1150371574}
   enemyDataSO: {fileID: 11400000, guid: e94b98b83ebfd5a43a81a1a81ba08073, type: 2}
+--- !u!114 &213536713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213536710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab40c80e1052e349993a52a77e35e35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &485350366
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,54 +535,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &995115058
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 995115059}
-  - component: {fileID: 995115060}
-  m_Layer: 0
-  m_Name: AttackCompo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &995115059
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 995115058}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 213536711}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &995115060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 995115058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab40c80e1052e349993a52a77e35e35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <enemyDataSO>k__BackingField: {fileID: 11400000, guid: e94b98b83ebfd5a43a81a1a81ba08073, type: 2}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &1013389047
 GameObject:
   m_ObjectHideFlags: 0
