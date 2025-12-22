@@ -46,7 +46,19 @@ public class ShopManager : MonoBehaviour
     private void OnBuyConfirmClick()
     {
         if (currentSelectedSupply == null) return;
+        
+        // 결제 요청
+        int cost = currentSelectedSupply.price;
 
-        Debug.Log($"[구매 성공] {currentSelectedSupply.SupplyName}");
+        if (MoneyManager.Instance.TrySpendMoney(cost))
+        {
+            Debug.Log($"[구매 성공] {currentSelectedSupply.SupplyName}");
+
+            // 얻은 아이템은 여기에서 처리
+        }
+        else
+        {
+            Debug.Log("[구매 실패] 돈엇ㅂ음");
+        }
     }
 }
