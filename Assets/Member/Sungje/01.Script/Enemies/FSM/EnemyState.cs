@@ -1,13 +1,18 @@
+using Code.Entities;
 using UnityEngine;
 
 public abstract class EnemyState
 {
     protected Enemy _enemy;
+    protected Player _player;
+    protected EnemyDataSO data;
     public string stateName;
 
     public EnemyState(Enemy enemy)
     {
         _enemy = enemy;
+        _player = enemy.player;
+        this.data = enemy.enemyDataSO;
     }
 
     public void Enter()
@@ -22,10 +27,10 @@ public abstract class EnemyState
 
     public void Exit()
     {
-        ExtiState();
+        ExitState();
     }
 
-    protected virtual void ExtiState()
+    protected virtual void ExitState()
     {
         Debug.Log("Exit State: " + stateName);
     }

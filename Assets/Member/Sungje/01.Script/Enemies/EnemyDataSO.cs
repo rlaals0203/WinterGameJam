@@ -10,8 +10,8 @@ public class EnemyDataSO : ScriptableObject
     public int maxHealth;
     public int damage;
 
-    public float moveCooldown;
     public float attackCooldown;
+    public float attackRange;
     public int occupySpaceX;
     public int occupySpaceY;
 }
