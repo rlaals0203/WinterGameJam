@@ -32,13 +32,6 @@ namespace Code.UI.Ink
             ChangeInk(evt.inkType);
         }
 
-        private void Update()
-        {
-            if(Keyboard.current.qKey.wasPressedThisFrame)
-                ChangeInk(InkType.Blue);
-
-        }
-
         private void ChangeInk(InkType inkType)
         {
             _frontTween?.Kill();
