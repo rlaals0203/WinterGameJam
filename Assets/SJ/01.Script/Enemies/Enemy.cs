@@ -21,16 +21,48 @@ public abstract class Enemy : Entity
 
     protected bool IsAttack = false;
 
-    public EnemyAttackCompo attackCompo { get; set; }
+    public EnemyAttackCompo AttackCompo { get; set; }
 
     protected override void Awake()
     {
-        if(enemyDataSO == null)
+        base.Awake();
+        if (enemyDataSO == null)
             _currentHealth = enemyDataSO.maxHealth;
+        AttackCompo = GetComponentInChildren<EnemyAttackCompo>();
+    }
+
+    public void Initialize()
+    {
+        //Player = player;
+    }
+
+    private void OnEnable()
+    {
+        TransitionState(EnemyStateType.Idle);
+    }
+
+    public void TransitionState(EnemyStateType newState)
+    {
+        StateEnum[currentState].Exit();
+        previousState = currentState;
+        currentState = newState;
+        StateEnum[currentState].Enter();
     }
 
     protected virtual void Update()
     {
-        if (enemyDataSO == null) return;
+        StateEnum[currentState].UpdateState();
+    }
+    protected virtual void FixedUpdate()
+    {
+        StateEnum[currentState].FixedUpdateState();
+    }
+
+    public virtual void HandleDead()
+    {
+        IsDead = true;
+        OnDeadEvent?.Invoke();
+        TransitionState(EnemyStateType.Die);
+        DestroyObject();
     }
 }
