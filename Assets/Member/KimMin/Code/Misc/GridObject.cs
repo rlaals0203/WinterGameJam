@@ -12,6 +12,8 @@ namespace Code.Misc
         
         public Vector2 Position => transform.position;
         public GridType Type { get; private set; }
+        
+        private Color _originColor = new Color32(255, 255, 255, 100);
 
         private bool _isColored;
         private float _duration;
@@ -22,29 +24,29 @@ namespace Code.Misc
             
             _duration -= Time.deltaTime;
             if (_duration <= 0)
-                ResetModify();
+                ClearModify();
         }
 
         public void SetDestroyState(bool isDestroyed)
         {
             if(isDestroyed)
-                SetModify(Color.grey, int.MaxValue, GridType.Black);
+                SetModify(Color.grey, GridType.Black);
             else
-                ResetModify();
+                ClearModify();
         }
 
-        public void SetModify(Color color, float duration, GridType type)
+        public void SetModify(Color color, GridType type, float duration = int.MaxValue)
         {
-            Fill.DOColor(color, 0.2f);
+            Fill.DOColor(color, 0.1f);
             _duration = duration;
             _isColored = true;
 
             Type = type;
         }
 
-        private void ResetModify()
+        public void ClearModify()
         {
-            Fill.DOColor(Color.white, 0.2f);
+            Fill.DOColor(_originColor, 0.1f);
             _isColored = false;
         }
     }
