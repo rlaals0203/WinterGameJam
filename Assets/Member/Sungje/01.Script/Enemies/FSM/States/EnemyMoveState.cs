@@ -1,33 +1,32 @@
+using System;
 using UnityEngine;
 
-public class EnemyMoveState : EnemyState
+public class EnemyMoveState : MonoBehaviour, IEntityComponent
 {
     private float _interval = 2f;
     private float _prevTime;
 
-    public EnemyMoveState(Enemy enemy) : base(enemy)
+    private Enemy _enemy;
+    private EnemyAttackCompo _attackCompo;
+
+    public void Initialize(Entity entity)
     {
-        _interval = enemy.enemyDataSO.moveSpeed;
+        _enemy = entity as Enemy;
+        _attackCompo = entity.GetCompo<EnemyAttackCompo>();
+        _interval = _enemy.EnemyDataSO.moveSpeed;
     }
 
-    public override void Enter()
+    private void Update()
     {
-        _prevTime = Time.time;
-    }
-
-    public override void UpdateState()
-    {
-        if (_player == null) return;
-
         if (Time.time - _prevTime >= _interval)
         {
             _prevTime = Time.time;
             _enemy.GridManager.MoveToPlayer(_enemy.transform);
         }
 
-        if (DistanceToPlayer <= data.attackRange)
+        if (_enemy.DistanceToPlayer <= _enemy.EnemyDataSO.attackRange)
         {
-            _enemy.TransitionState(EnemyStateType.Attack);
+            _attackCompo.TryDoAttack();
         }
     }
 }

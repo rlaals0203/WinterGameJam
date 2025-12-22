@@ -15,6 +15,6 @@ public class EnemyBatHit : MonoBehaviour
         Player player = other.GetComponentInParent<Player>();
         if (player == null) return;
 
-        player.TakeDamage(_enemy.enemyDataSO.damage);
+        player.TakeDamage(_enemy.EnemyDataSO.damage);
     }
 }

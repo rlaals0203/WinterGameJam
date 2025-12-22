@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HittingAttackState : EnemyState
+/*public class HittingAttackState : EnemyState
 {
     private float _timer;
     private EnemyAttackCompo _attackCompo;
@@ -8,12 +8,11 @@ public class HittingAttackState : EnemyState
     public HittingAttackState(Enemy enemy) : base(enemy)
     {
         _attackCompo = enemy.GetCompo<EnemyAttackCompo>();
-        Debug.Log(_attackCompo);
     }
 
     public override void Enter()
     {
-        _attackCompo.DoAttack();
+        _attackCompo.TryDoAttack();
         _timer = 0f;
     }
 
@@ -41,4 +40,4 @@ public class HittingAttackState : EnemyState
     public override void Exit()
     {
     }
-}
+}*/

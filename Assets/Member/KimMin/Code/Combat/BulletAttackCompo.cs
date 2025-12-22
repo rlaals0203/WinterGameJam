@@ -14,7 +14,7 @@ namespace Code.Combat
             base.Initialize(entity);
         }
 
-        public async override void DoAttack()
+        public async override void TryDoAttack()
         {
             for (int i = 0; i < 3; i++)
             {
