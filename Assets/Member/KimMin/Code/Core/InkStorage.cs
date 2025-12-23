@@ -7,16 +7,16 @@ namespace Code.Core
 {
     public class InkStorage : MonoSingleton<InkStorage>
     {
-        private void Awake()
-        {
-            // 임의 테스트
-            _inkDict.Add(InkType.Red, 100);
-            _inkDict.Add(InkType.Blue, 200);
-            _inkDict.Add(InkType.Yellow, 300);
-            _inkDict.Add(InkType.Black, 400);
-            _inkDict.Add(InkType.White, 500);
-            _inkDict.Add(InkType.Green, 600);
-        }
+        //private void Awake()
+        //{
+        //    // 임의 테스트
+        //    _inkDict.Add(InkType.Red, 100);
+        //    _inkDict.Add(InkType.Blue, 200);
+        //    _inkDict.Add(InkType.Yellow, 300);
+        //    _inkDict.Add(InkType.Black, 400);
+        //    _inkDict.Add(InkType.White, 500);
+        //    _inkDict.Add(InkType.Green, 600);
+        //}
 
         private Dictionary<InkType, int> _inkDict = new();
 
