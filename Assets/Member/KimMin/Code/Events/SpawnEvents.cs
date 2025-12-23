@@ -1,4 +1,6 @@
+using Code.Entities;
 using KimMin.Core;
+using KimMin.ObjectPool.Editor;
 using KimMin.ObjectPool.RunTime;
 using UnityEngine;
 
@@ -8,7 +10,7 @@ namespace KimMin.Events
     {
         public static SpawnBulletEvent SpawnBulletEvent = new();
         public static SpawnEnergyBallEvent SpawnEnergyBallEvent = new();
-        public static DashAttackEvent DashAttackEvent = new();
+        public static SpawnHomingBulletEvent SpawnHomingBullet = new();
     }
     
     public class SpawnBulletEvent : GameEvent
@@ -17,15 +19,15 @@ namespace KimMin.Events
         public Vector3 position;
         public Vector3 direction;
         public float speed;
-        public float damage;
+        public int damage;
         public Entity entity;
 
-        public SpawnBulletEvent Init(PoolItemSO poolItem, Vector2 position, 
-            Vector2 direction, float speed, float damage, Entity owner)
+        public SpawnBulletEvent Init(PoolItemSO poolItem, Vector3 position, 
+            Vector3 rotation, float speed, int damage, Entity owner)
         {
             this.poolItem = poolItem;
             this.position = position;
-            this.direction = direction;
+            this.direction = rotation;
             this.speed = speed;
             this.damage = damage;
             this.entity = owner;
@@ -39,10 +41,10 @@ namespace KimMin.Events
         public Vector3 position;
         public Vector3 direction;
         public float speed;
-        public float damage;
+        public int damage;
         public Entity entity;
         public SpawnEnergyBallEvent Init(PoolItemSO poolItem, Vector3 position, 
-            Vector3 rotation, float speed, float damage, Entity owner)
+            Vector3 rotation, float speed, int damage, Entity owner)
         {
             this.poolItem = poolItem;
             this.position = position;
@@ -54,20 +56,23 @@ namespace KimMin.Events
         }
     }
 
-    public class DashAttackEvent : GameEvent
+    public class SpawnHomingBulletEvent : GameEvent
     {
         public PoolItemSO poolItem;
         public Vector3 position;
         public Vector3 direction;
-        public float damage;
+        public float speed;
+        public int damage;
         public Entity entity;
-        public DashAttackEvent Init(PoolItemSO poolItem, Vector3 position, 
-            Vector3 rotation, float speed, float damage, Entity owner)
+        public Player target;
+        public SpawnHomingBulletEvent Init(PoolItemSO poolItem, Vector3 position,
+            float speed, int damage, Player target, Entity owner)
         {
             this.poolItem = poolItem;
             this.position = position;
-            this.direction = rotation;
+            this.speed = speed;
             this.damage = damage;
+            this.target = target;
             this.entity = owner;
             return this;
         }

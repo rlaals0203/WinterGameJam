@@ -1,4 +1,6 @@
+using Code.Entities;
 using KimMin.Core;
+using KimMin.Dependencies;
 using KimMin.Events;
 using KimMin.ObjectPool.RunTime;
 using UnityEngine;
@@ -12,7 +14,7 @@ namespace Code.Combat
         [SerializeField] protected LayerMask enemyLayer;
         [SerializeField] private TrailRenderer trailRenderer;
 
-        protected float _damage;
+        protected int _damage;
         protected float _speed;
         private Pool _myPool;
         private bool _isHit;
@@ -25,7 +27,7 @@ namespace Code.Combat
             _rb = GetComponent<Rigidbody2D>();
         }
 
-        public virtual void Init(Vector3 position, Vector2 direction, float bulletSpeed, float damage, Entity entity)
+        public virtual void Init(Vector3 position, Vector2 direction, float bulletSpeed, int damage, Entity entity)
         {
             transform.position = position;
             transform.right = direction;

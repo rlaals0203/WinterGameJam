@@ -14,7 +14,7 @@ namespace Code.Combat
             _owner = owner;
         }
 
-        public abstract bool CastDamage(float damage);
+        public abstract bool CastDamage(int damage);
 
         public bool CanCounter { get; set; }
         public Transform TargetTrm => _owner.transform;

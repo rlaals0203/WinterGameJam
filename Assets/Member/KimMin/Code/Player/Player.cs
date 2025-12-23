@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.Entities
 {
-    public class Player : Entity, IDependencyProvider
+    public class Player : Entity, IDependencyProvider, IDamageable
     {
         private int maxHealth = 100;
 
@@ -31,6 +31,11 @@ namespace Code.Entities
         }
 
         public void TakeDamage(int damage)
+        {
+            
+        }
+
+        public void ApplyDamage(int damage)
         {
             currentHealth -= damage;
             if (currentHealth < 0)
