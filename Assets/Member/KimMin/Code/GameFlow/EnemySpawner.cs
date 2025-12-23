@@ -107,5 +107,4 @@ private List<Enemy> _enemyList;
             TransitionManager.Instance().Transition(SceneName.Game, paintEffect, 0);
         }
     }
-    }
 }
