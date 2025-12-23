@@ -9,11 +9,10 @@ public class InkSelectUI : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Button[] slotButtons;
     [SerializeField] private Transform highlightObj;
-    [SerializeField] private InkStorage inkStorage;
     [SerializeField] private TransitionSettings GameStartEffect;
 
-    private int selectedIndex = -1;// ÇöÀç ¼±ÅÃµÈ Ä­ ¹øÈ£
-    private InkType[] slotsData; // °¢ Ä­¿¡ ´ã±ä À×Å© Á¤º¸
+    private int selectedIndex = -1;// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ Ä­ ï¿½ï¿½È£
+    private InkType[] slotsData; // ï¿½ï¿½ Ä­ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½
 
     private void Start()
     {
@@ -23,11 +22,11 @@ public class InkSelectUI : MonoBehaviour
         {
             int index = i;
 
-            // ¹öÆ° Å¬¸¯ ÀÌº¥Æ® ¿¬°á
+            // ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
             slotButtons[i].onClick.RemoveAllListeners();
             slotButtons[i].onClick.AddListener(() => OnSlotClicked(index));
 
-            // ÃÊ±âÈ­
+            // ï¿½Ê±ï¿½È­
             slotButtons[i].image.color = Color.gray;
             slotsData[i] = InkType.None;
         }
@@ -39,7 +38,7 @@ public class InkSelectUI : MonoBehaviour
     {
         selectedIndex = index;
 
-        // ÇÏÀÌ¶óÀÌÆ® ÀÌµ¿ ¹× È¸Àü
+        // ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ï¿½Æ® ï¿½Ìµï¿½ ï¿½ï¿½ È¸ï¿½ï¿½
         if (highlightObj != null)
         {
             highlightObj.gameObject.SetActive(true);
@@ -54,10 +53,10 @@ public class InkSelectUI : MonoBehaviour
 
         InkType type = (InkType)inkTypeInt;
 
-        // À×Å© ¾øÀ¸¸é ¹«½Ã
-        if (inkStorage != null && !inkStorage.HasInk(type)) return;
+        // ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if (InkStorage.Instance == null && !InkStorage.Instance.HasInk(type)) return;
 
-        // µ¥ÀÌÅÍ ÀúÀå ¹× »ö»ó º¯°æ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         slotsData[selectedIndex] = type;
         slotButtons[selectedIndex].image.color = GetColorByType(type);
     }
@@ -74,7 +73,7 @@ public class InkSelectUI : MonoBehaviour
         if (finalLoadout.Count > 0 && InkLoadoutManager.Instance != null)
         {
             InkLoadoutManager.Instance.SaveSelectedInks(finalLoadout);
-            TransitionManager.Instance().Transition(SceneName.TestGame, GameStartEffect, 0);
+            TransitionManager.Instance().Transition(SceneName.Game, GameStartEffect, 0);
         }
     }
 

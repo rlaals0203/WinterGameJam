@@ -1,7 +1,9 @@
+using System;
 using EasyTransition;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,6 +17,14 @@ public class IntroManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(ProcessIntroSequence(1.5f));
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            TransitionManager.Instance().Transition(SceneName.Lobby, paintEffect, 0);
+        }
     }
 
     public IEnumerator ProcessIntroSequence(float fadeDuration)
