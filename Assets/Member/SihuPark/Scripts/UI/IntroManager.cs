@@ -1,13 +1,16 @@
+using EasyTransition;
+using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IntroManager : MonoBehaviour
 {
     [SerializeField] Image team_img = null;
     [SerializeField] Image school_img = null;
+
+    [SerializeField] private TransitionSettings paintEffect;
 
     void Start()
     {
@@ -56,7 +59,7 @@ public class IntroManager : MonoBehaviour
         }
         team_img.color = SetAlpha(team_img.color, 0);
 
-        SceneManager.LoadScene(SceneName.Lobby);
+        TransitionManager.Instance().Transition(SceneName.Lobby, paintEffect, 0);
     }
 
     private Color SetAlpha(Color color, float alpha)

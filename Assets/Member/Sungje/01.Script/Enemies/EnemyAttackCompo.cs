@@ -1,31 +1,41 @@
+using System;
+using System.Data.Common;
 using Code.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EnemyAttackCompo : MonoBehaviour
+public class EnemyAttackCompo : MonoBehaviour, IEntityComponent
 {
     [SerializeField] private LayerMask targetLayer;
 
-    private Enemy _enemy;
-    private bool _isAttacking;
+    protected Enemy _enemy;
+    private float _lastAttackTime;
 
-    private EnemyDataSO Data => _enemy.enemyDataSO;
-
-    private void Awake()
+    private EnemyDataSO Data => _enemy.EnemyDataSO;
+    
+    public virtual void Initialize(Entity entity)
     {
-        _enemy = GetComponent<Enemy>();
+        _enemy = entity as Enemy;
     }
 
-    public void StartAttack()
+    private void Update()
     {
-        _isAttacking = true;
+        TryDoAttack();
     }
 
-    public void DoAttack()
+    public void TryDoAttack()
     {
-        if (!_isAttacking) return;
         if (Data == null) return;
+        
+        if (Time.time - _lastAttackTime < Data.attackCooldown
+            || _enemy.DistanceToPlayer > Data.attackRange) return;
+        
+        _lastAttackTime = Time.time;
+        ProcessAttack();
+    }
 
+    protected virtual void ProcessAttack()
+    {
         Collider2D hit = Physics2D.OverlapCircle(
             transform.position,
             Data.attackRange,
@@ -40,18 +50,13 @@ public class EnemyAttackCompo : MonoBehaviour
         target.TakeDamage(Data.damage);
     }
 
-    public void EndAttack()
-    {
-        _isAttacking = false;
-    }
-
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        if (_enemy == null || _enemy.enemyDataSO == null) return;
+        if (_enemy == null || _enemy.EnemyDataSO == null) return;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _enemy.enemyDataSO.attackRange);
+        Gizmos.DrawWireSphere(transform.position, _enemy.EnemyDataSO.attackRange);
     }
 #endif
 }

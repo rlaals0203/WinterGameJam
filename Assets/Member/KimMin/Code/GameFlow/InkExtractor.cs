@@ -1,18 +1,37 @@
+using System.Collections.Generic;
 using Code.Core;
 using Code.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Code.GameFlow
 {
     public class InkExtractor : MonoBehaviour
     {
-        [SerializeField] private ExtractorUI extractorUI;
+        public static readonly List<InkExtractor> All = new();
+        
+        [field: SerializeField] public ExtractorUI extractorUI { get; private set; }
+        [field: SerializeField] public bool IsVisible { get;  set; }
+        public ExtractorUI UI { get; private set; }
         
         public void InitExtractor(InkData[] data)
         {
             Extract(data);
-            var ui = Instantiate(extractorUI, transform.position, Quaternion.identity, transform);
-            ui.transform.localScale = Vector3.zero;
+            UI = Instantiate(extractorUI, transform.position, Quaternion.identity, transform);
+            UI.EnableFor(data);
+            UI.Root.localScale = Vector3.one * 0.6f;
+            UI.Root.localPosition += Vector3.up * 0.8f;
+            IsVisible = false;
+        }
+        
+        private void OnEnable()
+        {
+            All.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            All.Remove(this);
         }
         
         public InkType Extract(InkData[] data)

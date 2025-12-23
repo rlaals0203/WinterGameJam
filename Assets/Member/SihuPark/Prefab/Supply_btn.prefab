@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8361527, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -134,11 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696940434f72fd146ae9b37a60db9e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon_img: {fileID: 0}
-  name_txt: {fileID: 0}
-  price_txt: {fileID: 0}
-  desc_txt: {fileID: 0}
-  purchase_btn: {fileID: 0}
+  mySupplyData: {fileID: 11400000, guid: 989aa9cef89d4a14692843744f8a8b51, type: 2}
+  shopManager: {fileID: 0}
+  myButton: {fileID: 889606554494233669}
+  myIcon: {fileID: 7540671043424583746}
+  myName: {fileID: 919449933073658073}
 --- !u!1 &7556379294604811303
 GameObject:
   m_ObjectHideFlags: 0

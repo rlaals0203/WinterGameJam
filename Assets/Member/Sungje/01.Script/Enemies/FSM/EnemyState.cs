@@ -15,7 +15,7 @@ public abstract class EnemyState
     protected EnemyState(Enemy enemy)
     {
         _enemy = enemy;
-        data = enemy.enemyDataSO;
+        data = enemy.EnemyDataSO;
     }
 
     public virtual void Enter() { }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Entities;
 using Code.Misc;
@@ -19,7 +20,7 @@ namespace Code.Core
     }
     
     [Provide]
-    public class GridManager : MonoBehaviour, IDependencyProvider
+    public class GridManager : MonoSingleton<GridManager>, IDependencyProvider
     {
         [SerializeField] private int row;
         [SerializeField] private int col;
@@ -39,7 +40,7 @@ namespace Code.Core
             {
                 for (int x = 0; x < row; x++)
                 {
-                    GridObject gridObj = Instantiate(gridPrefab);
+                    GridObject gridObj = Instantiate(gridPrefab, transform);
                     Vector3Int cell = new Vector3Int(x, y, 0);
                     Vector3 worldPos = grid.CellToWorld(cell) + grid.cellSize / 2f + (Vector3)gridOffset;
 
@@ -138,13 +139,19 @@ namespace Code.Core
             return result;
         }
 
-        public void MoveToPlayer(Transform target)
+        public void MoveToPlayer(Transform target, Action callback = null)
         {
             Vector3Int targetCell = grid.WorldToCell(target.position);
             Vector3Int playerCell = grid.WorldToCell(_player.transform.position);
+    
             Vector3Int step = MoveByGrid(targetCell, playerCell);
-            Vector3 worldPos = grid.CellToWorld(targetCell + step) + grid.cellSize / 2f;
-            target.DOMove(worldPos, 0.1f);
+            Vector3Int nextCell = targetCell + step;
+            Vector3 worldPos = grid.CellToWorld(nextCell) + grid.cellSize / 2f + (Vector3)gridOffset;
+
+            target.DOMove(worldPos, 0.1f).OnComplete(() =>
+            {
+                if (callback != null) callback();
+            });
         }
         
     }
