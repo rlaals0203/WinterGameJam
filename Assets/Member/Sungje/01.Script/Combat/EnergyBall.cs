@@ -8,7 +8,7 @@ public class EnergyBall : Bullet
 
     private bool _fired;
 
-    public override void Init(Vector3 position, Vector2 direction, float bulletSpeed, float damage, Entity entity)
+    public override void Init(Vector3 position, Vector2 direction, float bulletSpeed, int damage, Entity entity)
     {
         if (_fired) return;
 

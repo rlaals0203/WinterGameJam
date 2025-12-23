@@ -20,7 +20,7 @@ namespace Code.Combat
             _hitResults = new Collider2D[maxHitCount];
         }
 
-        public override bool CastDamage(float damage)
+        public override bool CastDamage(int damage)
         {
 
             int cnt = overlapCastType switch

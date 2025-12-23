@@ -11,7 +11,7 @@ public class EnemyAttackCompo : MonoBehaviour, IEntityComponent
     protected Enemy _enemy;
     private float _lastAttackTime;
 
-    private EnemyDataSO Data => _enemy.EnemyDataSO;
+    protected EnemyDataSO Data => _enemy.EnemyDataSO;
     
     public virtual void Initialize(Entity entity)
     {
