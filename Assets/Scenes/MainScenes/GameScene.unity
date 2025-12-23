@@ -869,7 +869,9 @@ MonoBehaviour:
   datas:
   - {fileID: 11400000, guid: fcba99f1f189b64489f8c5e5f377fe9d, type: 2}
   - {fileID: 11400000, guid: 6546b4ba00eb9b541bc582e52fd216c2, type: 2}
-  - {fileID: 11400000, guid: 6546b4ba00eb9b541bc582e52fd216c2, type: 2}
+  - {fileID: 11400000, guid: 7c59ce90d58b4a2448d248d151ae64d2, type: 2}
+  - {fileID: 11400000, guid: 7c59ce90d58b4a2448d248d151ae64d2, type: 2}
+  - {fileID: 11400000, guid: 7c59ce90d58b4a2448d248d151ae64d2, type: 2}
   paintEffect: {fileID: 11400000, guid: 152c37bdfe3ef3548a52cacf26758371, type: 2}
 --- !u!1 &907831874
 GameObject:
@@ -967,6 +969,9 @@ MonoBehaviour:
   stages:
   - {fileID: 11400000, guid: fcba99f1f189b64489f8c5e5f377fe9d, type: 2}
   - {fileID: 11400000, guid: 6546b4ba00eb9b541bc582e52fd216c2, type: 2}
+  - {fileID: 11400000, guid: 7c59ce90d58b4a2448d248d151ae64d2, type: 2}
+  - {fileID: 11400000, guid: 7c59ce90d58b4a2448d248d151ae64d2, type: 2}
+  - {fileID: 11400000, guid: 7c59ce90d58b4a2448d248d151ae64d2, type: 2}
 --- !u!4 &941054474 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7147871941634092416, guid: 0dcf12a4901a7974daed78a7c2229ec5, type: 3}
