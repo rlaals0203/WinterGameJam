@@ -46,7 +46,7 @@ public class MoneyManager : MonoBehaviour
     {
         if (money_txt != null)
         {
-            money_txt.text = "Money : " + $"{currentMoney:N0} G";
+            money_txt.text = $"{currentMoney:N0} G";
         }
     }
 }
