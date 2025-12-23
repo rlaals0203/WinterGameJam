@@ -1366,6 +1366,7 @@ MonoBehaviour:
   info_price_txt: {fileID: 910831842}
   info_type_txt: {fileID: 1408220632}
   buy_confirm_btn: {fileID: 1808023728}
+  buy_btn_txt: {fileID: 1656890944}
 --- !u!4 &712207088
 Transform:
   m_ObjectHideFlags: 0
