@@ -512,8 +512,8 @@ Transform:
   m_GameObject: {fileID: 485350366}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1021397917}
@@ -559,8 +559,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1432875691
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -7872159900971222029, guid: 7459ef019e15a444880e975789e51a22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -971,7 +971,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000550d98aa
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1463,7 +1463,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
 --- !u!1 &1118699760
 GameObject:
@@ -1624,8 +1624,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: -50, y: -65}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1170991768
 MonoBehaviour:
@@ -1647,7 +1647,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6867634730196512644, guid: 72e1e2584982ed047aea57c42a053ef8, type: 3}
+  m_Sprite: {fileID: 565482057696422497, guid: 7459ef019e15a444880e975789e51a22, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1788,6 +1788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowObject: {fileID: 310773113}
   damageCaster: {fileID: 1286843585}
+  renderer: {fileID: 485350368}
 --- !u!1 &1268484672
 GameObject:
   m_ObjectHideFlags: 0
@@ -2477,6 +2478,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4801827204484284297, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
+      propertyPath: contactFilter.useLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801827204484284297, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
       propertyPath: contactFilter.layerMask.m_Bits
       value: 128
       objectReference: {fileID: 0}
@@ -2703,6 +2708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 11400000, guid: e404979626a37854eb83e482b0ca7efe, type: 2}
+  renderer: {fileID: 485350368}
 --- !u!1001 &350362086419911489
 PrefabInstance:
   m_ObjectHideFlags: 0

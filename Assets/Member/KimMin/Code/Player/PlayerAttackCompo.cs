@@ -13,6 +13,7 @@ namespace Code.Entities
     {
         [SerializeField] private GameObject arrowObject;
         [SerializeField] private OverlapDamageCaster damageCaster;
+        [SerializeField] private SpriteRenderer renderer;
         
         private Player _player;
         private Vector3Int _direction;
@@ -69,6 +70,11 @@ namespace Code.Entities
 
         private void CastDamage(List<GridObject> grids)
         {
+            if (_direction.x == -1)
+                renderer.flipX = true;
+            else if(_direction.x == 1)
+                renderer.flipX = false;
+            
             if (_gridManager.TryGetRendererBounds(grids, out var bounds))
             {
                 Vector3 pos = bounds.center;

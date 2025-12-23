@@ -10,6 +10,7 @@ namespace Code.Entities
     public class PlayerMovement : MonoBehaviour, IEntityComponent
     {
         [SerializeField] private PlayerInputSO playerInput;
+        [SerializeField] private SpriteRenderer renderer;
         public Vector2 Position { get; private set; }
         public bool CanMove { get; set; }
 
@@ -44,6 +45,11 @@ namespace Code.Entities
         {
             Vector2 dir = _movementQueue.Dequeue();
             Position += dir;
+
+            if (Mathf.Approximately(dir.x, 1))
+                renderer.flipX = false;
+            else if(Mathf.Approximately(dir.x, -1))
+                renderer.flipX = true;
 
             var cellPos = _gridManager.WorldToGrid(Position);
             _gridManager.ApplyGridBuff(_gridManager.GetGrid(cellPos), _player);
