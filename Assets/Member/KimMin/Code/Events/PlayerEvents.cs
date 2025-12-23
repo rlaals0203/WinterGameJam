@@ -5,6 +5,7 @@ namespace KimMin.Events
 {
     public static class PlayerEvents
     {
+        public static readonly PlayerDead PlayerDead = new PlayerDead();
         public static readonly PlayerHealthEvent PlayerHealthEvent = new PlayerHealthEvent();
         public static ChangeInkEvent ChangeInkEvent = new();
         public static ChangeExtractorEvent ChangeExtractorEvent = new();
@@ -44,4 +45,6 @@ namespace KimMin.Events
             return this;
         }
     }
+    
+    public class PlayerDead : GameEvent {}
 }

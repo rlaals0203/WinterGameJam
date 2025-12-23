@@ -20,7 +20,7 @@ namespace Code.Entities
         private PlayerMovement _movementCompo;
         private PlayerInkCompo _inkCompo;
         private List<GridObject> _prevGrids;
-        private Color _gizmoColor = new Color32(255, 200, 200, 100);
+        private Color _gizmoColor = new Color32(255, 175, 150, 175);
 
         private readonly int _inkSkillAmount = 10;
         
@@ -43,7 +43,7 @@ namespace Code.Entities
         private void HandleRightClick()
         {
             if (!_inkStorage.HasInk(_inkCompo.CurrentInk) ||
-                !_player.IsCombatMode) return;
+                !GameManager.Instance.isCombatMode) return;
             var grid = _gridManager.GetGrid(_gridManager.WorldToGrid(_player.Position));
             var ink = _inkCompo.CurrentInk;
             
@@ -124,7 +124,7 @@ namespace Code.Entities
 
         private void SetGridGizmo()
         {
-            if (!_player.IsCombatMode) return;
+            if (!GameManager.Instance.isCombatMode) return;
 
             if (_prevGrids != null)
             {

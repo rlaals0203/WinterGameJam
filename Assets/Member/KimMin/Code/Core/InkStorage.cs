@@ -10,17 +10,6 @@ namespace Code.Core
     {
         private Dictionary<InkType, int> _inkDict = new();
 
-        private void Awake()
-        {
-            //테스트
-            _inkDict.Add(InkType.Red, 100);
-            _inkDict.Add(InkType.Blue, 200);
-            _inkDict.Add(InkType.Yellow, 300);
-            _inkDict.Add(InkType.Black, 100);
-            _inkDict.Add(InkType.White, 100);
-            _inkDict.Add(InkType.Green, 100);
-        }
-
         public void ModifyInk(InkType inkType, int amount)
         {
             if (!_inkDict.TryAdd(inkType, amount))

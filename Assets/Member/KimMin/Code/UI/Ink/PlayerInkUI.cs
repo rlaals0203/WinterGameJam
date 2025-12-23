@@ -27,6 +27,11 @@ namespace Code.UI.Ink
             GameEventBus.AddListener<ChangeInkEvent>(HandleChangeInk);
         }
 
+        private void OnDestroy()
+        {
+            GameEventBus.RemoveListener<ChangeInkEvent>(HandleChangeInk);
+        }
+
         private void HandleChangeInk(ChangeInkEvent evt)
         {
             ChangeInk(evt.inkType);
