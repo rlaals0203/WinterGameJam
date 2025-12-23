@@ -1,3 +1,4 @@
+using System;
 using System.Data.Common;
 using Code.Entities;
 using UnityEngine;
@@ -17,12 +18,17 @@ public class EnemyAttackCompo : MonoBehaviour, IEntityComponent
         _enemy = entity as Enemy;
     }
 
+    private void Update()
+    {
+        TryDoAttack();
+    }
+
     public void TryDoAttack()
     {
         if (Data == null) return;
-
+        
         if (Time.time - _lastAttackTime < Data.attackCooldown
-            || _enemy.DistanceToPlayer < Data.attackRange) return;
+            || _enemy.DistanceToPlayer > Data.attackRange) return;
         
         _lastAttackTime = Time.time;
         ProcessAttack();

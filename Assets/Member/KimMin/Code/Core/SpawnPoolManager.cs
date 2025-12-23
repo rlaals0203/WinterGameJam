@@ -27,7 +27,7 @@ namespace Code.Core
         private void HandleSpawnBullet(SpawnBulletEvent evt)
         {
             var bullet = _poolManager.Pop<Bullet>(evt.poolItem);
-            bullet.Init(evt.position, evt.direction, 10f, evt.damage, evt.entity);
+            bullet.Init(evt.position, evt.direction, 5f, evt.damage, evt.entity);
         }
 
         private void HandlePlayPoolEffect(PlayPoolEffect evt)
