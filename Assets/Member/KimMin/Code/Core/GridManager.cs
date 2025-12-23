@@ -147,14 +147,14 @@ namespace Code.Core
         {
             Vector3Int targetCell = grid.WorldToCell(target.position);
             Vector3Int playerCell = grid.WorldToCell(_player.transform.position);
-
             Vector3Int step = MoveByGrid(targetCell, playerCell);
             Vector3Int nextCell = targetCell + step;
-            Vector3 worldPos = grid.CellToWorld(nextCell) + grid.cellSize / 2f + (Vector3)gridOffset;
 
-            target.DOMove(worldPos, 0.1f).OnComplete(() =>
-            {
-                if (callback != null) callback();
+            if (nextCell == playerCell) return;
+
+            Vector3 worldPos = grid.CellToWorld(nextCell) + grid.cellSize / 2f + (Vector3)gridOffset;
+            target.DOMove(worldPos, 0.1f).OnComplete(() => {
+                callback?.Invoke();
                 ApplyGridBuff(GetGrid(nextCell), owner);
             });
         }

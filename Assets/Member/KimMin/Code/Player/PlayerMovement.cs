@@ -50,13 +50,20 @@ namespace Code.Entities
         {
             Vector2 dir = _movementQueue.Dequeue();
             Position += dir;
+            
+            var cellPos = _gridManager.WorldToGrid(Position);
+            if (!_gridManager.IsValidCell(cellPos) ||
+                _gridManager.GetGrid(cellPos).CannotStand)
+            {
+                Position -= dir;
+                return;
+            };
 
             if (Mathf.Approximately(dir.x, 1))
                 renderer.flipX = false;
             else if(Mathf.Approximately(dir.x, -1))
                 renderer.flipX = true;
-
-            var cellPos = _gridManager.WorldToGrid(Position);
+            
             _gridManager.ApplyGridBuff(_gridManager.GetGrid(cellPos), _player);
             
             float duration = 0.1f - (_movementQueue.Count * 0.02f);
