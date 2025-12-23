@@ -352,7 +352,6 @@ MonoBehaviour:
   OnDeadEvent:
     m_PersistentCalls:
       m_Calls: []
-  player: {fileID: 1021397916}
   gridManager: {fileID: 1150371574}
   <EnemyDataSO>k__BackingField: {fileID: 11400000, guid: 0351c94a27021bb40bb50548ca1d84d4, type: 2}
 --- !u!114 &198653320
@@ -371,6 +370,7 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   renderer: {fileID: 366042092}
+  hitSound: {fileID: 0}
 --- !u!1 &298357409
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,7 +591,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1432875691
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e20bf7e557e5b474c8dc84bbb0bb6115, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -741,7 +741,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1432875691
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -7872159900971222029, guid: 7459ef019e15a444880e975789e51a22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1621,6 +1621,7 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   renderer: {fileID: 485350368}
+  hitSound: {fileID: 0}
 --- !u!1 &1083928520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,7 +2431,7 @@ PrefabInstance:
       objectReference: {fileID: 1150371574}
     - target: {fileID: 368089990140593110, guid: 57166e93576fa9d40a366c50840d2b95, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 870826396097102138, guid: 57166e93576fa9d40a366c50840d2b95, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2478,7 +2479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1551661702684455592, guid: 57166e93576fa9d40a366c50840d2b95, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1779487163582370093, guid: 57166e93576fa9d40a366c50840d2b95, type: 3}
       propertyPath: chancePerSecond
@@ -2486,11 +2487,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2931411658162278526, guid: 57166e93576fa9d40a366c50840d2b95, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5375695146473057100, guid: 57166e93576fa9d40a366c50840d2b95, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6635914506577708271, guid: 57166e93576fa9d40a366c50840d2b95, type: 3}
       propertyPath: renderer
@@ -2498,11 +2499,11 @@ PrefabInstance:
       objectReference: {fileID: 783281832888207204}
     - target: {fileID: 6921694099179252885, guid: 57166e93576fa9d40a366c50840d2b95, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7940215168503592432, guid: 57166e93576fa9d40a366c50840d2b95, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2709,7 +2710,7 @@ MonoBehaviour:
   statOverrides:
   - stat: {fileID: 11400000, guid: 680605fd1a541d64288071fd3103e161, type: 2}
     isUseOverride: 1
-    overrideValue: 10000
+    overrideValue: 200
 --- !u!1 &1871179441
 GameObject:
   m_ObjectHideFlags: 0
@@ -3326,6 +3327,10 @@ PrefabInstance:
     - target: {fileID: 7059250963905835014, guid: 998b5ea78252674408cbf17ad023ed30, type: 3}
       propertyPath: m_Name
       value: Enemy1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059250963905835014, guid: 998b5ea78252674408cbf17ad023ed30, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7888246890817313091, guid: 998b5ea78252674408cbf17ad023ed30, type: 3}
       propertyPath: m_LocalPosition.x
