@@ -22,11 +22,13 @@ namespace Code.GameFlow
         private float _lastTime;
         private int _enemyLeft;
 
-        [Inject] private GridManager _gridManager;
-
         private void Awake()
         {
-            if (!GameManager.Instance.isCombatMode) gameObject.SetActive(false);
+            if (!GameManager.Instance.isCombatMode)
+            {
+                mobCountText.gameObject.SetActive(false);
+                gameObject.SetActive(false);
+            }
             
             GameEventBus.AddListener<EnemyDeadEvent>(HandleEnemyDead);
             InitStage();
@@ -63,7 +65,7 @@ namespace Code.GameFlow
         private void SpawnEnemy()
         {
             var target = _enemyList[Random.Range(0, _enemyList.Count)];
-            var enemy = Instantiate(target, _gridManager.
+            var enemy = Instantiate(target, GridManager.Instance.
                 GetRandomBorderGrid().Position, Quaternion.identity);
             mobCountText.text = $"남은 적 : {_enemyLeft}/{_currentStage.enemyCount}";
         }

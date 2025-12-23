@@ -101,7 +101,6 @@ MonoBehaviour:
   OnDeadEvent:
     m_PersistentCalls:
       m_Calls: []
-  player: {fileID: 0}
   gridManager: {fileID: 0}
   <EnemyDataSO>k__BackingField: {fileID: 11400000, guid: 55ed818560ae73c4b8fe6f9cbf7bb5fe, type: 2}
 --- !u!61 &8530651500138698416
@@ -166,6 +165,7 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   renderer: {fileID: 0}
+  hitSound: {fileID: 0}
 --- !u!1 &2931411658162278526
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a462734d714c49a28ad0f4dffd33bce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chancePerSecond: 20
+  chancePerSecond: 3
 --- !u!1 &5375695146473057100
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1144659994418904937}
   - component: {fileID: 2835144575286487382}
+  - component: {fileID: 9037075057445912989}
   m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
@@ -381,9 +382,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1432875691
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e20bf7e557e5b474c8dc84bbb0bb6115, type: 3}
+  m_Sprite: {fileID: -9095196822728518287, guid: 432ad122feb774b44803a64b703784ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -394,3 +395,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &9037075057445912989
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7940215168503592432}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8d6b64a3b9f8f7444808a6786f516322, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

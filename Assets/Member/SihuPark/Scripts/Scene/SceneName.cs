@@ -4,5 +4,6 @@ public class SceneName
     public const string Lobby = "Lobby";
     public const string Game = "GameScene";
     public const string Loading = "Loading";
+    public const string Extracting = "Extracting";
     public const string Ready = "Ready";
 }
