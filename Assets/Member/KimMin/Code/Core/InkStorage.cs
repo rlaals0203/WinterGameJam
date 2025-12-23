@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Code.Core
 {
-    [Provide]
     public class InkStorage : MonoSingleton<InkStorage>, IDependencyProvider
     {
         private Dictionary<InkType, int> _inkDict = new();

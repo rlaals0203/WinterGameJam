@@ -20,7 +20,7 @@ namespace Code.Entities
         private PlayerMovement _movementCompo;
         private PlayerInkCompo _inkCompo;
         private List<GridObject> _prevGrids;
-        private Color _gizmoColor = new Color32(255, 175, 150, 175);
+        private Color _gizmoColor = new Color32(255, 200, 150, 175);
 
         private readonly int _inkSkillAmount = 10;
         
