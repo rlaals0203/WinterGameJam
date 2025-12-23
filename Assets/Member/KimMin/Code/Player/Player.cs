@@ -1,3 +1,4 @@
+using Code.Core;
 using DG.Tweening;
 using KimMin.Dependencies;
 using UnityEngine;
@@ -14,6 +15,9 @@ namespace Code.Entities
         [SerializeField] private int currentHealth;
         
         [SerializeField] private StateDataSO[] states;
+        
+        [Inject] private GridManager _gridManager;
+        public GridManager GridManager => _gridManager;
         
         private EntityStateMachine _stateMachine;
         public int MaxHealth => maxHealth;
