@@ -42,9 +42,10 @@ namespace Code.Entities
         {
             if (GameManager.Instance.isCombatMode) return;
             
-            var extr = Instantiate(extractor);
             var cellPos = _gridManager.WorldToGrid(_player.Position);
-            
+            if (_gridManager.GetGrid(cellPos).CannotStand) return;
+
+            var extr = Instantiate(extractor);
             extr.transform.position = cellPos;
             int area = _gridManager.GetGrid(cellPos).Area;
             var data = InkTable.StageDatas[_stage];

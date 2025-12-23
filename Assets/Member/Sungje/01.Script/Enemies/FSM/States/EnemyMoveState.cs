@@ -1,4 +1,5 @@
 using System;
+using Code.Core;
 using UnityEngine;
 
 public class EnemyMoveState : MonoBehaviour, IEntityComponent
@@ -21,7 +22,7 @@ public class EnemyMoveState : MonoBehaviour, IEntityComponent
         if (Time.time - _prevTime >= _interval)
         {
             _prevTime = Time.time;
-            _enemy.GridManager.MoveToPlayer(_enemy.transform, _enemy);
+            GridManager.Instance.MoveToPlayer(_enemy.transform, _enemy);
         }
 
         if (_enemy.DistanceToPlayer <= _enemy.EnemyDataSO.attackRange)

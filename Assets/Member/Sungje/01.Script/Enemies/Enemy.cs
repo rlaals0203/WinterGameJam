@@ -6,7 +6,6 @@ using UnityEngine;
 public abstract class Enemy : Entity
 {
     [Inject] private Player player;
-    [SerializeField] private GridManager gridManager;
     
     public bool IsSpoilMode { get; set; }
 
@@ -25,6 +24,4 @@ public abstract class Enemy : Entity
             return player;
         }
     }
-
-    public GridManager GridManager => gridManager;
 }
