@@ -16,7 +16,7 @@ namespace Code.Combat
             {
                 Vector2 dir = _enemy.Player.Position - _enemy.transform.position;
                 GameEventBus.RaiseEvent(_bulletEvent.Init(bullet, _enemy.transform.position, 
-                    dir, 5f, 5, _enemy));
+                    dir, 3f, 3, _enemy));
                 await Awaitable.WaitForSecondsAsync(0.15f);
             }
         }

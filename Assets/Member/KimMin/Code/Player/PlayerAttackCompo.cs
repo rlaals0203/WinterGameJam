@@ -4,7 +4,10 @@ using Code.Combat;
 using Code.Core;
 using Code.Misc;
 using DG.Tweening;
+using KimMin.Core;
 using KimMin.Dependencies;
+using KimMin.Events;
+using KimMin.ObjectPool.RunTime;
 using UnityEngine;
 
 namespace Code.Entities
@@ -14,13 +17,14 @@ namespace Code.Entities
         [SerializeField] private GameObject arrowObject;
         [SerializeField] private OverlapDamageCaster damageCaster;
         [SerializeField] private SpriteRenderer renderer;
+        [SerializeField] private PoolItemSO slashEffect;
         
         private Player _player;
         private Vector3Int _direction;
         private PlayerMovement _movementCompo;
         private PlayerInkCompo _inkCompo;
         private List<GridObject> _prevGrids;
-        private Color _gizmoColor = new Color32(255, 200, 150, 175);
+        private Color _gizmoColor = new Color32(200, 75, 75, 200);
 
         private readonly int _inkSkillAmount = 10;
         
@@ -85,6 +89,10 @@ namespace Code.Entities
                 damageCaster.transform.position = pos;
                 damageCaster.CastDamage(10);
             }
+            
+            GameEventBus.RaiseEvent(EffectEvents.PlayPoolEffect.Initializer(
+                bounds.center, Quaternion.Euler(0, 0, GetZRotation() + 90f),
+                slashEffect, 1f));
         }
 
         private void SetArrow()
@@ -116,11 +124,16 @@ namespace Code.Entities
             arrowObject.transform.position =
                 _player.transform.position + _direction;
 
-            arrowObject.transform.rotation = _direction switch {
-                { x: 0, y: 1 }  => Quaternion.Euler(0, 0, 0),
-                { x: 1, y: 0 }  => Quaternion.Euler(0, 0, 270),
-                { x: 0, y: -1 } => Quaternion.Euler(0, 0, 180),
-                _ => Quaternion.Euler(0, 0, 90),
+            arrowObject.transform.rotation = Quaternion.Euler(0, 0, GetZRotation());
+        }
+
+        private float GetZRotation()
+        {
+            return _direction switch {
+                { x: 0, y: 1 }  => 0,
+                { x: 1, y: 0 }  => 270,
+                { x: 0, y: -1 } => 180,
+                _ => 90,
             };
         }
 
