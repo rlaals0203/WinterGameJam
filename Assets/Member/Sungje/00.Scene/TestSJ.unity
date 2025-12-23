@@ -1655,6 +1655,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b40c3ecd374920d47b287a537f85ca5e, type: 2}
   - {fileID: 11400000, guid: f78395483611d0e4aa57dd800d943b02, type: 2}
   <PlayerInput>k__BackingField: {fileID: 11400000, guid: e404979626a37854eb83e482b0ca7efe, type: 2}
+  <Transition>k__BackingField: {fileID: 0}
 --- !u!4 &1021397917
 Transform:
   m_ObjectHideFlags: 0
