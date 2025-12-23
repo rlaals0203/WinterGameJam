@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class MoneyManager : MonoBehaviour
@@ -7,7 +8,7 @@ public class MoneyManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private int currentMoney = 1000;
-    [SerializeField] private TextMeshProUGUI money_txt; 
+    [SerializeField] private Text money_txt; 
 
     private void Awake()
     {
@@ -45,7 +46,7 @@ public class MoneyManager : MonoBehaviour
     {
         if (money_txt != null)
         {
-            money_txt.text = "Money : " + $"{currentMoney:N0} G";
+            money_txt.text = $"{currentMoney:N0} G";
         }
     }
 }
