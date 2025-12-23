@@ -43,6 +43,9 @@ public abstract class Enemy : Entity
 
     private void HandleDead()
     {
+        if(MoneyManager.Instance != null)
+            MoneyManager.Instance.AddMoney(10);
+        
         _isDead = true;
         GameEventBus.RaiseEvent(EnemyEvents.EnemyDeadEvent);
         animator.SetBool(IsDeadHash, _isDead);
