@@ -158,7 +158,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   animator: {fileID: 5049979391482479860}
-  attackDuration: 0.4
+  attackDuration: 2
   bullet: {fileID: 11400000, guid: f083940bd14911549aa4a43155f34b33, type: 2}
 --- !u!1 &2079693940437603744
 GameObject:
@@ -402,7 +402,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.9887514}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &5475325669150248102
 MonoBehaviour:
@@ -420,4 +420,4 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   renderer: {fileID: 8350137204336087580}
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 11400000, guid: 260b00352a16d3d4c9ec07ac83ea548e, type: 2}

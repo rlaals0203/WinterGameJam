@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Blade.SoundSystem;
 using Code.Combat;
 using Code.Core;
 using Code.Misc;
@@ -18,7 +19,8 @@ namespace Code.Entities
         [SerializeField] private OverlapDamageCaster damageCaster;
         [SerializeField] private SpriteRenderer renderer;
         [SerializeField] private PoolItemSO slashEffect;
-        
+        [SerializeField] private SoundSO slashSound;
+
         private Player _player;
         private Vector3Int _direction;
         private PlayerMovement _movementCompo;
@@ -50,15 +52,28 @@ namespace Code.Entities
             var ink = _inkCompo.CurrentInk;
             
             if(grid.Type == ink || grid.Type == InkType.Destroyed) return;
+
+            var inkLoadout = InkLoadoutManager.Instance;
             
-            if(InkLoadoutManager.Instance.savedUsedAmount[ink] < 10) return;
+            if(inkLoadout == null ||
+               !inkLoadout.savedUsedAmount.ContainsKey(ink) ||
+               inkLoadout.savedUsedAmount[ink] < 10) return;
+            
             InkLoadoutManager.Instance.savedUsedAmount[ink] -= 10;
             grid.SetModify(Utility.GetGridColor(ink), ink);
         }
 
         public void Attack()
         {
-            CastDamage(GetRangeGrids());
+            var grids = _gridManager.GetForwardGrid(
+                _movementCompo.Position,
+                _direction,
+                (int)Range.x,
+                (int)Range.y
+            );
+
+            GameEventBus.RaiseEvent(SoundEvents.PlaySFXEvent.Initialize(slashSound));
+            CastDamage(grids);
         }
 
         private void OnDestroy()
@@ -99,11 +114,11 @@ namespace Code.Entities
                         boss.TakeDamage(10);
                     }
                 }
+                
+                GameEventBus.RaiseEvent(EffectEvents.PlayPoolEffect.Initializer(
+                    bounds.center, Quaternion.Euler(0, 0, GetZRotation() + 90f),
+                    slashEffect, 1f));
             }
-            
-            GameEventBus.RaiseEvent(EffectEvents.PlayPoolEffect.Initializer(
-                bounds.center, Quaternion.Euler(0, 0, GetZRotation() + 90f),
-                slashEffect, 1f));
         }
 
         private void SetArrow()
@@ -153,11 +168,12 @@ namespace Code.Entities
             if (!GameManager.Instance.isCombatMode ||
                 GridManager.Instance == null) return;
 
-        if (_prevGrids != null)
+            if (_prevGrids != null)
             {
                 foreach (var grid in _prevGrids)
                 {
-                    grid.ClearModify();
+                    if (grid.Type == InkType.None)
+                        grid.ClearModify();
                 }
             }
             

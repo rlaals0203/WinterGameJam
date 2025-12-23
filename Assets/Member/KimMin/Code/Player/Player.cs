@@ -2,6 +2,7 @@ using System;
 using Code.Combat;
 using Code.Core;
 using DG.Tweening;
+using EasyTransition;
 using KimMin.Core;
 using KimMin.Dependencies;
 using KimMin.Events;
@@ -12,13 +13,15 @@ namespace Code.Entities
     public class Player : Entity, IDependencyProvider
     {
         [SerializeField] private StateDataSO[] states;
-        
+
         [Inject] private GridManager _gridManager;
         
         private EntityStateMachine _stateMachine;
         private EntityHealth _healthCompo;
 
         [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
+        [field: SerializeField] public TransitionSettings Transition { get; private set; }
+        
         public int RemainTripleAttack { get; set; } = 0;
         public int RemainDoubleRadius { get; set; } = 0;
         public bool IsCombatMode { get; set; } = false;

@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Enemy4
   description: "\uC704\uD5D8 \uAD6C\uC5ED \uACF5\uACA9\uD558\uB294 \uC801"
   maxHealth: 50
-  damage: 20
+  damage: 3
   moveSpeed: 2
   attackCooldown: 4
   attackRange: 5

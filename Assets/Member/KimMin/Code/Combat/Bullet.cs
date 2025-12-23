@@ -11,6 +11,7 @@ namespace Code.Combat
         protected Rigidbody2D _rb;
         [SerializeField] private LayerMask targetLayer;
         [SerializeField] private TrailRenderer trailRenderer;
+        [SerializeField] private float lifeTime = 2f;
 
         protected int _damage;
         protected float _speed;
@@ -18,6 +19,7 @@ namespace Code.Combat
 
         private Pool _myPool;
         private bool _isHit;
+        private float _timer;
 
         [field: SerializeField] public PoolItemSO PoolItem { get; set; }
         public GameObject GameObject => gameObject;
@@ -41,12 +43,25 @@ namespace Code.Combat
             _damage = damage;
             _owner = owner;
 
-            _rb.linearVelocity = direction * bulletSpeed * 0.5f;
+            _rb.linearVelocity = direction * bulletSpeed * 0.4f;
+            _timer = 0f;
+            _isHit = false;
 
             if (trailRenderer != null)
             {
                 trailRenderer.enabled = true;
                 trailRenderer.time = 0.1f;
+            }
+        }
+
+        protected virtual void Update()
+        {
+            if (_isHit) return;
+
+            _timer += Time.deltaTime;
+            if (_timer >= lifeTime)
+            {
+                ReturnToPool();
             }
         }
 
@@ -68,6 +83,11 @@ namespace Code.Combat
                 )
             );
 
+            ReturnToPool();
+        }
+
+        private void ReturnToPool()
+        {
             if (trailRenderer != null)
             {
                 trailRenderer.enabled = false;
@@ -85,6 +105,7 @@ namespace Code.Combat
         public virtual void ResetItem()
         {
             _isHit = false;
+            _timer = 0f;
             _rb.linearVelocity = Vector2.zero;
             _owner = null;
 
@@ -96,3 +117,4 @@ namespace Code.Combat
         }
     }
 }
+

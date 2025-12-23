@@ -16,7 +16,7 @@ MonoBehaviour:
   description: "\uD50C\uB808\uC774\uC5B4\uB97C \uB530\uB77C\uAC00\uB294 \uCD1D\uC54C\uC744
     \uC3D8\uB294 \uC801"
   maxHealth: 50
-  damage: 10
+  damage: 2
   moveSpeed: 0.5
   attackCooldown: 1
   attackRange: 5

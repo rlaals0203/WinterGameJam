@@ -248,7 +248,6 @@ namespace Code.Core
         {
             bounds = new Bounds();
             bool initialized = false;
-            Vector3 cellSize = grid.cellSize;
 
             foreach (var g in grids)
             {

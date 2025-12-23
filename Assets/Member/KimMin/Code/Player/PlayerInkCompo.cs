@@ -22,6 +22,11 @@ namespace Code.Entities
             CurrentInk = InkType.Red;
         }
 
+        private void Start()
+        {
+            GameEventBus.RaiseEvent(_changeInkEvent.Init(CurrentInk));
+        }
+
         private void Update()
         {
             var kb = Keyboard.current;
@@ -41,7 +46,9 @@ namespace Code.Entities
 
         private void OnPressed(int n)
         {
-            if (n > InkLoadoutManager.Instance.savedRemainingAmount.Count || _prevIdx == n - 1) return;
+            if (InkLoadoutManager.Instance ==null ||
+                (n > InkLoadoutManager.Instance.savedRemainingAmount.Count || 
+                 _prevIdx == n - 1)) return;
             _prevIdx = n - 1;
             CurrentInk = InkLoadoutManager.Instance.savedRemainingAmount.ElementAt(n - 1).Key;
             GameEventBus.RaiseEvent(_changeInkEvent.Init(CurrentInk));
