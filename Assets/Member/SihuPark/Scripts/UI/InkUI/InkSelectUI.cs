@@ -1,14 +1,16 @@
 using Code.Core;
+using EasyTransition;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InkSelectUI : MonoBehaviour
 {
-    [Header("UI 연결")]
+    [Header("UI")]
     [SerializeField] private Button[] slotButtons;
     [SerializeField] private Transform highlightObj;
     [SerializeField] private InkStorage inkStorage;
+    [SerializeField] private TransitionSettings GameStartEffect;
 
     private int selectedIndex = -1;// 현재 선택된 칸 번호
     private InkType[] slotsData; // 각 칸에 담긴 잉크 정보
@@ -72,7 +74,7 @@ public class InkSelectUI : MonoBehaviour
         if (finalLoadout.Count > 0 && InkLoadoutManager.Instance != null)
         {
             InkLoadoutManager.Instance.SaveSelectedInks(finalLoadout);
-            // SceneManager.LoadScene("BattleScene"); 
+            TransitionManager.Instance().Transition(SceneName.TestGame, GameStartEffect, 0);
         }
     }
 
