@@ -10,8 +10,6 @@ public class EnemyMoveCompo : MonoBehaviour, IEntityComponent
     private float duration = 2f;
     private float _prevTime = 0f;
     private Enemy _enemy;
-
-    [Inject] private GridManager _gridManager;
     
     public void Initialize(Entity entity)
     {
@@ -28,14 +26,14 @@ public class EnemyMoveCompo : MonoBehaviour, IEntityComponent
     {
         if (Time.time - _prevTime > duration && !_enemy.IsSpoilMode)
         {
-            _gridManager.MoveToPlayer(_enemy.transform, _enemy, HandleCompleteMove);
+            GridManager.Instance.MoveToPlayer(_enemy.transform, _enemy, HandleCompleteMove);
             _prevTime = Time.time;
         }
     }
 
     private void HandleCompleteMove()
     {
-        var grid = _gridManager.GetGrid(_gridManager.WorldToGrid(_enemy.transform.position));
+        var grid = GridManager.Instance.GetGrid(GridManager.Instance.WorldToGrid(_enemy.transform.position));
         if (grid.Type == InkType.None || grid.Type == InkType.Destroyed) return;
         grid.ClearModify();
     }

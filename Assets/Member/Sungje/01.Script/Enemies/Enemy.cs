@@ -1,10 +1,11 @@
 using Code.Core;
 using Code.Entities;
+using KimMin.Dependencies;
 using UnityEngine;
 
 public abstract class Enemy : Entity
 {
-    [SerializeField] private Player player;
+    [Inject] private Player player;
     [SerializeField] private GridManager gridManager;
     
     public bool IsSpoilMode { get; set; }
@@ -13,7 +14,7 @@ public abstract class Enemy : Entity
     public float RemainSlowTime { get; set; }
     
     public float DistanceToPlayer =>
-        Vector2.Distance(transform.position, player.transform.position);
+        Vector2.Distance(transform.position, Player.transform.position);
     
     public Player Player
     {

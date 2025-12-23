@@ -167,6 +167,29 @@ namespace Code.Core
                 ApplyGridBuff(GetGrid(nextCell), owner);
             });
         }
+        
+        public GridObject GetRandomBorderGrid()
+        {
+            List<GridObject> borderGrids = new();
+
+            for (int y = 0; y < Col; y++)
+            {
+                for (int x = 0; x < Row; x++)
+                {
+                    if (x == 0 || x == Row - 1 || y == 0 || y == Col - 1)
+                    {
+                        var grid = _gridData[x, y];
+                        if (grid != null)
+                            borderGrids.Add(grid);
+                    }
+                }
+            }
+
+            if (borderGrids.Count == 0)
+                return null;
+
+            return borderGrids[UnityEngine.Random.Range(0, borderGrids.Count)];
+        }
 
         public void ApplyGridBuff(GridObject grid, Entity entity)
         {
