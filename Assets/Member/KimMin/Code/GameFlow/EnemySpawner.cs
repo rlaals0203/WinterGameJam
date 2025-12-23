@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Code.Core;
+using EasyTransition;
 using KimMin.Core;
 using KimMin.Dependencies;
 using KimMin.Events;
@@ -15,7 +16,8 @@ namespace Code.GameFlow
     {
         [SerializeField] private TextMeshProUGUI mobCountText;
         [SerializeField] private StageDataSO[] datas;
-        
+        [SerializeField] private TransitionSettings paintEffect;
+
         private List<Enemy> _enemyList;
         private StageDataSO _currentStage;
         private float _delay;
@@ -58,7 +60,7 @@ namespace Code.GameFlow
                 GameManager.Instance.isCombatMode = false;
                 if (GameManager.Instance.currentStage < 3)
                     GameManager.Instance.currentStage++;
-                SceneManager.LoadScene("GameScene");
+                TransitionManager.Instance().Transition(SceneName.Game, paintEffect, 0);
             }
         }
 
