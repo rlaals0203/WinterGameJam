@@ -17,4 +17,4 @@ MonoBehaviour:
   supplyType: 2
   icon: {fileID: -8724781832977672362, guid: 75c40e16043b42a48bbcd64c3067646e, type: 3}
   description: "\uAE30\uBCF8\uC801\uC778 \uBB3C\uAC10 \uCD94\uCD9C\uAE30"
-  price: 100
+  price: 50
