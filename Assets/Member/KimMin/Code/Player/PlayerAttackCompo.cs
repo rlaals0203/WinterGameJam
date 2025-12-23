@@ -63,7 +63,14 @@ namespace Code.Entities
 
         public void Attack()
         {
-            CastDamage(GetRangeGrids());
+            var grids = _gridManager.GetForwardGrid(
+                _movementCompo.Position,
+                _direction,
+                (int)Range.x,
+                (int)Range.y
+            );
+
+            CastDamage(grids);
         }
 
         private void OnDestroy()
@@ -104,11 +111,11 @@ namespace Code.Entities
                         boss.TakeDamage(10);
                     }
                 }
+                
+                GameEventBus.RaiseEvent(EffectEvents.PlayPoolEffect.Initializer(
+                    bounds.center, Quaternion.Euler(0, 0, GetZRotation() + 90f),
+                    slashEffect, 1f));
             }
-            
-            GameEventBus.RaiseEvent(EffectEvents.PlayPoolEffect.Initializer(
-                bounds.center, Quaternion.Euler(0, 0, GetZRotation() + 90f),
-                slashEffect, 1f));
         }
 
         private void SetArrow()

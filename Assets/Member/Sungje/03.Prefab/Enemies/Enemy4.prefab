@@ -402,7 +402,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1.0090778}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &9146080501114903391
 MonoBehaviour:
@@ -420,4 +420,4 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   renderer: {fileID: 0}
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 11400000, guid: 260b00352a16d3d4c9ec07ac83ea548e, type: 2}

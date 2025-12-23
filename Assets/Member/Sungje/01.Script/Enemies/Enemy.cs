@@ -1,6 +1,9 @@
+using Code.Combat;
 using Code.Core;
 using Code.Entities;
+using KimMin.Core;
 using KimMin.Dependencies;
+using KimMin.Events;
 using UnityEngine;
 
 public abstract class Enemy : Entity
@@ -31,7 +34,14 @@ public abstract class Enemy : Entity
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
 
+        OnDeadEvent.AddListener(HandleDead);
         OnHitEvent.AddListener(HandleHitEvent);
+    }
+
+    private void HandleDead()
+    {
+        GameEventBus.RaiseEvent(EnemyEvents.EnemyDeadEvent);
+        Destroy(gameObject);
     }
 
     protected virtual void Update()
@@ -42,6 +52,7 @@ public abstract class Enemy : Entity
     private void OnDestroy()
     {
         OnHitEvent.RemoveListener(HandleHitEvent);
+        OnDeadEvent.RemoveListener(HandleDead);
     }
 
     private void HandleHitEvent()
