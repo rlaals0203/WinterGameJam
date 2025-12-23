@@ -22,6 +22,11 @@ namespace Code.Entities
             CurrentInk = InkType.Red;
         }
 
+        private void Start()
+        {
+            GameEventBus.RaiseEvent(_changeInkEvent.Init(CurrentInk));
+        }
+
         private void Update()
         {
             var kb = Keyboard.current;

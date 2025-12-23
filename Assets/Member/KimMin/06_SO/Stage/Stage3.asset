@@ -17,8 +17,8 @@ MonoBehaviour:
   - {fileID: 4437330257164189139, guid: 961fb42f9b660424b9c49b311262868c, type: 3}
   - {fileID: 99078583335161091, guid: 57166e93576fa9d40a366c50840d2b95, type: 3}
   - {fileID: 7268910192580477019, guid: 3c19f30de3b534e499cdbd05b4df9ced, type: 3}
-  enemyDelay: 0
-  enemyCount: 0
+  enemyDelay: 3
+  enemyCount: 30
   paint: {fileID: 5281488578355062479, guid: 7a7ff87f57ecc7742a818eeb469455f1, type: 3}
   row: 28
   column: 16
