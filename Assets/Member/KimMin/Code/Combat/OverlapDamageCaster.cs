@@ -36,7 +36,7 @@ namespace Code.Combat
             {
                 if (_hitResults[i].TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(damage);
+                    damageable.ApplyDamage(damage);
                 }
             }
 

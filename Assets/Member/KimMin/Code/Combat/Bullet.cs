@@ -57,7 +57,7 @@ namespace Code.Combat
 
             _isHit = true;
 
-            collision.GetComponentInParent<IDamageable>()?.TakeDamage(_damage);
+            collision.GetComponentInParent<IDamageable>()?.ApplyDamage(_damage);
 
             GameEventBus.RaiseEvent(
                 EffectEvents.PlayPoolEffect.Initializer(
