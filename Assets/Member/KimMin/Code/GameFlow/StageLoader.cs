@@ -14,7 +14,7 @@ namespace Code.GameFlow
         private void Awake()
         {
             var currentStage = stages[GameManager.Instance.currentStage];
-            _gridManager.CreateGrids(currentStage.row, currentStage.column);
+            _gridManager.CreateGrids(currentStage);
         }
     }
 }

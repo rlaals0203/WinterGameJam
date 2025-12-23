@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 046f39372b684aa9ac10d1e39c78e893, type: 3}
-  m_Name: Stage1
+  m_Name: Stage2
   m_EditorClassIdentifier: 
-  paint: {fileID: 6925018665742826213, guid: 32637caf5bcafb44787e29243de859cb, type: 3}
-  row: 38
-  column: 22
+  paint: {fileID: 5281488578355062479, guid: 4254054fca0a75c4b9442c0d4515223e, type: 3}
+  row: 40
+  column: 24

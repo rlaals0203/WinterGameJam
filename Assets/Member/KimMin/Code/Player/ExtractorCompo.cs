@@ -40,6 +40,8 @@ namespace Code.Entities
             extr.transform.position = cellPos;
             int area = _gridManager.GetGrid(cellPos).Area;
             var data = InkTable.StageDatas[_stage];
+
+            _gridManager.GetGrid(cellPos).CannotStand = true;
             extr.InitExtractor(data[area - 1]);
             AddInk(data[area - 1]);
             _remainExtractor--;

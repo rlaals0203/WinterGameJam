@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.Combat;
 using Code.Entities;
+using Code.GameFlow;
 using Code.Misc;
 using DG.Tweening;
 using KimMin.Dependencies;
@@ -26,9 +27,10 @@ namespace Code.Core
     {
         [SerializeField] private Grid grid;
         [SerializeField] private GridObject gridPrefab;
-        [SerializeField] private Vector2 gridOffset;
 
         private GridObject[,] _gridData = new GridObject[100, 100];
+        private Vector3 _offset;
+        
         [Inject] private Player _player;
 
         public int Row { get; private set; }
@@ -36,10 +38,17 @@ namespace Code.Core
 
         float CellSize => grid.cellSize.x;
 
-        public void CreateGrids(int row, int col)
+        public void CreateGrids(StageDataSO data)
         {
-            Row = row;
-            Col = col;
+            Row = data.row;
+            Col = data.column;
+            
+            float offsetX = Row % 2== 0 ? 0.5f : 0;
+            float offsetY = Col % 2== 0 ? 0.5f : 0;
+            _offset = new Vector2(offsetX, offsetY);
+            
+            Vector2 pos = new Vector2(Row / 2f, Col / 2f);
+            Instantiate(data.paint, pos, Quaternion.identity);
             
             for (int y = 0; y < Col; y++)
             {
@@ -47,7 +56,7 @@ namespace Code.Core
                 {
                     GridObject gridObj = Instantiate(gridPrefab, transform);
                     Vector3Int cell = new Vector3Int(x, y, 0);
-                    Vector3 worldPos = grid.CellToWorld(cell) + grid.cellSize / 2f + (Vector3)gridOffset;
+                    Vector3 worldPos = grid.CellToWorld(cell) + grid.cellSize / 2f - _offset;
 
                     gridObj.transform.position = worldPos;
                     gridObj.Area = GetAreaIndex(cell);
@@ -152,7 +161,7 @@ namespace Code.Core
 
             if (nextCell == playerCell) return;
 
-            Vector3 worldPos = grid.CellToWorld(nextCell) + grid.cellSize / 2f + (Vector3)gridOffset;
+            Vector3 worldPos = grid.CellToWorld(nextCell) + grid.cellSize / 2f - _offset;
             target.DOMove(worldPos, 0.1f).OnComplete(() => {
                 callback?.Invoke();
                 ApplyGridBuff(GetGrid(nextCell), owner);
