@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7768318406797073337
 Transform:
   m_ObjectHideFlags: 0
@@ -61,7 +61,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3831523734180133085
 Transform:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4116766973629451039
 Transform:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7812071826872420513
 Transform:
   m_ObjectHideFlags: 0
@@ -184,6 +184,8 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
+  animator: {fileID: 5298829505794401503}
+  attackDuration: 0.4
   warningArea: {fileID: 11400000, guid: b6a7a678de1a9314fbaa40d295175b34, type: 2}
 --- !u!1 &5831642083082982601
 GameObject:
@@ -195,13 +197,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6208194541635327987}
   - component: {fileID: 3441377976829932836}
+  - component: {fileID: 5298829505794401503}
   m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6208194541635327987
 Transform:
   m_ObjectHideFlags: 0
@@ -259,10 +262,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1432875691
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e20bf7e557e5b474c8dc84bbb0bb6115, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -9095196822728518287, guid: 432ad122feb774b44803a64b703784ce, type: 3}
+  m_Color: {r: 0.90193784, g: 0.5801887, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -272,6 +275,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5298829505794401503
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5831642083082982601}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 61fe09450e21a1942826b6d74e08472d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5958583933661896367
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3469372396906925355
 Transform:
   m_ObjectHideFlags: 0
@@ -329,8 +354,9 @@ MonoBehaviour:
   OnDeadEvent:
     m_PersistentCalls:
       m_Calls: []
-  player: {fileID: 0}
   gridManager: {fileID: 0}
+  animator: {fileID: 5298829505794401503}
+  hitDuration: 0.15
   <EnemyDataSO>k__BackingField: {fileID: 11400000, guid: 41315ec2c53f78044bd3eeefd5e43f00, type: 2}
 --- !u!61 &5890617309100336562
 BoxCollider2D:
@@ -394,3 +420,4 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   renderer: {fileID: 0}
+  hitSound: {fileID: 0}

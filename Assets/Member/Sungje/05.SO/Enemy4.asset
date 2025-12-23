@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy4
   m_EditorClassIdentifier: 
   enemyName: Enemy4
-  description: "\uC5D0\uB108\uC9C0\uBCFC\uC744 \uC3D8\uB294 \uC801"
+  description: "\uC704\uD5D8 \uAD6C\uC5ED \uACF5\uACA9\uD558\uB294 \uC801"
   maxHealth: 50
   damage: 20
   moveSpeed: 2
