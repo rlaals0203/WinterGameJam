@@ -1,20 +1,15 @@
+using Code.Core;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class MoneyManager : MonoBehaviour
+public class MoneyManager : MonoSingleton<MoneyManager>
 {
     public static MoneyManager Instance;
 
     [Header("Settings")]
-    [SerializeField] private int currentMoney = 1000;
+    [SerializeField] private int currentMoney = 0;
     [SerializeField] private Text money_txt; 
-
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
 
     private void Start()
     {
