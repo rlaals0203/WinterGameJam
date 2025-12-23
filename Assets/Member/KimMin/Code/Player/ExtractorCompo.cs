@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Code.Core;
 using Code.GameFlow;
 using DG.Tweening;
+using KimMin.Core;
 using KimMin.Dependencies;
+using KimMin.Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -35,8 +37,11 @@ namespace Code.Entities
 
         private void HandleRightClick()
         {
+            if (GameManager.Instance.isCombatMode) return;
+            
             var extr = Instantiate(extractor);
             var cellPos = _gridManager.WorldToGrid(_player.Position);
+            
             extr.transform.position = cellPos;
             int area = _gridManager.GetGrid(cellPos).Area;
             var data = InkTable.StageDatas[_stage];
@@ -45,9 +50,13 @@ namespace Code.Entities
             extr.InitExtractor(data[area - 1]);
             AddInk(data[area - 1]);
             _remainExtractor--;
+            GameEventBus.RaiseEvent(PlayerEvents.ChangeExtractorEvent.Initialize(10 - _remainExtractor));
 
             if (_remainExtractor <= 0)
+            {
                 SceneManager.LoadScene("Ready");
+                GameManager.Instance.isCombatMode = true;
+            }
         }
 
         private void AddInk(InkData[] data)
@@ -55,7 +64,6 @@ namespace Code.Entities
             int rand = Random.Range(0, data.Length);
             var ink = data[rand];
             InkStorage.Instance.ModifyInk(ink.InkType, 10);
-            Debug.Log($"{ink.InkType}");
         }
     }
 }

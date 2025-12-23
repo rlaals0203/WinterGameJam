@@ -64,6 +64,12 @@ namespace Code.Core
                 }
             }
         }
+        
+        private void OnEnable()
+        {
+            if (grid == null)
+                grid = FindAnyObjectByType<Grid>();
+        }
 
         private int GetAreaIndex(Vector3Int cell)
         {
@@ -108,6 +114,7 @@ namespace Code.Core
 
         public List<GridObject> GetForwardGrid(Vector3 origin, Vector3 dir, int length, int width)
         {
+            if (grid == null) return null;
             List<GridObject> result = new();
             Vector3Int originCell = grid.WorldToCell(origin);
             Vector3Int forward = ToVectorInt(dir);
@@ -170,6 +177,29 @@ namespace Code.Core
 
                 ApplyGridBuff(GetGrid(nextCell), owner);
             });
+        }
+        
+        public GridObject GetRandomBorderGrid()
+        {
+            List<GridObject> borderGrids = new();
+
+            for (int y = 0; y < Col; y++)
+            {
+                for (int x = 0; x < Row; x++)
+                {
+                    if (x == 0 || x == Row - 1 || y == 0 || y == Col - 1)
+                    {
+                        var grid = _gridData[x, y];
+                        if (grid != null)
+                            borderGrids.Add(grid);
+                    }
+                }
+            }
+
+            if (borderGrids.Count == 0)
+                return null;
+
+            return borderGrids[UnityEngine.Random.Range(0, borderGrids.Count)];
         }
 
         public void ApplyGridBuff(GridObject grid, Entity entity)

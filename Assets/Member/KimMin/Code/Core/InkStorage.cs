@@ -5,21 +5,9 @@ using UnityEngine;
 
 namespace Code.Core
 {
-    [Provide]
-    public class InkStorage : MonoSingleton<InkStorage>, IDependencyProvider
+    public class InkStorage : MonoSingleton<InkStorage>
     {
         private Dictionary<InkType, int> _inkDict = new();
-
-        private void Awake()
-        {
-            //테스트
-            _inkDict.Add(InkType.Red, 100);
-            _inkDict.Add(InkType.Blue, 200);
-            _inkDict.Add(InkType.Yellow, 300);
-            _inkDict.Add(InkType.Black, 100);
-            _inkDict.Add(InkType.White, 100);
-            _inkDict.Add(InkType.Green, 100);
-        }
 
         public void ModifyInk(InkType inkType, int amount)
         {
@@ -27,7 +15,14 @@ namespace Code.Core
                 _inkDict[inkType] += amount;
         }
 
-        public int GetRemainInk(InkType inkType) => _inkDict[inkType];
+        public int GetRemainInk(InkType inkType)
+        {
+            if(_inkDict.TryGetValue(inkType, out int amount))
+                return amount;
+            
+            return 0;
+        }
+        
         public bool HasInk(InkType inkType) => _inkDict[inkType] > 0;
 
         public Dictionary<InkType, int> GetInkDict() => _inkDict;

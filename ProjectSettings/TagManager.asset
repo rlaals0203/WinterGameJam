@@ -41,6 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3290114067
+    locked: 0
+  - name: Grid
+    uniqueID: 2409578777
+    locked: 0
   - name: Entity
     uniqueID: 2862091605
     locked: 0

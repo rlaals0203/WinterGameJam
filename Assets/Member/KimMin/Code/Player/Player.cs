@@ -1,3 +1,4 @@
+using System;
 using Code.Combat;
 using Code.Core;
 using DG.Tweening;
@@ -36,6 +37,12 @@ namespace Code.Entities
             _healthCompo.OnHealthChangeEvent += HandleHealthChange;
         }
 
+        private void OnDestroy()
+        {
+            OnDeadEvent.RemoveListener(HandleDeadEvent);
+            _healthCompo.OnHealthChangeEvent -= HandleHealthChange;
+        }
+
         private void HandleHealthChange(float current, float max)
         {
             GameEventBus.RaiseEvent(PlayerEvents.PlayerHealthEvent.Initialize(current, max));
@@ -45,8 +52,9 @@ namespace Code.Entities
         {
             if (IsDead) return;
             IsDead = true;
-            //나중에 이벤트 발행
-            ChangeState("DEAD", true); 
+            GameEventBus.RaiseEvent(PlayerEvents.PlayerDead);
+            Debug.Log("죽음");
+            ChangeState("DEAD", true);
         }
 
         private void Start()

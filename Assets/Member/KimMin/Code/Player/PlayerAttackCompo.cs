@@ -20,14 +20,13 @@ namespace Code.Entities
         private PlayerMovement _movementCompo;
         private PlayerInkCompo _inkCompo;
         private List<GridObject> _prevGrids;
-        private Color _gizmoColor = new Color32(255, 200, 200, 100);
+        private Color _gizmoColor = new Color32(255, 200, 150, 175);
 
         private readonly int _inkSkillAmount = 10;
         
         private Vector2 Range => _player.RemainDoubleRadius > 0 ? new Vector2(2, 1) : new Vector2(1, 1);
 
         [Inject] private GridManager _gridManager;
-        [Inject] private InkStorage _inkStorage;
 
         public void Initialize(Entity entity)
         {
@@ -42,13 +41,14 @@ namespace Code.Entities
         
         private void HandleRightClick()
         {
-            if (!_inkStorage.HasInk(_inkCompo.CurrentInk) ||
-                !_player.IsCombatMode) return;
+            if (!GameManager.Instance.isCombatMode) return;
             var grid = _gridManager.GetGrid(_gridManager.WorldToGrid(_player.Position));
             var ink = _inkCompo.CurrentInk;
             
             if(grid.Type == ink || grid.Type == InkType.Destroyed) return;
-            _inkStorage.ModifyInk(ink, -_inkSkillAmount);
+            
+            if(InkLoadoutManager.Instance.savedUsedAmount[ink] < 10) return;
+            InkLoadoutManager.Instance.savedUsedAmount[ink] -= 10;
             grid.SetModify(Utility.GetGridColor(ink), ink);
         }
 
@@ -70,6 +70,8 @@ namespace Code.Entities
 
         private void CastDamage(List<GridObject> grids)
         {
+            if (renderer == null) return;
+            
             if (_direction.x == -1)
                 renderer.flipX = true;
             else if(_direction.x == 1)
@@ -124,9 +126,10 @@ namespace Code.Entities
 
         private void SetGridGizmo()
         {
-            if (!_player.IsCombatMode) return;
+            if (!GameManager.Instance.isCombatMode ||
+                GridManager.Instance == null) return;
 
-            if (_prevGrids != null)
+        if (_prevGrids != null)
             {
                 foreach (var grid in _prevGrids)
                 {

@@ -11,8 +11,6 @@ namespace Code.Entities
 {
     public class PlayerInkCompo : MonoBehaviour, IEntityComponent
     {
-        [Inject] private InkStorage _inkStorage;
-
         public InkType CurrentInk { get; private set; }
 
         private readonly ChangeInkEvent _changeInkEvent = PlayerEvents.ChangeInkEvent;
@@ -43,9 +41,9 @@ namespace Code.Entities
 
         private void OnPressed(int n)
         {
-            if (n > _inkStorage.GetInkDict().Count || _prevIdx == n - 1) return;
+            if (n > InkLoadoutManager.Instance.savedRemainingAmount.Count || _prevIdx == n - 1) return;
             _prevIdx = n - 1;
-            CurrentInk = _inkStorage.GetInkDict().ElementAt(n - 1).Key;
+            CurrentInk = InkLoadoutManager.Instance.savedRemainingAmount.ElementAt(n - 1).Key;
             GameEventBus.RaiseEvent(_changeInkEvent.Init(CurrentInk));
         }
     }
