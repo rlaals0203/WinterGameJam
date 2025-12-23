@@ -16,7 +16,7 @@ namespace KimMin.Events
         public PoolItemSO targetItem;
         public float duration;
 
-        public PlayPoolEffect Initializer(Vector3 position, Quaternion rotation, PoolItemSO item, float duration)
+        public PlayPoolEffect Initializer(Vector2 position, Quaternion rotation, PoolItemSO item, float duration)
         {
             this.position = position;
             this.rotation = rotation;

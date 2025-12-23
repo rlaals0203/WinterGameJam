@@ -8,8 +8,6 @@ namespace KimMin.Core.Managers
 {
     public class EffectManager : MonoBehaviour
     {
-        [SerializeField] private PoolItemSO popupTextItem;
-        
         [Inject] private PoolManagerMono _poolManager;
 
         private void Awake()
