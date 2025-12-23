@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 65ccb7b6cbefce14eb6f884cfc33ba91, type: 2}
+  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -333,16 +333,20 @@ PrefabInstance:
       value: DamageCaster
       objectReference: {fileID: 0}
     - target: {fileID: 4801827204484284297, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
+      propertyPath: damageRadius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801827204484284297, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
       propertyPath: contactFilter.useLayerMask
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5566876750261183618, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.084325
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5566876750261183618, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.0165253
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5566876750261183618, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
       propertyPath: m_LocalPosition.z

@@ -1,5 +1,6 @@
 using Code.Core;
 using Code.Entities;
+using KimMin.Dependencies;
 using System;
 using UnityEngine;
 
@@ -12,9 +13,9 @@ public abstract class Enemy : Entity
 
     [field: SerializeField] public EnemyDataSO EnemyDataSO { get; private set; }
     public float RemainSlowTime { get; set; }
-    
+
     public float DistanceToPlayer =>
-        Vector2.Distance(transform.position, player.transform.position);
+    Vector2.Distance(transform.position, Player.transform.position);
 
     protected override void Awake()
     {
