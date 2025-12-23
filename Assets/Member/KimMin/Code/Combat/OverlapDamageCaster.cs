@@ -30,6 +30,7 @@ namespace Code.Combat
                 OverlapCastType.Box => Physics2D.OverlapBox(transform.position, damageBoxSize, 0, contactFilter, _hitResults),
                 _ => 0
             };
+            
 
             for (int i = 0; i < cnt; i++)
             {
@@ -56,7 +57,6 @@ namespace Code.Combat
                     Gizmos.DrawWireCube(transform.position, damageBoxSize);
                     break;
             }
-            ;
         }
 #endif
     }

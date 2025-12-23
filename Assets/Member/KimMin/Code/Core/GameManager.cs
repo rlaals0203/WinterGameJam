@@ -13,5 +13,6 @@ namespace Code.Core
     {
         public GameState GameState { get; set; }
         public bool isCombatMode;
+        public int currentStage = 0;
     }
 }

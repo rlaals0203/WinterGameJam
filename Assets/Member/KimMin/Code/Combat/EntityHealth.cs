@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Code.Combat
 {
-    public class EntityHealth : MonoBehaviour,IEntityComponent, IDamageable
+    public class EntityHealth : MonoBehaviour,IEntityComponent, IDamageable, IAfterInitialize
     {
         private Entity _entity;
         private EntityStat _statCompo;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Entities
 {
-    public class Player : Entity, IDependencyProvider, IDamageable
+    public class Player : Entity, IDependencyProvider
     {
         private int maxHealth = 100;
 
@@ -66,25 +66,6 @@ namespace Code.Entities
         public void TakeDamage(int damage)
         {
             
-        }
-
-        public void ApplyDamage(int damage)
-        {
-            currentHealth -= damage;
-            if (currentHealth < 0)
-                currentHealth = 0;
-
-            spriteRenderer.DOKill();
-            spriteRenderer.color = Color.white;
-
-            spriteRenderer
-                .DOColor(Color.red, hitFlashTime)
-                .SetLoops(2, LoopType.Yoyo);
-
-            if (currentHealth == 0)
-            {
-                DestroyObject();
-            }
         }
     }
 }

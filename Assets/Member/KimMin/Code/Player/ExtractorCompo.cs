@@ -17,6 +17,8 @@ namespace Code.Entities
 
         private Player _player;
         private int _stage;
+        private int _remainExtractor;
+
 
         public void Initialize(Entity entity)
         {
@@ -76,6 +78,7 @@ namespace Code.Entities
             int area = _gridManager.GetGrid(cellPos).Area;
             var data = InkTable.StageDatas[_stage];
             extr.InitExtractor(data[area - 1]);
+            _remainExtractor--;
         }
     }
 }
