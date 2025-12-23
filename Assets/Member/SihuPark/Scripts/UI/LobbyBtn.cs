@@ -2,30 +2,51 @@ using Code.Core;
 using EasyTransition;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using System.Collections;
 
 public class LobbyBtn : MonoBehaviour
 {
-    [Header("Scene Change Effect")]
     [SerializeField] private TransitionSettings paintEffect;
-
-    [Header("Button")]
     [SerializeField] private Button game_start_btn;
     [SerializeField] private Button game_exit_btn;
+    [SerializeField] private CanvasGroup pressKeyCanvasGroup;
 
-    private string TestScene = "GameScene";
+    private bool isTransitioning = false;
 
     private void Awake()
     {
-        if(game_start_btn != null) game_start_btn.onClick.AddListener(GoToGameScene);
-
-        if (game_exit_btn != null) game_exit_btn.onClick.AddListener(ExitGame);
+        if (game_start_btn) game_start_btn.onClick.AddListener(() => StartCoroutine(OnGameStart()));
+        if (game_exit_btn) game_exit_btn.onClick.AddListener(ExitGame);
     }
 
-    private void GoToGameScene()
+    private void Update()
     {
-        TransitionManager.Instance().Transition(TestScene, paintEffect, 0);
-        GameManager.Instance.isCombatMode = false;
+        if (isTransitioning) return;
+
+        if (pressKeyCanvasGroup)
+            pressKeyCanvasGroup.alpha = Mathf.PingPong(Time.time * 2f, 0.8f) + 0.2f;
+
+        if (Input.anyKeyDown)
+            StartCoroutine(OnGameStart());
+    }
+
+    private IEnumerator OnGameStart()
+    {
+        isTransitioning = true;
+
+        for (int i = 0; i < 2; i++)
+        {
+            pressKeyCanvasGroup.alpha = 1f;
+            yield return new WaitForSeconds(0.05f);
+            pressKeyCanvasGroup.alpha = 0f;
+            yield return new WaitForSeconds(0.05f);
+        }
+        pressKeyCanvasGroup.alpha = 1f;
+
+        yield return new WaitForSeconds(0.1f);
+
+        TransitionManager.Instance().Transition(SceneName.Loading, paintEffect, 0);
+        if (GameManager.Instance) GameManager.Instance.isCombatMode = false;
     }
 
     private void ExitGame()
@@ -33,8 +54,7 @@ public class LobbyBtn : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-                Application.Quit();
+        Application.Quit();
 #endif
     }
-
 }
