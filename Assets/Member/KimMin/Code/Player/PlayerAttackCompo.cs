@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Blade.SoundSystem;
 using Code.Combat;
 using Code.Core;
 using Code.Misc;
@@ -18,7 +19,8 @@ namespace Code.Entities
         [SerializeField] private OverlapDamageCaster damageCaster;
         [SerializeField] private SpriteRenderer renderer;
         [SerializeField] private PoolItemSO slashEffect;
-        
+        [SerializeField] private SoundSO slashSound;
+
         private Player _player;
         private Vector3Int _direction;
         private PlayerMovement _movementCompo;
@@ -70,6 +72,7 @@ namespace Code.Entities
                 (int)Range.y
             );
 
+            GameEventBus.RaiseEvent(SoundEvents.PlaySFXEvent.Initialize(slashSound));
             CastDamage(grids);
         }
 
