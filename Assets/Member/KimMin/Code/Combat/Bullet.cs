@@ -15,7 +15,6 @@ namespace Code.Combat
         [SerializeField] private PoolItemSO effect;
         [SerializeField] private TrailRenderer trailRenderer;
         protected float _damage;
-        protected float _speed;
         private Pool _myPool;
 
         [field:SerializeField] public PoolItemSO PoolItem { get; set; }
@@ -30,8 +29,7 @@ namespace Code.Combat
         {
             transform.position = position;
             transform.right = direction;
-            _speed = bulletSpeed;
-            _rb.linearVelocity = direction * bulletSpeed;
+            _rb.linearVelocity = direction.normalized * bulletSpeed;
             _damage = damage;
             damageCaster.InitCaster(entity);
 
@@ -54,6 +52,7 @@ namespace Code.Combat
                 trailRenderer.enabled = false;
                 trailRenderer.time = 0f;
             }
+            
             _myPool.Push(this);
         }
 

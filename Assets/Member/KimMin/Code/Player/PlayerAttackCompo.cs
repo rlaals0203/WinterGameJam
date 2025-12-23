@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.Core;
 using Code.Misc;
+using DG.Tweening;
 using KimMin.Dependencies;
 using UnityEngine;
 
@@ -15,11 +16,12 @@ namespace Code.Entities
         private Vector3Int _direction;
         private PlayerMovement _movementCompo;
         private PlayerInkCompo _inkCompo;
-        
         private List<GridObject> _prevGrids;
         private Color _gizmoColor = new Color32(255, 200, 200, 100);
 
         private readonly int _inkSkillAmount = 10;
+        
+        private Vector2 Range => _player.RemainDoubleRadius > 0 ? new Vector2(2, 1) : new Vector2(1, 1);
 
         [Inject] private GridManager _gridManager;
         [Inject] private InkStorage _inkStorage;
@@ -32,6 +34,7 @@ namespace Code.Entities
             _movementCompo = entity.GetCompo<PlayerMovement>();
             _movementCompo.OnPositionChanged += SetGridGizmo;
             _player.PlayerInput.OnRightClickPressed += HandleRightClick;
+            _player.PlayerInput.OnLeftClickPressed += HandleLeftClick;
         }
 
         private void HandleRightClick()
@@ -40,9 +43,33 @@ namespace Code.Entities
             var grid = _gridManager.GetGrid(_gridManager.WorldToGrid(_player.Position));
             var ink = _inkCompo.CurrentInk;
             
-            if(grid.Type == ink) return;
+            if(grid.Type == ink || grid.Type == InkType.Destroyed) return;
             _inkStorage.ModifyInk(ink, -_inkSkillAmount);
             grid.SetModify(Utility.GetGridColor(ink), ink);
+        }
+
+        private void HandleLeftClick()
+        {
+            foreach (var grid in GetRangeGrids())
+            {
+                if(grid.Type == InkType.Destroyed) continue;
+                Color targetColor = Utility.GetGridColor(InkType.Red);
+
+                if (grid.BlinkTween != null && grid.BlinkTween.IsActive())
+                    grid.BlinkTween.Kill();
+
+                grid.BlinkTween = grid.Fill
+                    .DOColor(targetColor, 0.1f)
+                    .SetLoops(2, LoopType.Yoyo)
+                    .OnComplete(() =>
+                    {
+                        grid.Fill.color = Utility.GetGridColor(grid.Type);
+                        grid.BlinkTween = null;
+                        SetGridGizmo();
+                    });
+            }
+
+            _player.RemainDoubleRadius--;
         }
 
         private void OnDestroy()
@@ -102,14 +129,13 @@ namespace Code.Entities
                 }
             }
             
-            var grids = _prevGrids =_gridManager.GetForwardGrid
-                (_movementCompo.Position, _direction, 2, 0);
-            
             List<GridObject> removeList = new();
 
-            foreach (var grid in grids)
+            foreach (var grid in GetRangeGrids())
             {
-                if (grid.Type != InkType.None) {
+                if (grid.Type != InkType.None || (grid.BlinkTween != null 
+                                                  && grid.BlinkTween.IsActive())) 
+                {
                     removeList.Add(grid);
                     continue;
                 }
@@ -118,9 +144,11 @@ namespace Code.Entities
             }
             
             foreach (var item in removeList)
-            {
                 _prevGrids.Remove(item);
-            }
         }
+        
+        private List<GridObject> GetRangeGrids()
+        =>_prevGrids =_gridManager.GetForwardGrid(_movementCompo.Position, 
+            _direction, (int)Range.x, (int)Range.y);
     }
 }

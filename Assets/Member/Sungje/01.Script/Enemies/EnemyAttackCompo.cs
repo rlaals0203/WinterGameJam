@@ -25,7 +25,7 @@ public class EnemyAttackCompo : MonoBehaviour, IEntityComponent
 
     public void TryDoAttack()
     {
-        if (Data == null) return;
+        if (Data == null || _enemy.IsSpoilMode) return;
         
         if (Time.time - _lastAttackTime < Data.attackCooldown
             || _enemy.DistanceToPlayer > Data.attackRange) return;

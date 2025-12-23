@@ -16,6 +16,8 @@ namespace Code.Entities
         public int CurrentHealth => currentHealth;
 
         [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
+        public int RemainTripleAttack { get; set; } = 0;
+        public int RemainDoubleRadius { get; set; } = 0;
         public Vector3 Position => transform.position;
 
         [Provide]

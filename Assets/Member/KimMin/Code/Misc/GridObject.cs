@@ -12,9 +12,10 @@ namespace Code.Misc
         
         public Vector2 Position => transform.position;
         public InkType Type { get; private set; }
+        public Tween BlinkTween { get; set; }
         public int Area { get; set; }
         
-        private Color _originColor = new Color32(255, 255, 255, 100);
+        private Color _originColor = new Color32(255, 255, 255, 50);
 
         private bool _isColored;
         private float _duration;
@@ -35,8 +36,11 @@ namespace Code.Misc
 
         public void SetDestroyState(bool isDestroyed)
         {
-            if(isDestroyed)
-                SetModify(Color.grey, InkType.Black);
+            if (isDestroyed)
+            {
+                SetModify(Utility.GetGridColor(InkType.Black), InkType.Black);
+                Type = InkType.Destroyed;
+            }
             else
                 ClearModify();
         }

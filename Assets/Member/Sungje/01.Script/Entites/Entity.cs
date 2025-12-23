@@ -11,6 +11,8 @@ public abstract class Entity : MonoBehaviour
     public UnityEvent OnHitEvent;
     public UnityEvent OnDeadEvent;
 
+    public int RemainShieldCount { get; set; } = 0;
+
     protected Dictionary<Type, IEntityComponent> _components;
 
     protected virtual void Awake()

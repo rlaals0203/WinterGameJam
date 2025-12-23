@@ -17,7 +17,6 @@ namespace Code.Test
             if (Time.time - _prevTime > duration)
             {
                 _prevTime = Time.time;
-                _gridManager.MoveToPlayer(transform);
             }
         }
     }

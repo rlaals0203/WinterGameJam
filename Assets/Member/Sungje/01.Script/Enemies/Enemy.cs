@@ -6,8 +6,11 @@ public abstract class Enemy : Entity
 {
     [SerializeField] private Player player;
     [SerializeField] private GridManager gridManager;
+    
+    public bool IsSpoilMode { get; set; }
 
     [field: SerializeField] public EnemyDataSO EnemyDataSO { get; private set; }
+    public float RemainSlowTime { get; set; }
     
     public float DistanceToPlayer =>
         Vector2.Distance(transform.position, player.transform.position);
