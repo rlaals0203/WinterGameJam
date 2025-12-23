@@ -9,7 +9,7 @@ namespace Code.Combat
         [SerializeField] private float homingDuration = 1.2f;
 
         private Transform _target;
-        private float _timer;
+        private float timer;
         private bool _isHoming;
 
         public void Init(
@@ -24,7 +24,7 @@ namespace Code.Combat
             base.Init(position, dir, bulletSpeed, damage, owner);
 
             _target = target.transform;
-            _timer = 0f;
+            timer = 0f;
             _isHoming = true;
         }
 
@@ -32,8 +32,8 @@ namespace Code.Combat
         {
             if (!_isHoming || _target == null) return;
 
-            _timer += Time.fixedDeltaTime;
-            if (_timer >= homingDuration)
+            timer += Time.fixedDeltaTime;
+            if (timer >= homingDuration)
             {
                 _isHoming = false;
                 return;
@@ -55,7 +55,7 @@ namespace Code.Combat
         {
             base.ResetItem();
             _target = null;
-            _timer = 0f;
+            timer = 0f;
             _isHoming = false;
         }
     }
