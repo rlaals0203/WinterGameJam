@@ -1,5 +1,7 @@
+using Blade.SoundSystem;
 using Code.Entities;
 using DG.Tweening;
+using KimMin.Core;
 using KimMin.Events;
 using KimMin.StatSystem;
 using UnityEngine;
@@ -15,6 +17,7 @@ namespace Code.Combat
         [SerializeField] private float maxHealth;
         [SerializeField] private float currentHealth;
         [SerializeField] private SpriteRenderer renderer;
+        [SerializeField] private SoundSO hitSound;
         
         public delegate void HealthChange(float current, float max);
         public event HealthChange OnHealthChangeEvent;
@@ -58,13 +61,13 @@ namespace Code.Combat
         {
             currentHealth = Mathf.Clamp(currentHealth -damage, 0, maxHealth);
             OnHealthChangeEvent?.Invoke(currentHealth, maxHealth);
+            GameEventBus.RaiseEvent(SoundEvents.PlaySFXEvent.Initialize(hitSound));
             
             if (currentHealth <= 0)
             {
                 _entity.OnDeadEvent?.Invoke();
             }
 
-            Debug.Log("SDF");
             renderer.DOColor(Color.white, 0.1f).SetLoops(1, LoopType.Yoyo);
             _entity.OnHitEvent?.Invoke();
         }

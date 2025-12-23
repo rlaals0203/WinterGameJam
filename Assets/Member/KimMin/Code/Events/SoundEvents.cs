@@ -10,13 +10,11 @@ public static class SoundEvents
 
 public class PlaySFXEvent : GameEvent
 {
-    public Vector3 position;
     public SoundSO clip;
     public int channel;
 
-    public PlaySFXEvent Initialize(Vector3 position, SoundSO clip, int channel = 0)
+    public PlaySFXEvent Initialize(SoundSO clip, int channel = 0)
     {
-        this.position = position;
         this.clip = clip;
         this.channel = channel;
             

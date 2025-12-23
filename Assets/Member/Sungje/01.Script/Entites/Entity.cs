@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 public abstract class Entity : MonoBehaviour
 {
-    public bool IsDead { get; set; }
+    public bool IsDead { get; set; } = false;
     public UnityEvent OnHitEvent;
     public UnityEvent OnDeadEvent;
 

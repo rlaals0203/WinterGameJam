@@ -12,7 +12,7 @@ namespace Code.Core
     public class GameManager : MonoSingleton<GameManager>
     {
         public GameState GameState { get; set; }
-        public bool isCombatMode;
+        public bool isCombatMode = true;
         public int currentStage = 0;
     }
 }

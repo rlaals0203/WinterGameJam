@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Blade.SoundSystem;
+using Code.Core;
 using KimMin.Core;
 using KimMin.Dependencies;
 using KimMin.ObjectPool.RunTime;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace Blade.Managers
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : MonoSingleton<SoundManager>
     {
         [SerializeField] private PoolItemSO soundPlayer;
 
@@ -31,7 +32,6 @@ namespace Blade.Managers
         private void HandlePlaySFXEvent(PlaySFXEvent evt)
         {
             SoundPlayer player = _poolManager.Pop<SoundPlayer>(soundPlayer);
-            player.transform.position = evt.position;
             player.PlaySound(evt.clip);
 
             if (evt.channel > 0 && evt.clip.loop)
