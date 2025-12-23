@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyList:
   - {fileID: 4173007106661537825, guid: 998b5ea78252674408cbf17ad023ed30, type: 3}
   - {fileID: 4437330257164189139, guid: 961fb42f9b660424b9c49b311262868c, type: 3}
-  enemyDelay: 20
-  enemyCount: 5
+  enemyDelay: 3
+  enemyCount: 20
   paint: {fileID: 6925018665742826213, guid: 32637caf5bcafb44787e29243de859cb, type: 3}
   row: 28
   column: 16

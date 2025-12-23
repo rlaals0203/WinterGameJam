@@ -18,16 +18,19 @@ namespace Code.Combat
         [SerializeField] private float currentHealth;
         [SerializeField] private SpriteRenderer renderer;
         [SerializeField] private SoundSO hitSound;
-        
+
+        private float _lastHitTime;
+        private const float HitInterval = 0.2f;
+
         public delegate void HealthChange(float current, float max);
         public event HealthChange OnHealthChangeEvent;
-        
+
         public void Initialize(Entity entity)
         {
             _entity = entity;
             _statCompo = entity.GetCompo<EntityStat>();
         }
-        
+
         public void AfterInitialize()
         {
             currentHealth = maxHealth = _statCompo.SubscribeStat(hpStat, HandleMaxHPChange, 10f);
@@ -40,29 +43,31 @@ namespace Code.Combat
 
         private void OnDestroy()
         {
-            _statCompo.UnSubscribeStat(hpStat,HandleMaxHPChange );
+            _statCompo.UnSubscribeStat(hpStat, HandleMaxHPChange);
         }
 
         private void HandleMaxHPChange(StatSO stat, float currentvalue, float prevvalue)
         {
             float changed = currentvalue - prevvalue;
             maxHealth = currentvalue;
+
             if (changed > 0)
-            {
                 currentHealth = Mathf.Clamp(currentHealth + changed, 0, maxHealth);
-            }
             else
-            {
                 currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-            }
         }
 
         public void ApplyDamage(int damage)
         {
-            currentHealth = Mathf.Clamp(currentHealth -damage, 0, maxHealth);
+            if (Time.time - _lastHitTime < HitInterval)
+                return;
+
+            _lastHitTime = Time.time;
+
+            currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
             OnHealthChangeEvent?.Invoke(currentHealth, maxHealth);
             GameEventBus.RaiseEvent(SoundEvents.PlaySFXEvent.Initialize(hitSound));
-            
+
             if (currentHealth <= 0)
             {
                 _entity.OnDeadEvent?.Invoke();
