@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af38b02d8d696f468e573677893290b, type: 3}
+  m_Name: Enemy2
+  m_EditorClassIdentifier: 
+  enemyName: Enemy2
+  description: "\uD50C\uB808\uC774\uC5B4\uB97C \uB530\uB77C\uAC00\uB294 \uCD1D\uC54C\uC744
+    \uC3D8\uB294 \uC801"
+  maxHealth: 50
+  damage: 10
+  moveSpeed: 0.5
+  attackCooldown: 1
+  attackRange: 5

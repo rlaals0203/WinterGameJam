@@ -1,0 +1,243 @@
+fileFormatVersion: 2
+guid: ddc79dea5bbf92448bedc9c3759531f0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3976528242879781054
+    second: main_character_attack_animation_effct_FINAL-Sheet_0
+  - first:
+      213: 3434649664983628049
+    second: main_character_attack_animation_effct_FINAL-Sheet_1
+  - first:
+      213: 3682180032620748773
+    second: main_character_attack_animation_effct_FINAL-Sheet_2
+  - first:
+      213: 5195310648767043248
+    second: main_character_attack_animation_effct_FINAL-Sheet_3
+  - first:
+      213: 7902749337614686434
+    second: main_character_attack_animation_effct_FINAL-Sheet_4
+  - first:
+      213: -6635784841036881363
+    second: main_character_attack_animation_effct_FINAL-Sheet_5
+  - first:
+      213: 8145502489532789424
+    second: main_character_attack_animation_effct_FINAL-Sheet_6
+  - first:
+      213: 7094833315343129250
+    second: main_character_attack_animation_effct_FINAL-Sheet_7
+  - first:
+      213: -8593246720878988939
+    second: main_character_attack_animation_effct_FINAL-Sheet_8
+  - first:
+      213: 7054009573918134647
+    second: main_character_attack_animation_effct_FINAL-Sheet_9
+  - first:
+      213: 3271170965714223337
+    second: main_character_attack_animation_effct_FINAL-Sheet_10
+  - first:
+      213: -6975355754568687095
+    second: main_character_attack_animation_effct_FINAL-Sheet_11
+  - first:
+      213: 3554446623243381944
+    second: main_character_attack_animation_effct_FINAL-Sheet_12
+  - first:
+      213: 6231220931948265446
+    second: main_character_attack_animation_effct_FINAL-Sheet_13
+  - first:
+      213: -6346569533798668967
+    second: main_character_attack_animation_effct_FINAL-Sheet_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: main_character_attack_animation_effct_FINAL-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 8
+        width: 172
+        height: 231
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb8582c4e577f2730800000000000000
+      internalID: 3976528242879781054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: main_character_attack_animation_effct_FINAL-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1250
+        y: 8
+        width: 211
+        height: 231
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11973493ca35aaf20800000000000000
+      internalID: 3434649664983628049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: main_character_attack_animation_effct_FINAL-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 9
+        width: 211
+        height: 231
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ef556b0b3bb91330800000000000000
+      internalID: 3682180032620748773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 0865a893206abc04f92eb8449ac4c17c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      main_character_attack_animation_effct_FINAL-Sheet_0: 3976528242879781054
+      main_character_attack_animation_effct_FINAL-Sheet_1: 3434649664983628049
+      main_character_attack_animation_effct_FINAL-Sheet_10: 3271170965714223337
+      main_character_attack_animation_effct_FINAL-Sheet_11: -6975355754568687095
+      main_character_attack_animation_effct_FINAL-Sheet_12: 3554446623243381944
+      main_character_attack_animation_effct_FINAL-Sheet_13: 6231220931948265446
+      main_character_attack_animation_effct_FINAL-Sheet_14: -6346569533798668967
+      main_character_attack_animation_effct_FINAL-Sheet_2: 3682180032620748773
+      main_character_attack_animation_effct_FINAL-Sheet_3: 5195310648767043248
+      main_character_attack_animation_effct_FINAL-Sheet_4: 7902749337614686434
+      main_character_attack_animation_effct_FINAL-Sheet_5: -6635784841036881363
+      main_character_attack_animation_effct_FINAL-Sheet_6: 8145502489532789424
+      main_character_attack_animation_effct_FINAL-Sheet_7: 7094833315343129250
+      main_character_attack_animation_effct_FINAL-Sheet_8: -8593246720878988939
+      main_character_attack_animation_effct_FINAL-Sheet_9: 7054009573918134647
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
