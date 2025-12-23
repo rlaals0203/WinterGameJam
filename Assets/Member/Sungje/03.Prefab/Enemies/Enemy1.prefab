@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a462734d714c49a28ad0f4dffd33bce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chancePerSecond: 20
+  chancePerSecond: 3
 --- !u!1 &5708920973050285134
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,9 +214,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -1432875691
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 4173007106661537825}
   - component: {fileID: 3826771021822351577}
   - component: {fileID: 5953587886360154625}
+  - component: {fileID: 7157585847791592682}
   m_Layer: 7
   m_Name: Enemy1
   m_TagString: Untagged
@@ -405,3 +406,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7157585847791592682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7059250963905835014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed384996606a4c5c96e7546244742050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpStat: {fileID: 11400000, guid: 680605fd1a541d64288071fd3103e161, type: 2}
+  maxHealth: 0
+  currentHealth: 0
+  renderer: {fileID: 2966706436224331870}

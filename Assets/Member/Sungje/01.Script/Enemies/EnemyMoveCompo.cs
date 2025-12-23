@@ -49,9 +49,15 @@ public class EnemyMoveCompo : MonoBehaviour, IEntityComponent
 
     private void HandleCompleteMove()
     {
-        var grid = _gridManager.GetGrid(_gridManager.WorldToGrid(_enemy.transform.position));
+        if (_enemy.IsSpoilMode) return;
+
+        var grid = _gridManager.GetGrid(
+            _gridManager.WorldToGrid(_enemy.transform.position)
+        );
         if (grid == null) return;
         if (grid.Type == InkType.None || grid.Type == InkType.Destroyed) return;
+
         grid.ClearModify();
     }
+
 }

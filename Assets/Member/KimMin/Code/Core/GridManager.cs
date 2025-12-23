@@ -164,6 +164,10 @@ namespace Code.Core
             Vector3 worldPos = grid.CellToWorld(nextCell) + grid.cellSize / 2f - _offset;
             target.DOMove(worldPos, 0.1f).OnComplete(() => {
                 callback?.Invoke();
+
+                if (owner is Enemy enemy && enemy.IsSpoilMode)
+                    return;
+
                 ApplyGridBuff(GetGrid(nextCell), owner);
             });
         }
