@@ -478,7 +478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 831006924}
-  - component: {fileID: 831006923}
+  - component: {fileID: 831006925}
   m_Layer: 0
   m_Name: DialogueController
   m_TagString: Untagged
@@ -486,27 +486,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &831006923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 831006922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 265be04bdd3402d49bb49c9ed52e9d8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueText: {fileID: 1732096103}
-  sentences:
-  - "\xB7\xB7\xB7\xB7\uAE38\uAC8C \uB290\uAEF4\uC84C\uB358 \uC608\uC220\uB300\uC81C\uB3C4
-    \uC5B4\uB290\uB367 \uB9C9\uC744 \uB0B4\uB838\uB2E4."
-  - "\uC791\uD488\uC774 \uD6FC\uC190\uB418\uC5B4 \uB9C8\uC74C\uC774 \uC544\uD320\uC9C0\uB9CC,
-    \uB9CE\uC740 \uC0AC\uB78C\uC774 \uC990\uAE30\uB294 \uBAA8\uC2B5\uC744 \uBCF4\uACE0
-    \uAE08\uC138 \uC78A\uC5B4\uBC84\uB838\uB2E4."
-  - "\uB2E4\uC74C \uC608\uC220\uB300\uC81C\uAC00 \uAE30\uB300\uB41C\uB2E4."
-  typingSpeed: 0.05
 --- !u!4 &831006924
 Transform:
   m_ObjectHideFlags: 0
@@ -522,6 +501,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &831006925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831006922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b164d28f0e8d006419b550a09740b621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueText: {fileID: 1732096103}
+  sentences:
+  - "\xB7\xB7\xB7\xB7\uAE38\uAC8C \uB290\uAEF4\uC84C\uB358 \uC608\uC220\uB300\uC81C\uB3C4
+    \uC5B4\uB290\uB367 \uB9C9\uC744 \uB0B4\uB838\uB2E4."
+  - "\uC791\uD488\uC774 \uD6FC\uC190\uB418\uC5B4 \uB9C8\uC74C\uC774 \uC544\uD320\uC9C0\uB9CC,
+    \uB9CE\uC740 \uC0AC\uB78C\uC774 \uC990\uAE30\uB294 \uBAA8\uC2B5\uC744 \uBCF4\uACE0
+    \uAE08\uC138 \uC78A\uC5B4\uBC84\uB838\uB2E4."
+  - "\uB2E4\uC74C \uC608\uC220\uB300\uC81C\uAC00 \uAE30\uB300\uB41C\uB2E4."
+  typingSpeed: 0.05
 --- !u!1 &1165812231
 GameObject:
   m_ObjectHideFlags: 0

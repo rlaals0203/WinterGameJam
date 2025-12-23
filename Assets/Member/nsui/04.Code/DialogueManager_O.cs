@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro; // TMP 사용을 위해 필요
 using UnityEngine.SceneManagement; // 씬 전환 시 필요
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager_O : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText; // 텍스트 컴포넌트 연결
     public string[] sentences;           // 표시할 문장들
