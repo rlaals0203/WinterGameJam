@@ -41,7 +41,7 @@ namespace Code.Combat
             _damage = damage;
             _owner = owner;
 
-            _rb.linearVelocity = direction * bulletSpeed;
+            _rb.linearVelocity = direction * bulletSpeed * 0.5f;
 
             if (trailRenderer != null)
             {
