@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro; // TextMeshPro 사용
 
 public class InkSelectUI : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class InkSelectUI : MonoBehaviour
     [SerializeField] private Button[] slotButtons;
     [SerializeField] private Transform highlightObj;
     [SerializeField] private TransitionSettings GameStartEffect;
+
+    [Header("Ink Amount Info")]
+    [SerializeField] private TextMeshProUGUI[] inkAmountTexts;
 
     [Header("Warning UI")]
     [SerializeField] private GameObject notEnoughMsgObj;
@@ -33,7 +37,9 @@ public class InkSelectUI : MonoBehaviour
         }
 
         if (highlightObj != null) highlightObj.gameObject.SetActive(false);
-        if (notEnoughMsgObj != null) notEnoughMsgObj.SetActive(false); 
+        if (notEnoughMsgObj != null) notEnoughMsgObj.SetActive(false);
+
+        UpdateInkTexts();
     }
 
     private void OnSlotClicked(int index)
@@ -62,9 +68,7 @@ public class InkSelectUI : MonoBehaviour
         }
 
         int myTotalInk = InkStorage.Instance.GetRemainInk(newType);
-        if(myTotalInk == 0) return;
 
-        // 잉크가 모자라면 경고 메시지 띄우기
         if (myTotalInk - currentUsedAmount < INK_PER_SLOT)
         {
             StopAllCoroutines();
@@ -74,6 +78,33 @@ public class InkSelectUI : MonoBehaviour
 
         slotsData[selectedIndex] = newType;
         slotButtons[selectedIndex].image.color = GetColorByType(newType);
+
+        UpdateInkTexts();
+    }
+
+    // 텍스트 일괄 갱신 함수
+    private void UpdateInkTexts()
+    {
+        if (inkAmountTexts == null || InkStorage.Instance == null) return;
+
+        for (int i = 0; i < inkAmountTexts.Length; i++)
+        {
+            if (i >= inkAmountTexts.Length) break;
+
+            InkType type = (InkType)i;
+            int total = InkStorage.Instance.GetRemainInk(type);
+
+            // 현재 슬롯에 올라간 양 계산
+            int used = 0;
+            foreach (var slotInk in slotsData)
+            {
+                if (slotInk == type) used += INK_PER_SLOT;
+            }
+            if (inkAmountTexts[i] != null)
+            {
+                inkAmountTexts[i].text = $"{total - used}L";
+            }
+        }
     }
 
     private IEnumerator ShowWarningEffect()
