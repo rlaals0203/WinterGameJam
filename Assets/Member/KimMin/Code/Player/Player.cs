@@ -29,11 +29,6 @@ namespace Code.Entities
 
         public void TakeDamage(int damage)
         {
-            
-        }
-
-        public void ApplyDamage(int damage)
-        {
             currentHealth -= damage;
             if (currentHealth < 0)
                 currentHealth = 0;

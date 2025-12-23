@@ -1,6 +1,5 @@
 using Code.Entities;
 using KimMin.Core;
-using KimMin.Dependencies;
 using KimMin.Events;
 using KimMin.ObjectPool.RunTime;
 using UnityEngine;
@@ -10,12 +9,13 @@ namespace Code.Combat
     public class Bullet : MonoBehaviour, IPoolable
     {
         protected Rigidbody2D _rb;
-        [SerializeField] private OverlapDamageCaster damageCaster;
-        [SerializeField] protected LayerMask enemyLayer;
+        [SerializeField] private LayerMask targetLayer;
         [SerializeField] private TrailRenderer trailRenderer;
 
         protected int _damage;
         protected float _speed;
+        protected Entity _owner;
+
         private Pool _myPool;
         private bool _isHit;
 
@@ -27,14 +27,21 @@ namespace Code.Combat
             _rb = GetComponent<Rigidbody2D>();
         }
 
-        public virtual void Init(Vector3 position, Vector2 direction, float bulletSpeed, int damage, Entity entity)
+        public virtual void Init(
+            Vector3 position,
+            Vector2 direction,
+            float bulletSpeed,
+            int damage,
+            Entity owner
+        )
         {
             transform.position = position;
             transform.right = direction;
             _speed = bulletSpeed;
-            _rb.linearVelocity = direction * bulletSpeed;
             _damage = damage;
-            damageCaster.InitCaster(entity);
+            _owner = owner;
+
+            _rb.linearVelocity = direction * bulletSpeed;
 
             if (trailRenderer != null)
             {
@@ -46,28 +53,12 @@ namespace Code.Combat
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
             if (_isHit) return;
-            if ((enemyLayer & (1 << collision.gameObject.layer)) == 0) return;
+            if ((targetLayer & (1 << collision.gameObject.layer)) == 0) return;
 
             _isHit = true;
-            OnTrigger(collision);
-            PlayEffect();
 
-            if (trailRenderer != null)
-            {
-                trailRenderer.enabled = false;
-                trailRenderer.time = 0f;
-            }
+            collision.GetComponentInParent<IDamageable>()?.TakeDamage(_damage);
 
-            _myPool.Push(this);
-        }
-
-        protected virtual void OnTrigger(Collider2D collision)
-        {
-            damageCaster.CastDamage(_damage);
-        }
-
-        private void PlayEffect()
-        {
             GameEventBus.RaiseEvent(
                 EffectEvents.PlayPoolEffect.Initializer(
                     transform.position,
@@ -76,6 +67,14 @@ namespace Code.Combat
                     5f
                 )
             );
+
+            if (trailRenderer != null)
+            {
+                trailRenderer.enabled = false;
+                trailRenderer.time = 0f;
+            }
+
+            _myPool.Push(this);
         }
 
         public void SetUpPool(Pool pool)
@@ -87,6 +86,7 @@ namespace Code.Combat
         {
             _isHit = false;
             _rb.linearVelocity = Vector2.zero;
+            _owner = null;
 
             if (trailRenderer != null)
             {

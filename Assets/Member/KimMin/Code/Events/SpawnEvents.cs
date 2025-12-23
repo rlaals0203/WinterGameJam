@@ -11,8 +11,9 @@ namespace KimMin.Events
         public static SpawnBulletEvent SpawnBulletEvent = new();
         public static SpawnEnergyBallEvent SpawnEnergyBallEvent = new();
         public static SpawnHomingBulletEvent SpawnHomingBullet = new();
+        public static SpawnWarningAreaEvent SpawnWarningArea = new();
     }
-    
+
     public class SpawnBulletEvent : GameEvent
     {
         public PoolItemSO poolItem;
@@ -60,20 +61,48 @@ namespace KimMin.Events
     {
         public PoolItemSO poolItem;
         public Vector3 position;
-        public Vector3 direction;
         public float speed;
         public int damage;
-        public Entity entity;
+        public Entity owner;
         public Player target;
-        public SpawnHomingBulletEvent Init(PoolItemSO poolItem, Vector3 position,
-            float speed, int damage, Player target, Entity owner)
+
+        public SpawnHomingBulletEvent Init(
+            PoolItemSO poolItem,
+            Vector3 position,
+            float speed,
+            int damage,
+            Player target,
+            Entity owner
+        )
         {
             this.poolItem = poolItem;
             this.position = position;
             this.speed = speed;
             this.damage = damage;
             this.target = target;
-            this.entity = owner;
+            this.owner = owner;
+            return this;
+        }
+    }
+
+    public class SpawnWarningAreaEvent : GameEvent
+    {
+        public PoolItemSO poolItem;
+        public Vector3 position;
+        public int damage;
+        public Entity owner;
+
+        public SpawnWarningAreaEvent Init(
+            PoolItemSO poolItem,
+            Vector3 position,
+            int damage,
+            Entity owner
+        )
+        {
+            this.poolItem = poolItem;
+            this.position = position;
+            this.damage = damage;
+            this.owner = owner;
             return this;
         }
     }
