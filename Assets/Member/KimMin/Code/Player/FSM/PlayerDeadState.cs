@@ -1,4 +1,5 @@
 using Code.Core;
+using EasyTransition;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,7 +23,7 @@ namespace Code.Entities
             if (_isTriggerCall)
             {
                 GameManager.Instance.isCombatMode = false;
-                SceneManager.LoadScene("GameScene");
+                TransitionManager.Instance().Transition(SceneName.Game, _player.Transition, 0);
             }
         }
     }

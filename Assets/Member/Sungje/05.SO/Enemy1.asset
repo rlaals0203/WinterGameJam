@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Enemy1
   description: "\uC791\uC740 \uD22C\uC0AC\uCCB4\uB97C \uC3D8\uB294 \uC801"
   maxHealth: 50
-  damage: 10
+  damage: 3
   moveSpeed: 0.5
   attackCooldown: 5
   attackRange: 5
