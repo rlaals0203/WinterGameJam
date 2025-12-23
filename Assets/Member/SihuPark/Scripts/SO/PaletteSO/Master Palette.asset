@@ -15,7 +15,7 @@ MonoBehaviour:
   SupplyName: "\uAC70\uC7A5\uC758 \uD314\uB808\uD2B8"
   SupplyID: 4
   supplyType: 0
-  icon: {fileID: 0}
+  icon: {fileID: -4380640920890412905, guid: 4a3169df3ec461a42ac45cc0bd804276, type: 3}
   description: "\uC138\uACC4\uC801\uC778 \uAC70\uC7A5\uC774 \uC0AC\uC6A9\uD588\uB358
     \uD314\uB808\uD2B8"
   price: 200

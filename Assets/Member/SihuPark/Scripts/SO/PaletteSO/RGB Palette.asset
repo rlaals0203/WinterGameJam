@@ -15,7 +15,7 @@ MonoBehaviour:
   SupplyName: "RGB \uD314\uB808\uD2B8"
   SupplyID: 5
   supplyType: 0
-  icon: {fileID: 0}
+  icon: {fileID: -2957693652180263077, guid: 4e7651c4057630840af6df667d25bfe5, type: 3}
   description: "\uC5B4\uB5A0\uD55C \uC0C9\uC774\uB4E0 \uB9CC\uB4E4\uC5B4 \uB0BC \uC218
     \uC788\uB2E4\uB294 \uD314\uB808\uD2B8"
   price: 400
