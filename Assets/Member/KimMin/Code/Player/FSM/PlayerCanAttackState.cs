@@ -16,8 +16,8 @@ namespace Code.Entities
 
         public override void Exit()
         {
-            base.Exit();
             _player.PlayerInput.OnLeftClickPressed -= HandleAttackPressed;
+            base.Exit();
         }
 
         private void HandleAttackPressed()

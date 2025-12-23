@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.Combat;
 using Code.Entities;
+using Code.GameFlow;
 using Code.Misc;
 using DG.Tweening;
 using KimMin.Dependencies;
@@ -26,28 +27,36 @@ namespace Code.Core
     {
         [SerializeField] private Grid grid;
         [SerializeField] private GridObject gridPrefab;
-        [SerializeField] private Vector2 gridOffset;
 
         private GridObject[,] _gridData = new GridObject[100, 100];
+        private Vector3 _offset;
+        
         [Inject] private Player _player;
 
-        private int _row;
-        private int _col;
+        public int Row { get; private set; }
+        public int Col { get; private set; }
 
         float CellSize => grid.cellSize.x;
 
-        public void CreateGrids(int row, int col)
+        public void CreateGrids(StageDataSO data)
         {
-            _row = row;
-            _col = col;
+            Row = data.row;
+            Col = data.column;
             
-            for (int y = 0; y < _col; y++)
+            float offsetX = Row % 2== 0 ? 0.5f : 0;
+            float offsetY = Col % 2== 0 ? 0.5f : 0;
+            _offset = new Vector2(offsetX, offsetY);
+            
+            Vector2 pos = new Vector2(Row / 2f, Col / 2f);
+            Instantiate(data.paint, pos, Quaternion.identity);
+            
+            for (int y = 0; y < Col; y++)
             {
-                for (int x = 0; x < _row; x++)
+                for (int x = 0; x < Row; x++)
                 {
                     GridObject gridObj = Instantiate(gridPrefab, transform);
                     Vector3Int cell = new Vector3Int(x, y, 0);
-                    Vector3 worldPos = grid.CellToWorld(cell) + grid.cellSize / 2f + (Vector3)gridOffset;
+                    Vector3 worldPos = grid.CellToWorld(cell) + grid.cellSize / 2f - _offset;
 
                     gridObj.transform.position = worldPos;
                     gridObj.Area = GetAreaIndex(cell);
@@ -58,8 +67,8 @@ namespace Code.Core
 
         private int GetAreaIndex(Vector3Int cell)
         {
-            int areaWidth = _row / 3;
-            int areaHeight = _col / 3;
+            int areaWidth = Row / 3;
+            int areaHeight = Col / 3;
             int areaX = Mathf.Clamp(cell.x / areaWidth, 0, 2);
             int areaY = Mathf.Clamp(cell.y / areaHeight, 0, 2);
             int invertedY = 2 - areaY;
@@ -68,7 +77,7 @@ namespace Code.Core
         }
 
         public bool IsValidCell(Vector3Int cell)
-            => cell.x >= 0 && cell.x < _row && cell.y >= 0 && cell.y < _col;
+            => cell.x >= 0 && cell.x < Row && cell.y >= 0 && cell.y < Col;
 
         public GridObject GetGrid(Vector3Int cell)
         {
@@ -147,14 +156,14 @@ namespace Code.Core
         {
             Vector3Int targetCell = grid.WorldToCell(target.position);
             Vector3Int playerCell = grid.WorldToCell(_player.transform.position);
-
             Vector3Int step = MoveByGrid(targetCell, playerCell);
             Vector3Int nextCell = targetCell + step;
-            Vector3 worldPos = grid.CellToWorld(nextCell) + grid.cellSize / 2f + (Vector3)gridOffset;
 
-            target.DOMove(worldPos, 0.1f).OnComplete(() =>
-            {
-                if (callback != null) callback();
+            if (nextCell == playerCell) return;
+
+            Vector3 worldPos = grid.CellToWorld(nextCell) + grid.cellSize / 2f - _offset;
+            target.DOMove(worldPos, 0.1f).OnComplete(() => {
+                callback?.Invoke();
                 ApplyGridBuff(GetGrid(nextCell), owner);
             });
         }

@@ -1,27 +1,21 @@
+using Code.Combat;
 using Code.Core;
 using DG.Tweening;
+using KimMin.Core;
 using KimMin.Dependencies;
+using KimMin.Events;
 using UnityEngine;
 
 namespace Code.Entities
 {
     public class Player : Entity, IDependencyProvider
     {
-        private int maxHealth = 100;
-
-        [SerializeField] private SpriteRenderer spriteRenderer;
-        [SerializeField] private float hitFlashTime = 0.1f;
-
-        [SerializeField] private int currentHealth;
-        
         [SerializeField] private StateDataSO[] states;
         
         [Inject] private GridManager _gridManager;
-        public GridManager GridManager => _gridManager;
         
         private EntityStateMachine _stateMachine;
-        public int MaxHealth => maxHealth;
-        public int CurrentHealth => currentHealth;
+        private EntityHealth _healthCompo;
 
         [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
         public int RemainTripleAttack { get; set; } = 0;
@@ -36,10 +30,15 @@ namespace Code.Entities
         {
             base.Awake();
             _stateMachine = new EntityStateMachine(this, states);
-
+            _healthCompo = GetCompo<EntityHealth>();
+            
             OnDeadEvent.AddListener(HandleDeadEvent);
+            _healthCompo.OnHealthChangeEvent += HandleHealthChange;
+        }
 
-            currentHealth = maxHealth;
+        private void HandleHealthChange(float current, float max)
+        {
+            GameEventBus.RaiseEvent(PlayerEvents.PlayerHealthEvent.Initialize(current, max));
         }
 
         private void HandleDeadEvent()
@@ -52,6 +51,9 @@ namespace Code.Entities
 
         private void Start()
         {
+            Vector2 position = new Vector2(_gridManager.Row / 2, _gridManager.Col / 2);
+            transform.position = position;
+            
             _stateMachine.ChangeState("IDLE");
         }
 

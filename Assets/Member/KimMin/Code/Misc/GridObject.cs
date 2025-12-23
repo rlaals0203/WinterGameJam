@@ -13,6 +13,7 @@ namespace Code.Misc
         public Vector2 Position => transform.position;
         public InkType Type { get; private set; }
         public Tween BlinkTween { get; set; }
+        public bool CannotStand { get; set; }
         public int Area { get; set; }
         
         private Color _originColor = new Color32(255, 255, 255, 50);
