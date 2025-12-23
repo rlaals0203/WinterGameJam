@@ -13,14 +13,12 @@ public class ShopSupplySlot : MonoBehaviour
 
     [Header("My UI")]
     [SerializeField] private Image myIcon;
-    [SerializeField] private TextMeshProUGUI myName;
 
     private void Start()
     {
         if (mySupplyData != null)
         {
             if (myIcon != null) myIcon.sprite = mySupplyData.icon;
-            if (myName != null) myName.text = mySupplyData.SupplyName;
         }
 
         myButton.onClick.RemoveAllListeners();
