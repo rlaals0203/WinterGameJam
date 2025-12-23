@@ -4,6 +4,7 @@ using Code.Entities;
 using KimMin.Core;
 using KimMin.Dependencies;
 using KimMin.Events;
+using System.Collections;
 using UnityEngine;
 
 public abstract class Enemy : Entity
@@ -21,8 +22,10 @@ public abstract class Enemy : Entity
 
     private bool _isHit;
     private float _hitEndTime;
+    private bool _isDead;
 
     private readonly int IsHitHash = Animator.StringToHash("IsHit");
+    private readonly int IsDeadHash = Animator.StringToHash("IsDead");
 
     public float DistanceToPlayer =>
         Vector2.Distance(transform.position, Player.transform.position);
@@ -40,7 +43,16 @@ public abstract class Enemy : Entity
 
     private void HandleDead()
     {
+        _isDead = true;
         GameEventBus.RaiseEvent(EnemyEvents.EnemyDeadEvent);
+        animator.SetBool(IsDeadHash, _isDead);
+        StartCoroutine(DeadCoroutine());
+    }
+
+    private IEnumerator DeadCoroutine()
+    {
+        Debug.Log("Enemy Dead Coroutine Start");
+        yield return new WaitForSeconds(0.8f);
         Destroy(gameObject);
     }
 
