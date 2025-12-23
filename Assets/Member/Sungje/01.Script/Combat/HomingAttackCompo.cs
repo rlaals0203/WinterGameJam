@@ -9,14 +9,12 @@ namespace Code.Combat
     public class HomingAttackCompo : EnemyAttackCompo
     {
         [SerializeField] private PoolItemSO homingBullet;
-        private readonly SpawnHomingBulletEvent _homingAttackEvent = SpawnEvents.SpawnHomingBullet;
+        private readonly SpawnHomingBulletEvent _spawnEvent = SpawnEvents.SpawnHomingBullet;
 
         protected override void ProcessAttack()
         {
-            Vector2 dir = (_enemy.Player.Position - _enemy.transform.position).normalized;
-
             GameEventBus.RaiseEvent(
-                _homingAttackEvent.Init(
+                _spawnEvent.Init(
                     homingBullet,
                     _enemy.transform.position,
                     Data.moveSpeed,

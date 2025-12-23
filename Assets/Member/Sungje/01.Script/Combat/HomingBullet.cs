@@ -14,14 +14,15 @@ namespace Code.Combat
 
         public void Init(
             Vector3 position,
-            Vector2 direction,
             float bulletSpeed,
             int damage,
             Player target,
-            Entity entity
+            Entity owner
         )
         {
-            base.Init(position, direction, bulletSpeed, damage, entity);
+            Vector2 dir = (target.Position - position).normalized;
+            base.Init(position, dir, bulletSpeed, damage, owner);
+
             _target = target.transform;
             _timer = 0f;
             _isHoming = true;

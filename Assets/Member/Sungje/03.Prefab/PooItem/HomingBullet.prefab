@@ -54,13 +54,13 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 8
+      m_Bits: 128
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  overlapCastType: 0
-  damageBoxSize: {x: 0, y: 0}
+  overlapCastType: 1
+  damageBoxSize: {x: 0.5, y: 0.1}
   damageRadius: 0
 --- !u!1 &7003687064569299101
 GameObject:
@@ -158,10 +158,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6470702656484971174}
+  - component: {fileID: 2258331059179025337}
   - component: {fileID: 4585042266173881024}
   - component: {fileID: 4534374596725216114}
   - component: {fileID: 6446328063780417772}
-  - component: {fileID: 2258331059179025337}
   m_Layer: 0
   m_Name: HomingBullet
   m_TagString: Untagged
@@ -186,6 +186,25 @@ Transform:
   - {fileID: 7622724204317983786}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2258331059179025337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599278021367250199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616bfd92e1c90b645b61afe4974b2151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  trailRenderer: {fileID: 4534374596725216114}
+  <PoolItem>k__BackingField: {fileID: 11400000, guid: 7e5d20f58fe5769469f6dea4f2bdd3ba, type: 2}
+  rotateSpeed: 720
+  homingDuration: 1.2
 --- !u!61 &4585042266173881024
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216,7 +235,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -375,23 +394,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2258331059179025337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7599278021367250199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 616bfd92e1c90b645b61afe4974b2151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageCaster: {fileID: 8031255525732088882}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  trailRenderer: {fileID: 4534374596725216114}
-  <PoolItem>k__BackingField: {fileID: 11400000, guid: 7e5d20f58fe5769469f6dea4f2bdd3ba, type: 2}
-  rotateSpeed: 720
-  homingDuration: 1.2

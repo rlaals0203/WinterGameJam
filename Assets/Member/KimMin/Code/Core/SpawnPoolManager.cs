@@ -44,11 +44,10 @@ namespace Code.Core
             var bullet = _poolManager.Pop<HomingBullet>(evt.poolItem);
             bullet.Init(
                 evt.position,
-                evt.direction,
                 evt.speed * 8f,
                 evt.damage,
                 evt.target,
-                evt.entity
+                evt.owner
             );
         }
 
