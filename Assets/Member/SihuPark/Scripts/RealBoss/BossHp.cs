@@ -4,31 +4,47 @@ using System.Collections;
 
 public class BossHP : MonoBehaviour
 {
-    [Header("HP set")]
+    [Header("체력 설정")]
     [SerializeField] private float maxHealth = 1000f;
     [SerializeField] private float currentHealth;
 
-    [Header("HP Slider")]
+    [Header("UI 연결")]
     [SerializeField] private Slider hpSlider;
 
-    [Header("Hit effect")]
+    [Header("피격 효과")]
     [SerializeField] private SpriteRenderer bossSprite;
     [SerializeField] private Color hitColor = Color.red;
 
     private bool isDead = false;
+    private void OnEnable()
+    {
+        if (hpSlider != null)
+        {
+            hpSlider.gameObject.SetActive(true);
+            currentHealth = maxHealth;
+            UpdateUI();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (hpSlider != null)
+        {
+            hpSlider.gameObject.SetActive(false);
+        }
+    }
 
     private void Start()
     {
-        currentHealth = maxHealth;
-        UpdateUI();
         if (bossSprite == null) bossSprite = GetComponent<SpriteRenderer>();
+        UpdateUI();
     }
 
     public void TakeDamage(float damage)
     {
         if (isDead) return;
-        currentHealth -= damage;
 
+        currentHealth -= damage;
         UpdateUI();
 
         if (bossSprite != null)
@@ -54,11 +70,9 @@ public class BossHP : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        Debug.Log("보스 뒈짐");
+        Debug.Log("보스 뒤짐");
 
         Destroy(gameObject);
-
-        // GameManager.Instance.GameClear(); 
     }
 
     private IEnumerator HitFlashRoutine()

@@ -4,7 +4,7 @@ using Code.Entities;
 
 public class RealBoss : Enemy
 {
-    [Header("내 맘대로 공격 설정")]
+    [Header("Attack")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float attackCycleTime = 3f;
     [SerializeField] private Transform firePoint;
