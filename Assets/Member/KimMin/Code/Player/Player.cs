@@ -53,7 +53,6 @@ namespace Code.Entities
             if (IsDead) return;
             IsDead = true;
             GameEventBus.RaiseEvent(PlayerEvents.PlayerDead);
-            Debug.Log("죽음");
             ChangeState("DEAD", true);
         }
 

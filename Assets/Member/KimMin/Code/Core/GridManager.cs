@@ -49,6 +49,7 @@ namespace Code.Core
             
             Vector2 pos = new Vector2(Row / 2f, Col / 2f);
             Instantiate(data.paint, pos, Quaternion.identity);
+            _player.transform.position = pos;
             
             for (int y = 0; y < Col; y++)
             {
