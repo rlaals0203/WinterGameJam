@@ -18,6 +18,7 @@ namespace Code.Entities
         [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
         public int RemainTripleAttack { get; set; } = 0;
         public int RemainDoubleRadius { get; set; } = 0;
+        public bool IsCombatMode { get; set; } = false;
         public Vector3 Position => transform.position;
 
         [Provide]

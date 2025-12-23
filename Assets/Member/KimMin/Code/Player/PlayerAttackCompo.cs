@@ -42,7 +42,8 @@ namespace Code.Entities
 
         private void HandleRightClick()
         {
-            if (!_inkStorage.HasInk(_inkCompo.CurrentInk)) return;
+            if (!_inkStorage.HasInk(_inkCompo.CurrentInk) ||
+                !_player.IsCombatMode) return;
             var grid = _gridManager.GetGrid(_gridManager.WorldToGrid(_player.Position));
             var ink = _inkCompo.CurrentInk;
             
@@ -53,6 +54,7 @@ namespace Code.Entities
 
         private void HandleLeftClick()
         {
+            if (!_player.IsCombatMode) return;
             CastDamage(GetRangeGrids());
         }
 
@@ -117,6 +119,8 @@ namespace Code.Entities
 
         private void SetGridGizmo()
         {
+            if (!_player.IsCombatMode) return;
+
             if (_prevGrids != null)
             {
                 foreach (var grid in _prevGrids)
