@@ -19,5 +19,5 @@ MonoBehaviour:
   enemyDelay: 3
   enemyCount: 10
   paint: {fileID: 6925018665742826213, guid: 32637caf5bcafb44787e29243de859cb, type: 3}
-  row: 29
+  row: 28
   column: 16

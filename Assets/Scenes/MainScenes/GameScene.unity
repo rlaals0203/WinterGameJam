@@ -1429,15 +1429,15 @@ MonoBehaviour:
   m_text: "\uC6B0\uD074\uB9AD\uC744 \uD558\uC5EC \uCD94\uCD9C\uAE30\uB97C \uC124\uCE58\uD558\uC138\uC694
     ({evt.count}/10"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 39158905d4867d54aad09c573ca7316c, type: 2}
-  m_sharedMaterial: {fileID: 6133112939389408944, guid: 39158905d4867d54aad09c573ca7316c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c1bc9d96d129afb4ebe6fa0123f984be, type: 2}
+  m_sharedMaterial: {fileID: 6133112939389408944, guid: c1bc9d96d129afb4ebe6fa0123f984be, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

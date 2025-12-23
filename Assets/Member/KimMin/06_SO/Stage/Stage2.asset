@@ -20,5 +20,5 @@ MonoBehaviour:
   enemyDelay: 0
   enemyCount: 0
   paint: {fileID: 5281488578355062479, guid: 4254054fca0a75c4b9442c0d4515223e, type: 3}
-  row: 29
+  row: 28
   column: 16
