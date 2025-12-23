@@ -12,7 +12,7 @@ namespace Code.Entities
         [SerializeField] private PlayerInputSO playerInput;
         [SerializeField] private SpriteRenderer renderer;
         public Vector2 Position { get; private set; }
-        public bool CanMove { get; set; }
+        public bool CanMove { get; set; } = true;
 
         public event Action OnPositionChanged;
 
@@ -24,6 +24,11 @@ namespace Code.Entities
         {
             _player = entity as Player;
             playerInput.OnMovePressed += HandleMove;
+        }
+
+        private void Start()
+        {
+            Position = _player.Position;
         }
 
         private void OnDestroy()

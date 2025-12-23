@@ -31,19 +31,19 @@ namespace Code.Core
         private GridObject[,] _gridData = new GridObject[100, 100];
         [Inject] private Player _player;
 
-        private int _row;
-        private int _col;
+        public int Row { get; private set; }
+        public int Col { get; private set; }
 
         float CellSize => grid.cellSize.x;
 
         public void CreateGrids(int row, int col)
         {
-            _row = row;
-            _col = col;
+            Row = row;
+            Col = col;
             
-            for (int y = 0; y < _col; y++)
+            for (int y = 0; y < Col; y++)
             {
-                for (int x = 0; x < _row; x++)
+                for (int x = 0; x < Row; x++)
                 {
                     GridObject gridObj = Instantiate(gridPrefab, transform);
                     Vector3Int cell = new Vector3Int(x, y, 0);
@@ -58,8 +58,8 @@ namespace Code.Core
 
         private int GetAreaIndex(Vector3Int cell)
         {
-            int areaWidth = _row / 3;
-            int areaHeight = _col / 3;
+            int areaWidth = Row / 3;
+            int areaHeight = Col / 3;
             int areaX = Mathf.Clamp(cell.x / areaWidth, 0, 2);
             int areaY = Mathf.Clamp(cell.y / areaHeight, 0, 2);
             int invertedY = 2 - areaY;
@@ -68,7 +68,7 @@ namespace Code.Core
         }
 
         public bool IsValidCell(Vector3Int cell)
-            => cell.x >= 0 && cell.x < _row && cell.y >= 0 && cell.y < _col;
+            => cell.x >= 0 && cell.x < Row && cell.y >= 0 && cell.y < Col;
 
         public GridObject GetGrid(Vector3Int cell)
         {
