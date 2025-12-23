@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6019151746216117392}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1800991, y: 2.9586768, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -53,7 +53,6 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  effect: {fileID: 0}
   trailRenderer: {fileID: 7473960948140099507}
   <PoolItem>k__BackingField: {fileID: 11400000, guid: f083940bd14911549aa4a43155f34b33, type: 2}
 --- !u!58 &1975327435690399083
@@ -86,7 +85,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -216,7 +215,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6019151746216117392}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -333,6 +332,18 @@ PrefabInstance:
     - target: {fileID: 3851167959645186498, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
       propertyPath: m_Name
       value: DamageCaster
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801827204484284297, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
+      propertyPath: maxHitCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801827204484284297, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
+      propertyPath: damageRadius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801827204484284297, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
+      propertyPath: contactFilter.useLayerMask
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5566876750261183618, guid: 41eb5395b7a5afa4c84b6e60035612a9, type: 3}
       propertyPath: m_LocalPosition.x

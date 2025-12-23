@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IEntityComponent
 {
-    public void Initialize(Entity enemy);
+    public void Initialize(Entity entity);
 }

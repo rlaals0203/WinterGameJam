@@ -1,10 +1,11 @@
+using Code.Core;
 using DG.Tweening;
 using KimMin.Dependencies;
 using UnityEngine;
 
 namespace Code.Entities
 {
-    public class Player : Entity, IDependencyProvider, IDamageable
+    public class Player : Entity, IDependencyProvider
     {
         private int maxHealth = 100;
 
@@ -12,10 +13,20 @@ namespace Code.Entities
         [SerializeField] private float hitFlashTime = 0.1f;
 
         [SerializeField] private int currentHealth;
+        
+        [SerializeField] private StateDataSO[] states;
+        
+        [Inject] private GridManager _gridManager;
+        public GridManager GridManager => _gridManager;
+        
+        private EntityStateMachine _stateMachine;
         public int MaxHealth => maxHealth;
         public int CurrentHealth => currentHealth;
 
         [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
+        public int RemainTripleAttack { get; set; } = 0;
+        public int RemainDoubleRadius { get; set; } = 0;
+        public bool IsCombatMode { get; set; } = false;
         public Vector3 Position => transform.position;
 
         [Provide]
@@ -24,26 +35,37 @@ namespace Code.Entities
         protected override void Awake()
         {
             base.Awake();
+            _stateMachine = new EntityStateMachine(this, states);
+
+            OnDeadEvent.AddListener(HandleDeadEvent);
+
             currentHealth = maxHealth;
         }
 
+        private void HandleDeadEvent()
+        {
+            if (IsDead) return;
+            IsDead = true;
+            //나중에 이벤트 발행
+            ChangeState("DEAD", true); 
+        }
+
+        private void Start()
+        {
+            _stateMachine.ChangeState("IDLE");
+        }
+
+        private void Update()
+        {
+            _stateMachine.UpdateStateMachine();
+        }
+        
+        public void ChangeState(string newStateName, bool forced = false) 
+            => _stateMachine.ChangeState(newStateName, forced);
+
         public void TakeDamage(int damage)
         {
-            currentHealth -= damage;
-            if (currentHealth < 0)
-                currentHealth = 0;
-
-            spriteRenderer.DOKill();
-            spriteRenderer.color = Color.white;
-
-            spriteRenderer
-                .DOColor(Color.red, hitFlashTime)
-                .SetLoops(2, LoopType.Yoyo);
-
-            if (currentHealth == 0)
-            {
-                DestroyObject();
-            }
+            
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Entities;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,6 +12,8 @@ public abstract class Entity : MonoBehaviour
     public UnityEvent OnHitEvent;
     public UnityEvent OnDeadEvent;
 
+    public int RemainShieldCount { get; set; } = 0;
+
     protected Dictionary<Type, IEntityComponent> _components;
 
     protected virtual void Awake()
@@ -18,6 +21,7 @@ public abstract class Entity : MonoBehaviour
         _components = new Dictionary<Type, IEntityComponent>();
         AddedComponents();
         InitializeComponent();
+        AfterInitialize();
     }
     protected virtual void AddedComponents()
     {
@@ -28,6 +32,12 @@ public abstract class Entity : MonoBehaviour
     protected virtual void InitializeComponent()
     {
         _components.Values.ToList().ForEach(component => component.Initialize(this));
+    }
+    
+    protected virtual void AfterInitialize()
+    {
+        _components.Values.OfType<IAfterInitialize>()
+            .ToList().ForEach(compo => compo.AfterInitialize());
     }
 
     public T GetCompo<T>() where T : IEntityComponent

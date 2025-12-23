@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class ShopManager : MonoBehaviour
 {
@@ -15,16 +16,18 @@ public class ShopManager : MonoBehaviour
 
     [Header("Buy Button")]
     [SerializeField] private Button buy_confirm_btn;
-    [SerializeField] private TextMeshProUGUI buy_btn_txt; // 버튼 텍스트 변경용 추가
+    [SerializeField] private TextMeshProUGUI buy_btn_txt;
 
     private SupplySO currentSelectedSupply;
+
+    private HashSet<string> purchasedItems = new HashSet<string>();
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
@@ -59,7 +62,7 @@ public class ShopManager : MonoBehaviour
 
     private void CheckPurchaseState()
     {
-        bool isPurchased = PlayerPrefs.GetInt("Item_" + currentSelectedSupply.SupplyName, 0) == 1;
+        bool isPurchased = purchasedItems.Contains(currentSelectedSupply.SupplyName);
 
         if (isPurchased)
         {
@@ -79,11 +82,10 @@ public class ShopManager : MonoBehaviour
 
         if (MoneyManager.Instance.TrySpendMoney(currentSelectedSupply.price))
         {
-            // 저장
-            PlayerPrefs.SetInt("Item_" + currentSelectedSupply.SupplyName, 1);
-            PlayerPrefs.Save();
+            purchasedItems.Add(currentSelectedSupply.SupplyName);
 
-            CheckPurchaseState(); // UI 갱신
+
+            CheckPurchaseState();
         }
     }
 }

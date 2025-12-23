@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Code.Core
 {
     [Provide]
-    public class InkStorage : MonoBehaviour, IDependencyProvider
+    public class InkStorage : MonoSingleton<InkStorage>, IDependencyProvider
     {
         private Dictionary<InkType, int> _inkDict = new();
 
@@ -16,6 +16,9 @@ namespace Code.Core
             _inkDict.Add(InkType.Red, 100);
             _inkDict.Add(InkType.Blue, 200);
             _inkDict.Add(InkType.Yellow, 300);
+            _inkDict.Add(InkType.Black, 100);
+            _inkDict.Add(InkType.White, 100);
+            _inkDict.Add(InkType.Green, 100);
         }
 
         public void ModifyInk(InkType inkType, int amount)

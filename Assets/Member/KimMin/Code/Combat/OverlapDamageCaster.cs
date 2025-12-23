@@ -20,15 +20,17 @@ namespace Code.Combat
             _hitResults = new Collider2D[maxHitCount];
         }
 
+        public void SetSize(Vector2 size) => damageBoxSize = size;
+
         public override bool CastDamage(int damage)
         {
-
             int cnt = overlapCastType switch
             {
                 OverlapCastType.Circle => Physics2D.OverlapCircle(transform.position, damageRadius, contactFilter, _hitResults),
                 OverlapCastType.Box => Physics2D.OverlapBox(transform.position, damageBoxSize, 0, contactFilter, _hitResults),
                 _ => 0
             };
+            
 
             for (int i = 0; i < cnt; i++)
             {
@@ -55,7 +57,6 @@ namespace Code.Combat
                     Gizmos.DrawWireCube(transform.position, damageBoxSize);
                     break;
             }
-            ;
         }
 #endif
     }

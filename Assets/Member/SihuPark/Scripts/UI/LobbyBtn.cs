@@ -1,3 +1,4 @@
+using Code.Core;
 using EasyTransition;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class LobbyBtn : MonoBehaviour
     [SerializeField] private Button game_start_btn;
     [SerializeField] private Button game_exit_btn;
 
-    private string TestScene = "TestGame"; //Scene Test
+    private string TestScene = "GameScene";
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class LobbyBtn : MonoBehaviour
     private void GoToGameScene()
     {
         TransitionManager.Instance().Transition(TestScene, paintEffect, 0);
+        GameManager.Instance.isCombatMode = false;
     }
 
     private void ExitGame()

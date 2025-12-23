@@ -1,4 +1,7 @@
+using Code.Combat;
 using Code.Core;
+using Code.Entities;
+using Code.Misc;
 using KimMin.Dependencies;
 using UnityEngine;
 
@@ -23,9 +26,9 @@ public class EnemyMoveCompo : MonoBehaviour, IEntityComponent
 
     public void ProcessMove()
     {
-        if (Time.time - _prevTime > duration)
+        if (Time.time - _prevTime > duration && !_enemy.IsSpoilMode)
         {
-            _gridManager.MoveToPlayer(_enemy.transform, HandleCompleteMove);
+            _gridManager.MoveToPlayer(_enemy.transform, _enemy, HandleCompleteMove);
             _prevTime = Time.time;
         }
     }
@@ -33,9 +36,7 @@ public class EnemyMoveCompo : MonoBehaviour, IEntityComponent
     private void HandleCompleteMove()
     {
         var grid = _gridManager.GetGrid(_gridManager.WorldToGrid(_enemy.transform.position));
-        if (grid.Type != InkType.None || grid.Type != InkType.Black)
-        {
-            grid.ClearModify();
-        }
+        if (grid.Type == InkType.None || grid.Type == InkType.Destroyed) return;
+        grid.ClearModify();
     }
 }

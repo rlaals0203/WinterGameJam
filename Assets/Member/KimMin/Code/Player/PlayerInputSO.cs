@@ -10,6 +10,7 @@ namespace Code.Entities
         public event Action OnMovePressed;
         public event Action OnDashPressed;
         public event Action OnRightClickPressed;
+        public event Action OnLeftClickPressed;
         public Vector2 MovementKey;
         public Vector2 MousePosition;
         
@@ -53,6 +54,12 @@ namespace Code.Entities
         {
             if(context.performed)
                 OnRightClickPressed?.Invoke();
+        }
+
+        public void OnLeftClick(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+                OnLeftClickPressed?.Invoke();
         }
     }
 }

@@ -5,7 +5,9 @@ using Code.Core;
 public class InkLoadoutManager : MonoBehaviour
 {
     public static InkLoadoutManager Instance;
-    public List<InkType> savedInks = new List<InkType>(); // 이게 인게임으로 넘겨서 가져갈 데이터입니다. 이거 쓰시면 되요
+
+    //전투 씬에서 가져다 쓸 데이터
+    public List<InkType> savedInks = new List<InkType>();
 
     private void Awake()
     {

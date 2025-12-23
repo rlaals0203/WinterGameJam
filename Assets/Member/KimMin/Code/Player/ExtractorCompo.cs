@@ -5,6 +5,8 @@ using Code.GameFlow;
 using DG.Tweening;
 using KimMin.Dependencies;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace Code.Entities
 {
@@ -17,6 +19,8 @@ namespace Code.Entities
 
         private Player _player;
         private int _stage;
+        private int _remainExtractor = 10;
+
 
         public void Initialize(Entity entity)
         {
@@ -29,45 +33,6 @@ namespace Code.Entities
             _player.PlayerInput.OnRightClickPressed -= HandleRightClick;
         }
 
-        private void Update()
-        {
-            //FindExtractor();
-        }
-
-        private void FindExtractor()
-        {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(_player.transform.position,
-                detectRadius, whatIsExtractor);
-
-            HashSet<InkExtractor> inRange = new HashSet<InkExtractor>();
-
-            foreach (var hit in hits)
-            {
-                if (!hit.TryGetComponent<InkExtractor>(out var extractor))
-                    continue;
-
-                inRange.Add(extractor);
-                if (!extractor.IsVisible)
-                {
-                    extractor.extractorUI.Root.DOKill();
-                    extractor.IsVisible = true;
-                    extractor.extractorUI.Root
-                        .DOScale(1f, 1f)
-                        .SetEase(Ease.OutBack);
-                }
-            }
-
-            foreach (var extractor in InkExtractor.All)
-            {
-                if (inRange.Contains(extractor) || !extractor.IsVisible) continue;
-                extractor.extractorUI.Root.DOKill();
-                extractor.IsVisible = false;
-                extractor.extractorUI.Root
-                    .DOScale(0f, 1f)
-                    .SetEase(Ease.InBack);
-            }
-        }
-
         private void HandleRightClick()
         {
             var extr = Instantiate(extractor);
@@ -76,6 +41,19 @@ namespace Code.Entities
             int area = _gridManager.GetGrid(cellPos).Area;
             var data = InkTable.StageDatas[_stage];
             extr.InitExtractor(data[area - 1]);
+            AddInk(data[area - 1]);
+            _remainExtractor--;
+
+            if (_remainExtractor <= 0)
+                SceneManager.LoadScene("Ready");
+        }
+
+        private void AddInk(InkData[] data)
+        {
+            int rand = Random.Range(0, data.Length);
+            var ink = data[rand];
+            InkStorage.Instance.ModifyInk(ink.InkType, 10);
+            Debug.Log($"{ink.InkType}");
         }
     }
 }
