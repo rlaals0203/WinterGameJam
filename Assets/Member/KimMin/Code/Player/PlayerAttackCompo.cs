@@ -75,19 +75,30 @@ namespace Code.Entities
         private void CastDamage(List<GridObject> grids)
         {
             if (renderer == null) return;
-            
+
             if (_direction.x == -1)
                 renderer.flipX = true;
-            else if(_direction.x == 1)
+            else if (_direction.x == 1)
                 renderer.flipX = false;
-            
+
             if (_gridManager.TryGetRendererBounds(grids, out var bounds))
             {
                 Vector3 pos = bounds.center;
                 Vector3 size = bounds.size;
+
                 damageCaster.SetSize(size);
                 damageCaster.transform.position = pos;
                 damageCaster.CastDamage(10);
+
+                Collider2D[] hits = Physics2D.OverlapBoxAll(pos, size, 0);
+                foreach (var hit in hits)
+                {
+                    BossHP boss = hit.GetComponent<BossHP>();
+                    if (boss != null)
+                    {
+                        boss.TakeDamage(10);
+                    }
+                }
             }
             
             GameEventBus.RaiseEvent(EffectEvents.PlayPoolEffect.Initializer(
