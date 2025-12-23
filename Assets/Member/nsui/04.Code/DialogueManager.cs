@@ -78,7 +78,6 @@ public class DialogueManager : MonoBehaviour
         else
         {
             // 모든 대화가 끝났을 때의 처리 (예: 다음 씬 이동)
-            Debug.Log("대화 종료");
             // SceneManager.LoadScene("NextSceneName"); 
         }
     }
