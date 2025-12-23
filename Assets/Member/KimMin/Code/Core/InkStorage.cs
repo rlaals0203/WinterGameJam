@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Core
 {
-    public class InkStorage : MonoSingleton<InkStorage>, IDependencyProvider
+    public class InkStorage : MonoSingleton<InkStorage>
     {
         private Dictionary<InkType, int> _inkDict = new();
 
@@ -15,7 +15,14 @@ namespace Code.Core
                 _inkDict[inkType] += amount;
         }
 
-        public int GetRemainInk(InkType inkType) => _inkDict[inkType];
+        public int GetRemainInk(InkType inkType)
+        {
+            if(_inkDict.TryGetValue(inkType, out int amount))
+                return amount;
+            
+            return 0;
+        }
+        
         public bool HasInk(InkType inkType) => _inkDict[inkType] > 0;
 
         public Dictionary<InkType, int> GetInkDict() => _inkDict;

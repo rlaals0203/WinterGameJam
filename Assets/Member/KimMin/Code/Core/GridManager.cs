@@ -64,6 +64,12 @@ namespace Code.Core
                 }
             }
         }
+        
+        private void OnEnable()
+        {
+            if (grid == null)
+                grid = FindAnyObjectByType<Grid>();
+        }
 
         private int GetAreaIndex(Vector3Int cell)
         {
@@ -108,6 +114,7 @@ namespace Code.Core
 
         public List<GridObject> GetForwardGrid(Vector3 origin, Vector3 dir, int length, int width)
         {
+            if (grid == null) return null;
             List<GridObject> result = new();
             Vector3Int originCell = grid.WorldToCell(origin);
             Vector3Int forward = ToVectorInt(dir);

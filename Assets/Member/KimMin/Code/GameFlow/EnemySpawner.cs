@@ -23,8 +23,8 @@ namespace Code.GameFlow
 
         private void Awake()
         {
-            if (GameManager.Instance.isCombatMode)
-                InitStage();
+            if (!GameManager.Instance.isCombatMode) gameObject.SetActive(false);
+            InitStage();
         }
 
         private void InitStage()

@@ -57,6 +57,7 @@ public class InkSelectUI : MonoBehaviour
         }
 
         int myTotalInk = InkStorage.Instance.GetRemainInk(newType);
+        if(myTotalInk == 0) return;
 
         if (myTotalInk - currentUsedAmount < INK_PER_SLOT) return;
 

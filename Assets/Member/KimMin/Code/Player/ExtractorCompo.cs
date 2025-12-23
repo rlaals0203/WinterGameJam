@@ -64,7 +64,6 @@ namespace Code.Entities
             int rand = Random.Range(0, data.Length);
             var ink = data[rand];
             InkStorage.Instance.ModifyInk(ink.InkType, 10);
-            Debug.Log($"{ink.InkType}");
         }
     }
 }
