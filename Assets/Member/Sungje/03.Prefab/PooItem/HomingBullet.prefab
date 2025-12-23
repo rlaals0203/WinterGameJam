@@ -135,9 +135,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -1432875691
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   trailRenderer: {fileID: 4534374596725216114}
   <PoolItem>k__BackingField: {fileID: 11400000, guid: 7e5d20f58fe5769469f6dea4f2bdd3ba, type: 2}
   rotateSpeed: 720
@@ -293,9 +293,9 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -1432875691
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_Time: 5
   m_PreviewTimeScale: 1
   m_Parameters:

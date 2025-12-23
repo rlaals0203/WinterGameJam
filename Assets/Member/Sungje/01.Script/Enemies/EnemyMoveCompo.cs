@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class EnemyMoveCompo : MonoBehaviour, IEntityComponent
 {
-    private float duration = 2f;
+    private float duration = 1.2f;
     private float _prevTime = 0f;
     private Enemy _enemy;
 

@@ -1,12 +1,13 @@
 using Code.Core;
 using Code.Entities;
+using System;
 using UnityEngine;
 
 public abstract class Enemy : Entity
 {
     [SerializeField] private Player player;
     [SerializeField] private GridManager gridManager;
-    
+
     public bool IsSpoilMode { get; set; }
 
     [field: SerializeField] public EnemyDataSO EnemyDataSO { get; private set; }
@@ -14,7 +15,20 @@ public abstract class Enemy : Entity
     
     public float DistanceToPlayer =>
         Vector2.Distance(transform.position, player.transform.position);
-    
+
+    protected override void Awake()
+    {
+        base.Awake();
+        OnDeadEvent.AddListener(HandleDeadEvent);
+    }
+
+    private void HandleDeadEvent()
+    {
+        if (IsDead) return;
+        IsDead = true;
+        Destroy(gameObject, 0.5f);
+    }
+
     public Player Player
     {
         get
