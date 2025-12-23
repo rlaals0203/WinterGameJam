@@ -28,7 +28,7 @@ public class LobbyBtn : MonoBehaviour
 
         if (Input.anyKeyDown)
         {
-            if (!Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2))
+            if (!Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2) && !Input.GetKeyDown(KeyCode.Escape))
             {
                 StartCoroutine(OnGameStart());
             }
