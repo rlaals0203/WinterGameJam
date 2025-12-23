@@ -11,8 +11,9 @@ public class InkSelectUI : MonoBehaviour
     [SerializeField] private Transform highlightObj;
     [SerializeField] private TransitionSettings GameStartEffect;
 
-    private int selectedIndex = -1;// ���� ���õ� ĭ ��ȣ
-    private InkType[] slotsData; // �� ĭ�� ��� ��ũ ����
+    private int selectedIndex = -1;
+    private InkType[] slotsData;
+    private const int INK_PER_SLOT = 10;
 
     private void Start()
     {
@@ -21,12 +22,8 @@ public class InkSelectUI : MonoBehaviour
         for (int i = 0; i < slotButtons.Length; i++)
         {
             int index = i;
-
-            // ��ư Ŭ�� �̺�Ʈ ����
             slotButtons[i].onClick.RemoveAllListeners();
             slotButtons[i].onClick.AddListener(() => OnSlotClicked(index));
-
-            // �ʱ�ȭ
             slotButtons[i].image.color = Color.gray;
             slotsData[i] = InkType.None;
         }
@@ -37,8 +34,6 @@ public class InkSelectUI : MonoBehaviour
     private void OnSlotClicked(int index)
     {
         selectedIndex = index;
-
-        // ���̶���Ʈ �̵� �� ȸ��
         if (highlightObj != null)
         {
             highlightObj.gameObject.SetActive(true);
@@ -51,28 +46,52 @@ public class InkSelectUI : MonoBehaviour
     {
         if (selectedIndex == -1) return;
 
-        InkType type = (InkType)inkTypeInt;
+        InkType newType = (InkType)inkTypeInt;
 
-        // ��ũ ������ ����
-        if (InkStorage.Instance == null && !InkStorage.Instance.HasInk(type)) return;
+        if (InkStorage.Instance == null) return;
 
-        // ������ ���� �� ���� ����
-        slotsData[selectedIndex] = type;
-        slotButtons[selectedIndex].image.color = GetColorByType(type);
+        int currentUsedAmount = 0;
+        foreach (var ink in slotsData)
+        {
+            if (ink == newType) currentUsedAmount += INK_PER_SLOT;
+        }
+
+        int myTotalInk = InkStorage.Instance.GetRemainInk(newType);
+
+        if (myTotalInk - currentUsedAmount < INK_PER_SLOT) return;
+
+        slotsData[selectedIndex] = newType;
+        slotButtons[selectedIndex].image.color = GetColorByType(newType);
     }
 
     public void OnClickGameStart()
     {
         List<InkType> finalLoadout = new List<InkType>();
+        Dictionary<InkType, int> usedInkAmount = new Dictionary<InkType, int>();
 
         foreach (var ink in slotsData)
         {
-            if (ink != InkType.None) finalLoadout.Add(ink);
+            if (ink != InkType.None)
+            {
+                finalLoadout.Add(ink);
+                if (!usedInkAmount.ContainsKey(ink)) usedInkAmount[ink] = 0;
+                usedInkAmount[ink] += INK_PER_SLOT;
+            }
         }
 
-        if (finalLoadout.Count > 0 && InkLoadoutManager.Instance != null)
+        if (finalLoadout.Count > 0 && InkLoadoutManager.Instance != null && InkStorage.Instance != null)
         {
-            InkLoadoutManager.Instance.SaveSelectedInks(finalLoadout);
+            foreach (var pair in usedInkAmount)
+            {
+                InkStorage.Instance.ModifyInk(pair.Key, -pair.Value);
+            }
+
+            InkLoadoutManager.Instance.SaveData(
+                finalLoadout,
+                usedInkAmount,
+                InkStorage.Instance.GetInkDict()
+            );
+
             TransitionManager.Instance().Transition(SceneName.Game, GameStartEffect, 0);
         }
     }
