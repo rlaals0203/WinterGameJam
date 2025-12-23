@@ -24,10 +24,15 @@ public class LobbyBtn : MonoBehaviour
         if (isTransitioning) return;
 
         if (pressKeyCanvasGroup)
-            pressKeyCanvasGroup.alpha = Mathf.PingPong(Time.time * 2f, 0.8f) + 0.2f;
+            pressKeyCanvasGroup.alpha = Mathf.PingPong(Time.time * 2f, 1f) + 0.3f;
 
         if (Input.anyKeyDown)
-            StartCoroutine(OnGameStart());
+        {
+            if (!Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2) && !Input.GetKeyDown(KeyCode.Escape))
+            {
+                StartCoroutine(OnGameStart());
+            }
+        }
     }
 
     private IEnumerator OnGameStart()
