@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5399988051892432977
 Transform:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1429234742229398449}
-  - component: {fileID: 7137168174118169880}
+  - component: {fileID: 3447838644490089826}
   m_Layer: 0
   m_Name: AttackCompo
   m_TagString: Untagged
@@ -266,7 +266,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5399988051892432977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7137168174118169880
+--- !u!114 &3447838644490089826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,10 +275,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9141550688260630485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7a258636afd420aadfe00899a71730b, type: 3}
+  m_Script: {fileID: 11500000, guid: a2e7f46b83a85ae46a2064e2ec108717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
-  bullet: {fileID: 11400000, guid: 00ae8b3029ec61a4abe221b989943865, type: 2}
+  energyBall: {fileID: 11400000, guid: 00ae8b3029ec61a4abe221b989943865, type: 2}

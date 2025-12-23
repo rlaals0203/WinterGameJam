@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5af38b02d8d696f468e573677893290b, type: 3}
-  m_Name: ProjectileEnemy
+  m_Name: WhiteLump
   m_EditorClassIdentifier: 
-  enemyName: Enemy1
-  description: 1
+  enemyName: EnergyEnemy
+  description: "\uC5D0\uB108\uC9C0\uBCFC\uC744 \uC3D8\uB294 \uC801"
   maxHealth: 50
-  damage: 10
-  moveSpeed: 0.5
-  attackCooldown: 1
+  damage: 20
+  moveSpeed: 2
+  attackCooldown: 4
   attackRange: 5
-  attackAngle: 0
   occupySpaceX: 0
   occupySpaceY: 0

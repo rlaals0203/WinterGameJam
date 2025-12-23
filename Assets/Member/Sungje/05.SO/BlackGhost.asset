@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5af38b02d8d696f468e573677893290b, type: 3}
-  m_Name: WhiteGhost
+  m_Name: BlackGhost
   m_EditorClassIdentifier: 
-  enemyName: WhiteGhost
-  description: "\uC791\uC740 \uD22C\uC0AC\uCCB4\uB97C \uC3D8\uB294 \uC801"
+  enemyName: BlackGhost
+  description: "\uB3CC\uC9C4\uD558\uB294 \uC801"
   maxHealth: 50
   damage: 10
   moveSpeed: 0.5
