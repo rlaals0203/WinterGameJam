@@ -1,5 +1,6 @@
 using Code.Core;
 using EasyTransition;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,9 @@ public class InkSelectUI : MonoBehaviour
     [SerializeField] private Button[] slotButtons;
     [SerializeField] private Transform highlightObj;
     [SerializeField] private TransitionSettings GameStartEffect;
+
+    [Header("Warning UI")]
+    [SerializeField] private GameObject notEnoughMsgObj;
 
     private int selectedIndex = -1;
     private InkType[] slotsData;
@@ -29,6 +33,7 @@ public class InkSelectUI : MonoBehaviour
         }
 
         if (highlightObj != null) highlightObj.gameObject.SetActive(false);
+        if (notEnoughMsgObj != null) notEnoughMsgObj.SetActive(false); 
     }
 
     private void OnSlotClicked(int index)
@@ -58,10 +63,26 @@ public class InkSelectUI : MonoBehaviour
 
         int myTotalInk = InkStorage.Instance.GetRemainInk(newType);
 
-        if (myTotalInk - currentUsedAmount < INK_PER_SLOT) return;
+        // 잉크가 모자라면 경고 메시지 띄우기
+        if (myTotalInk - currentUsedAmount < INK_PER_SLOT)
+        {
+            StopAllCoroutines();
+            StartCoroutine(ShowWarningEffect());
+            return;
+        }
 
         slotsData[selectedIndex] = newType;
         slotButtons[selectedIndex].image.color = GetColorByType(newType);
+    }
+
+    private IEnumerator ShowWarningEffect()
+    {
+        if (notEnoughMsgObj != null)
+        {
+            notEnoughMsgObj.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            notEnoughMsgObj.SetActive(false);
+        }
     }
 
     public void OnClickGameStart()
