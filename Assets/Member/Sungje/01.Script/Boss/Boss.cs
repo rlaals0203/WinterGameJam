@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : Entity
+public class Boss : Enemy
 {
     [SerializeField] private List<Pattern> patterns;
     [SerializeField] private float patternInterval = 2f;

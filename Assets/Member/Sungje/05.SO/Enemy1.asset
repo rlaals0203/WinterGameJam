@@ -13,12 +13,9 @@ MonoBehaviour:
   m_Name: Enemy1
   m_EditorClassIdentifier: 
   enemyName: Enemy1
-  description: 1
+  description: "\uC791\uC740 \uD22C\uC0AC\uCCB4\uB97C \uC3D8\uB294 \uC801"
   maxHealth: 50
   damage: 10
   moveSpeed: 0.5
-  attackCooldown: 1
+  attackCooldown: 4
   attackRange: 5
-  attackAngle: 0
-  occupySpaceX: 0
-  occupySpaceY: 0

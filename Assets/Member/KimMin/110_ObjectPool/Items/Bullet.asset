@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolingName: Bullet
   prefab: {fileID: 6019151746216117392, guid: 11d9b64e199b1484c9b210a52c5b4ffe, type: 3}
-  initCount: 5
+  initCount: 3

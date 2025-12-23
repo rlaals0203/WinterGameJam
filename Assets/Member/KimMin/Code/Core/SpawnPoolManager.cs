@@ -17,6 +17,7 @@ namespace Code.Core
             GameEventBus.AddListener<SpawnBulletEvent>(HandleSpawnBullet);
             GameEventBus.AddListener<SpawnEnergyBallEvent>(HandleSpawnEnergyBall);
             GameEventBus.AddListener<SpawnHomingBulletEvent>(HandleHomingBullet);
+            GameEventBus.AddListener<SpawnWarningAreaEvent>(HandleWarningArea);
         }
 
         private void OnDestroy()
@@ -25,6 +26,7 @@ namespace Code.Core
             GameEventBus.RemoveListener<SpawnBulletEvent>(HandleSpawnBullet);
             GameEventBus.RemoveListener<SpawnEnergyBallEvent>(HandleSpawnEnergyBall);
             GameEventBus.RemoveListener<SpawnHomingBulletEvent>(HandleHomingBullet);
+            GameEventBus.RemoveListener<SpawnWarningAreaEvent>(HandleWarningArea);
         }
 
         private void HandleSpawnEnergyBall(SpawnEnergyBallEvent evt)
@@ -42,13 +44,14 @@ namespace Code.Core
         private void HandleHomingBullet(SpawnHomingBulletEvent evt)
         {
             var bullet = _poolManager.Pop<HomingBullet>(evt.poolItem);
-            bullet.Init(
-                evt.position,
-                evt.speed * 8f,
-                evt.damage,
-                evt.target,
-                evt.owner
+            bullet.Init(evt.position, evt.speed * 8f, evt.damage, evt.target, evt.owner
             );
+        }
+
+        private void HandleWarningArea(SpawnWarningAreaEvent evt)
+        {
+            var area = _poolManager.Pop<WarningArea>(evt.poolItem);
+            area.Init(evt.position, evt.damage, evt.owner);
         }
 
 
