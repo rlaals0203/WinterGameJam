@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Code.Core;
 using Code.GameFlow;
 using DG.Tweening;
+using EasyTransition;
 using KimMin.Core;
 using KimMin.Dependencies;
 using KimMin.Events;
@@ -17,6 +18,8 @@ namespace Code.Entities
         [SerializeField] private InkExtractor extractor;
         [SerializeField] private LayerMask whatIsExtractor;
         [SerializeField] private float detectRadius = 3f;
+        [SerializeField] private TransitionSettings paintEffect;
+
         [Inject] private GridManager _gridManager;
 
         private Player _player;
@@ -54,7 +57,7 @@ namespace Code.Entities
 
             if (_remainExtractor <= 0)
             {
-                SceneManager.LoadScene("Ready");
+                TransitionManager.Instance().Transition(SceneName.Extracting, paintEffect, 0);
                 GameManager.Instance.isCombatMode = true;
             }
         }
