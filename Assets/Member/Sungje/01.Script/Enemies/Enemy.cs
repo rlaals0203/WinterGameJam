@@ -5,6 +5,7 @@ using KimMin.Core;
 using KimMin.Dependencies;
 using KimMin.Events;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Enemy : Entity
@@ -22,7 +23,6 @@ public abstract class Enemy : Entity
 
     private bool _isHit;
     private float _hitEndTime;
-    private bool _isDead;
 
     private readonly int IsHitHash = Animator.StringToHash("IsHit");
     private readonly int IsDeadHash = Animator.StringToHash("IsDead");
@@ -43,12 +43,14 @@ public abstract class Enemy : Entity
 
     private void HandleDead()
     {
+        if (IsDead) return;
+        
         if(MoneyManager.Instance != null)
             MoneyManager.Instance.AddMoney(10);
         
-        _isDead = true;
+        IsDead = true;
         GameEventBus.RaiseEvent(EnemyEvents.EnemyDeadEvent);
-        animator.SetBool(IsDeadHash, _isDead);
+        animator.SetBool(IsDeadHash, IsDead);
         StartCoroutine(DeadCoroutine());
     }
 
