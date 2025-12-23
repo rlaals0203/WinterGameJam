@@ -46,6 +46,8 @@ namespace Code.Entities
             var ink = _inkCompo.CurrentInk;
             
             if(grid.Type == ink || grid.Type == InkType.Destroyed) return;
+            
+            if(InkLoadoutManager.Instance.savedUsedAmount[ink] < 10) return;
             InkLoadoutManager.Instance.savedUsedAmount[ink] -= 10;
             grid.SetModify(Utility.GetGridColor(ink), ink);
         }

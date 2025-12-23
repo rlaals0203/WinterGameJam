@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Code.Core;
+using KimMin.Core;
 using KimMin.Dependencies;
+using KimMin.Events;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Code.GameFlow
@@ -24,7 +27,14 @@ namespace Code.GameFlow
         private void Awake()
         {
             if (!GameManager.Instance.isCombatMode) gameObject.SetActive(false);
+            
+            GameEventBus.AddListener<EnemyDeadEvent>(HandleEnemyDead);
             InitStage();
+        }
+
+        private void HandleEnemyDead(EnemyDeadEvent evt)
+        {
+            _enemyLeft--;
         }
 
         private void InitStage()
@@ -37,10 +47,16 @@ namespace Code.GameFlow
 
         private void Update()
         {
-            if (Time.time - _lastTime > _delay)
-            {
+            if (Time.time - _lastTime > _delay && _enemyLeft > 0) {
                 _lastTime = Time.time;
                 SpawnEnemy();
+            }
+
+            if (_enemyLeft == 0) {
+                GameManager.Instance.isCombatMode = false;
+                if (GameManager.Instance.currentStage < 3)
+                    GameManager.Instance.currentStage++;
+                SceneManager.LoadScene("GameScene");
             }
         }
 
@@ -49,7 +65,6 @@ namespace Code.GameFlow
             var target = _enemyList[Random.Range(0, _enemyList.Count)];
             var enemy = Instantiate(target, _gridManager.
                 GetRandomBorderGrid().Position, Quaternion.identity);
-            _enemyLeft--;
             mobCountText.text = $"남은 적 : {_enemyLeft}/{_currentStage.enemyCount}";
         }
     }
