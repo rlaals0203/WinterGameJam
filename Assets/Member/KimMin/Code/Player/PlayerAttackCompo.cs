@@ -37,9 +37,8 @@ namespace Code.Entities
             _movementCompo = entity.GetCompo<PlayerMovement>();
             _movementCompo.OnPositionChanged += SetGridGizmo;
             _player.PlayerInput.OnRightClickPressed += HandleRightClick;
-            _player.PlayerInput.OnLeftClickPressed += HandleLeftClick;
         }
-
+        
         private void HandleRightClick()
         {
             if (!_inkStorage.HasInk(_inkCompo.CurrentInk) ||
@@ -52,15 +51,15 @@ namespace Code.Entities
             grid.SetModify(Utility.GetGridColor(ink), ink);
         }
 
-        private void HandleLeftClick()
+        public void Attack()
         {
-            if (!_player.IsCombatMode) return;
             CastDamage(GetRangeGrids());
         }
 
         private void OnDestroy()
         {
             _movementCompo.OnPositionChanged -= SetGridGizmo;
+            _player.PlayerInput.OnRightClickPressed -= HandleRightClick;
         }
 
         private void Update()
@@ -76,7 +75,7 @@ namespace Code.Entities
                 Vector3 size = bounds.size;
                 damageCaster.SetSize(size);
                 damageCaster.transform.position = pos;
-                damageCaster.CastDamage(10f);
+                damageCaster.CastDamage(10);
             }
         }
 

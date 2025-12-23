@@ -12,6 +12,10 @@ namespace Code.Entities
         [SerializeField] private float hitFlashTime = 0.1f;
 
         [SerializeField] private int currentHealth;
+        
+        [SerializeField] private StateDataSO[] states;
+        
+        private EntityStateMachine _stateMachine;
         public int MaxHealth => maxHealth;
         public int CurrentHealth => currentHealth;
 
@@ -27,8 +31,33 @@ namespace Code.Entities
         protected override void Awake()
         {
             base.Awake();
+            _stateMachine = new EntityStateMachine(this, states);
+
+            OnDeadEvent.AddListener(HandleDeadEvent);
+
             currentHealth = maxHealth;
         }
+
+        private void HandleDeadEvent()
+        {
+            if (IsDead) return;
+            IsDead = true;
+            //나중에 이벤트 발행
+            ChangeState("DEAD", true); 
+        }
+
+        private void Start()
+        {
+            _stateMachine.ChangeState("IDLE");
+        }
+
+        private void Update()
+        {
+            _stateMachine.UpdateStateMachine();
+        }
+        
+        public void ChangeState(string newStateName, bool forced = false) 
+            => _stateMachine.ChangeState(newStateName, forced);
 
         public void TakeDamage(int damage)
         {

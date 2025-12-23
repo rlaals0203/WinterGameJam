@@ -22,9 +22,8 @@ namespace Code.Combat
 
         public void SetSize(Vector2 size) => damageBoxSize = size;
 
-        public override bool CastDamage(float damage)
+        public override bool CastDamage(int damage)
         {
-
             int cnt = overlapCastType switch
             {
                 OverlapCastType.Circle => Physics2D.OverlapCircle(transform.position, damageRadius, contactFilter, _hitResults),

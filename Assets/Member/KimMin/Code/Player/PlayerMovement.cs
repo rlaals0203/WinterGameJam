@@ -11,6 +11,7 @@ namespace Code.Entities
     {
         [SerializeField] private PlayerInputSO playerInput;
         public Vector2 Position { get; private set; }
+        public bool CanMove { get; set; }
 
         public event Action OnPositionChanged;
 
@@ -29,12 +30,14 @@ namespace Code.Entities
             playerInput.OnMovePressed -= HandleMove;
         }
 
-        private void Update()
+        public bool TryMove()
         {
-            if (_movementQueue.Count > 0)
-            {
+            if (_movementQueue.Count > 0 && CanMove) {
                 Move();
+                return true;
             }
+            
+            return false;
         }
 
         private void Move()

@@ -54,7 +54,7 @@ namespace Code.Combat
             }
         }
 
-        public void ApplyDamage(float damage)
+        public void ApplyDamage(int damage)
         {
             currentHealth = Mathf.Clamp(currentHealth -damage, 0, maxHealth);
             OnHealthChangeEvent?.Invoke(currentHealth, maxHealth);

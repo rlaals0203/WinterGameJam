@@ -193,7 +193,7 @@ namespace Code.Core
                 case InkType.Black:
                 {
                     var healthCompo = entity.GetCompo<EntityHealth>();
-                    healthCompo?.ApplyDamage(-10f);
+                    healthCompo?.ApplyDamage(-10);
                     break;
                 }
             }
