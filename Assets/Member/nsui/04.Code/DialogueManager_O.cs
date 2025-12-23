@@ -78,7 +78,7 @@ public class DialogueManager_O : MonoBehaviour
         else
         {
             // 모든 대화가 끝났을 때의 처리 (예: 다음 씬 이동)
-            // SceneManager.LoadScene("NextSceneName"); 
+            SceneManager.LoadScene("Loading"); 
         }
     }
 }

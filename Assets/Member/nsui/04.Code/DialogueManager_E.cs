@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement; // 씬 전환 시 필요
 
 public class DialogueManager_E : MonoBehaviour
 {
+    [SerializeField] private GameObject panel;
+
     public TextMeshProUGUI dialogueText; // 텍스트 컴포넌트 연결
     public string[] sentences;           // 표시할 문장들
     public float typingSpeed = 0.05f;    // 글자가 써지는 속도
@@ -78,7 +80,7 @@ public class DialogueManager_E : MonoBehaviour
         else
         {
             // 모든 대화가 끝났을 때의 처리 (예: 다음 씬 이동)
-            // SceneManager.LoadScene("NextSceneName"); 
+            panel.SetActive(true);
         }
     }
 }
