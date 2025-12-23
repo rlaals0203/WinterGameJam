@@ -102,6 +102,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   gridManager: {fileID: 0}
+  animator: {fileID: 9037075057445912989}
+  hitDuration: 0.15
   <EnemyDataSO>k__BackingField: {fileID: 11400000, guid: 55ed818560ae73c4b8fe6f9cbf7bb5fe, type: 2}
 --- !u!61 &8530651500138698416
 BoxCollider2D:
@@ -258,6 +260,8 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
+  animator: {fileID: 9037075057445912989}
+  attackDuration: 0.4
   bullet: {fileID: 11400000, guid: 00ae8b3029ec61a4abe221b989943865, type: 2}
 --- !u!1 &6921694099179252885
 GameObject:
@@ -385,7 +389,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095196822728518287, guid: 432ad122feb774b44803a64b703784ce, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.514151, g: 0.5917908, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -405,7 +409,7 @@ Animator:
   m_GameObject: {fileID: 7940215168503592432}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8d6b64a3b9f8f7444808a6786f516322, type: 2}
+  m_Controller: {fileID: 9100000, guid: 61fe09450e21a1942826b6d74e08472d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

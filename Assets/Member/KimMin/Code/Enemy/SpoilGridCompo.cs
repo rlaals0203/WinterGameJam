@@ -23,16 +23,15 @@ namespace Code.Entities
 
         private void Update()
         {
-            Debug.Log("SpoilGridCompo Update Called");
+            if (_enemy == null) return;
+
             if (Time.time - _lastTime > 1f)
             {
-                Debug.Log("SpoilGridCompo Update Check");
                 int rand = Random.Range(0, 100);
                 _lastTime = Time.time;
-                
+
                 if (rand < chancePerSecond && !_enemy.IsSpoilMode)
                 {
-                    Debug.Log("SpoilGridCompo ProcessSpoil Triggered");
                     ProcessSpoil();
                 }
             }
