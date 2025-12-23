@@ -20,6 +20,8 @@ namespace Code.Combat
             _hitResults = new Collider2D[maxHitCount];
         }
 
+        public void SetSize(Vector2 size) => damageBoxSize = size;
+
         public override bool CastDamage(float damage)
         {
 

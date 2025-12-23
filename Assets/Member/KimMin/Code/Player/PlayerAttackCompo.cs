@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Combat;
 using Code.Core;
 using Code.Misc;
 using DG.Tweening;
@@ -11,6 +12,7 @@ namespace Code.Entities
     public class PlayerAttackCompo : MonoBehaviour, IEntityComponent
     {
         [SerializeField] private GameObject arrowObject;
+        [SerializeField] private OverlapDamageCaster damageCaster;
         
         private Player _player;
         private Vector3Int _direction;
@@ -29,6 +31,7 @@ namespace Code.Entities
         public void Initialize(Entity entity)
         {
             _player = entity as Player;
+            damageCaster.InitCaster(entity);
 
             _inkCompo = entity.GetCompo<PlayerInkCompo>();
             _movementCompo = entity.GetCompo<PlayerMovement>();
@@ -50,26 +53,7 @@ namespace Code.Entities
 
         private void HandleLeftClick()
         {
-            foreach (var grid in GetRangeGrids())
-            {
-                if(grid.Type == InkType.Destroyed) continue;
-                Color targetColor = Utility.GetGridColor(InkType.Red);
-
-                if (grid.BlinkTween != null && grid.BlinkTween.IsActive())
-                    grid.BlinkTween.Kill();
-
-                grid.BlinkTween = grid.Fill
-                    .DOColor(targetColor, 0.1f)
-                    .SetLoops(2, LoopType.Yoyo)
-                    .OnComplete(() =>
-                    {
-                        grid.Fill.color = Utility.GetGridColor(grid.Type);
-                        grid.BlinkTween = null;
-                        SetGridGizmo();
-                    });
-            }
-
-            _player.RemainDoubleRadius--;
+            CastDamage(GetRangeGrids());
         }
 
         private void OnDestroy()
@@ -80,6 +64,18 @@ namespace Code.Entities
         private void Update()
         {
             SetArrow();
+        }
+
+        private void CastDamage(List<GridObject> grids)
+        {
+            if (_gridManager.TryGetRendererBounds(grids, out var bounds))
+            {
+                Vector3 pos = bounds.center;
+                Vector3 size = bounds.size;
+                damageCaster.SetSize(size);
+                damageCaster.transform.position = pos;
+                damageCaster.CastDamage(10f);
+            }
         }
 
         private void SetArrow()

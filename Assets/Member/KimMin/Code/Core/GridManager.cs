@@ -198,5 +198,28 @@ namespace Code.Core
                 }
             }
         }
+        
+        public bool TryGetRendererBounds(List<GridObject> grids, out Bounds bounds)
+        {
+            bounds = new Bounds();
+            bool initialized = false;
+            Vector3 cellSize = grid.cellSize;
+
+            foreach (var g in grids)
+            {
+                Vector3 center = g.transform.position;
+                Vector3 size = grid.cellSize;
+                Bounds cellBounds = new Bounds(center, size);
+
+                if (!initialized) {
+                    bounds = cellBounds;
+                    initialized = true;
+                }
+                else
+                    bounds.Encapsulate(cellBounds);
+            }
+
+            return initialized;
+        }
     }
 }
